@@ -1,5 +1,14 @@
 package com.sf.iguess.response;
 
+/**
+ * ClassName: ResponseCode <br/>
+ * Function: 返回 code 定义类. <br/>
+ * date: 2017年12月14日 下午9:04:45 <br/>
+ *
+ * @author 618721
+ * @version 
+ * @since JDK 1.8
+ */
 public enum ResponseCode {
 	/** 成功 */
 	SUCCESS("200", "成功"),
