@@ -14,7 +14,7 @@
 			isicdb       sfs@f123456
         -->  
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"  
-            connectionURL="jdbc:mysql://10.202.8.16:3306/isic_survey" userId="isicdb" password="sfs@f123456" />  
+            connectionURL="jdbc:mysql://47.90.56.34:3306/cdojo_dev" userId="cdojo_dev" password="cdojo_dev" />  
         <!-- 生成模型的包名和位置 -->  
         <javaModelGenerator targetPackage="com.sf.iguess.survey.domain" targetProject="webapp-survey\src\main\java" />  
         <!-- 生成的映射文件报名和位置 -->  
