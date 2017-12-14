@@ -4,7 +4,10 @@
  -------------|-------------|-----  
  smart-basic-depengent   	| 项目模块,所有模块的基础依赖      			| java	  
  smart-common-model      	| 项目模块，公告模型模块			| java	  
- smart-webapp-survey     	| 项目模块，前端展现应用			| web	  
+ smart-common-tookit    	| 项目模块，工具类封装模块			| java	
+ smart-service-email        | 项目模块，邮件应用    			| java	 
+ smart-webapp-page     	    | 项目模块，前端展现应用			| web	  
+ smart-webapp-survey     	| 项目模块，前端展现应用			| web	
  pom.xml                 	| 项目模块			| java	  
  readme.md               	| 项目描述文件		| md 	  
 >#### 项目打包说明
