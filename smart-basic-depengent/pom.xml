@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sf.iguess</groupId>
+	<artifactId>basic-depengent</artifactId>
+	<version>${smart.release.version}</version>
+	<packaging>pom</packaging>
+	<name>smart-basic-depengent</name>
+
+	<!-- 集中定义依赖版本号 -->
+	<properties>
+		<alibaba.json.version>1.2.28</alibaba.json.version>
+		<ant.version>1.8.2</ant.version>
+		<aspectj.version>1.6.9</aspectj.version>
+		<bcprov.version>1.56</bcprov.version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<commons-io-apache.version>1.3.2</commons-io-apache.version>
+		<commons-io.version>2.4</commons-io.version>
+		<commons-net.version>3.3</commons-net.version>
+		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<commons-validator.version>1.4.0</commons-validator.version>
+		<commons-http.version>3.0.1</commons-http.version>
+		<commons-codec.version>1.9</commons-codec.version>
+		<druid.version>1.1.0</druid.version>
+		<ehcache.version>2.6.11</ehcache.version>
+		<http.nio.version>4.4.5</http.nio.version>
+		<httpclient.version>4.3.5</httpclient.version>
+		<hibernate.validator.version>5.4.1.Final</hibernate.validator.version>
+		<guava.version>17.0</guava.version>
+		<javassist.version>3.15.0-GA</javassist.version>
+		<jstl.version>1.2</jstl.version>
+		<junit.version>4.12</junit.version>
+		<jsp-api.version>2.0</jsp-api.version>
+		<joda-time.version>2.5</joda-time.version>
+		<jsqlparser.version>0.9.1</jsqlparser.version>
+		<jgroup.version>1.8.3</jgroup.version>
+		<jedis.version>2.7.2</jedis.version>
+		<kapcha.version>2.3.2</kapcha.version>
+		<log4j2.version>2.8.2</log4j2.version>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.resource.version>2.7</maven.resource.version>
+		<maven.compile.version>3.1</maven.compile.version>
+		<mybatis.version>3.4.5</mybatis.version>
+		<mybatis.paginator.version>1.2.15</mybatis.paginator.version>
+		<mybatis.generator.version>1.3.2</mybatis.generator.version>
+		<mysql.version>5.1.32</mysql.version>
+		<net.sf.version>2.4</net.sf.version>
+		<pagehelper.version>3.6.4</pagehelper.version>
+		<poi.version>3.9</poi.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.net.sf.ezmorph.version>1.0.6</project.net.sf.ezmorph.version>
+		<project.commons.collections.version>3.2.1</project.commons.collections.version>
+		<project.commons.beanutils>1.9.2</project.commons.beanutils>
+		<smart.release.version>1.0.1</smart.release.version>
+		<servlet-api.version>2.5</servlet-api.version>
+		<shiro.version>1.3.2</shiro.version>
+		<slf4j.version>1.7.2</slf4j.version>
+		<solrj.version>4.10.3</solrj.version>
+		<spring.mybatis.verison>1.3.1</spring.mybatis.verison>
+		<spring.mybatis.helper.verison>1.1.2</spring.mybatis.helper.verison>
+		<spring.test.version>2.5</spring.test.version>
+		<spring.boot.version>1.5.8.RELEASE</spring.boot.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- smart项目引入文件 -->
+			<dependency>
+				<groupId>com.sf.iguess</groupId>
+				<artifactId>common-algorithm</artifactId>
+				<version>${smart.release.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sf.iguess</groupId>
+				<artifactId>common-model</artifactId>
+				<version>${smart.release.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sf.iguess</groupId>
+				<artifactId>common-tookit</artifactId>
+				<version>${smart.release.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sf.iguess</groupId>
+				<artifactId>common-service</artifactId>
+				<version>${smart.release.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sf.iguess</groupId>
+				<artifactId>service-sms</artifactId>
+				<version>${smart.release.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sf.iguess</groupId>
+				<artifactId>service-email</artifactId>
+				<version>${smart.release.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sf.iguess</groupId>
+				<artifactId>service-shop</artifactId>
+				<version>${smart.release.version}</version>
+			</dependency>
+
+			<!-- spring boot 相关依赖 Import dependency management from Spring Boot -->
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${spring.mybatis.verison}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>${spring.mybatis.helper.verison}</version>
+			</dependency>
+
+			<!-- 时间操作组件 -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time.version}</version>
+			</dependency>
+			<!-- 开源JSON group -->
+			<dependency>
+				<groupId>org.jsoup</groupId>
+				<artifactId>jsoup</artifactId>
+				<version>${jgroup.version}</version>
+			</dependency>
+			<!-- Apache工具组件 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io-apache.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-net</groupId>
+				<artifactId>commons-net</artifactId>
+				<version>${commons-net.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-validator</groupId>
+				<artifactId>commons-validator</artifactId>
+				<version>${commons-validator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>${ant.version}</version>
+			</dependency>
+			<!-- Jackson Json处理工具包 -->
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${javassist.version}</version>
+			</dependency>
+
+			<!-- httpclient -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpmime</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient-cache</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpcore-nio</artifactId>
+				<version>${http.nio.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>${commons-http.version}</version>
+			</dependency>
+
+			<!-- 日志处理 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<!-- log4j2 begin -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-jcl</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<!-- log4j2 end -->
+			<dependency>
+				<groupId>com.github.miemiedev</groupId>
+				<artifactId>mybatis-paginator</artifactId>
+				<version>${mybatis.paginator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>${mybatis.generator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${pagehelper.version}</version>
+			</dependency>
+			<!-- MySql -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>2.5</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- JSP相关 -->
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${jstl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${servlet-api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- 文件上传组件 -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.version}</version>
+			</dependency>
+			<!-- Redis客户端 -->
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>${jedis.version}</version>
+			</dependency>
+			<!-- solr客户端 -->
+			<dependency>
+				<groupId>org.apache.solr</groupId>
+				<artifactId>solr-solrj</artifactId>
+				<version>${solrj.version}</version>
+			</dependency>
+
+			<!-- shiro begin -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>slf4j-api</artifactId>
+						<groupId>org.slf4j</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-all</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<!-- shiro end -->
+
+			<!-- maven 插件相关依赖 -->
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compile.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency> 
+			<!-- maven 相关依赖结束 -->
+
+			<!-- ehcache和redis必选其一，也可同时使用（需要注意） -->
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache-core</artifactId>
+				<version>${ehcache.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<classifier>jdk15</classifier>
+				<version>${net.sf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.ezmorph</groupId>
+				<artifactId>ezmorph</artifactId>
+				<version>${project.net.sf.ezmorph.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${project.commons.collections.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${project.commons.beanutils}</version>
+			</dependency>
+			<!-- google 验证码插件 -->
+			<dependency>
+				<groupId>com.google.code</groupId>
+				<artifactId>kaptcha</artifactId>
+				<version>${kapcha.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+			<!-- 阿里 fastjson -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${alibaba.json.version}</version>
+			</dependency>
+			<!-- hibernate 参数校验 -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.validator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcprov-jdk15on</artifactId>
+				<version>${bcprov.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+			<!-- 单元测试 -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<!-- 资源文件拷贝插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- java编译插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!-- 配置Tomcat插件 -->
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

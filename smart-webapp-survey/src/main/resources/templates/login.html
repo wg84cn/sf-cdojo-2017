@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<meta charset="UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<script th:src="@{/js/jquery/jquery-1.10.1.js}"></script>
+	<script th:src="@{/js/layer/layer.js}"></script>
+	<script th:src="@{/js/survey/login.js}"></script>
+	<link rel="stylesheet" href="css/surveyview.css"></link>
+	<title>信息安全问卷调查-登录</title>
+</head>
+<body class="login_bg">
+	<div class="login_module">
+		<div class="login_show_module">
+			<div class="login_title">欢迎登录信息安全调查系统</div>
+			<div class="survey_login" id="survey-login">
+				<p>
+					<span class="survey_login_tag">用户名：</span> <input type="text"
+						class="survey_login_input" name="userName" placeholder="请输入用户名"
+						maxlength="100"></input>
+				</p>
+				<p>
+					<span class="survey_login_tag">密码：</span> <input type="password"
+						class="survey_login_input" name="password" placeholder="请输入密码"
+						maxlength="100"></input>
+				</p>
+				<p class="survey_login_submit">
+					<button type="submit" id="loginSubmit" class="s-btn">登录</button>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link rel="stylesheet" href="/css/surveyview.css"></link>
+    <title>信息安全问卷调查-查看</title>
+</head>
+<body>
+<p th:text="${scoreId}" class="dis-none" id="scoreId"></p>
+<div id="app">
+    <div class="survey_page" id="manager-page">
+        <div>
+            <div class="survey_title">
+                <div class="survey_show_title">供应商信息安全问卷调查——答题详情</div>
+                <p class="survey_show_tips">
+                    &nbsp;&nbsp;&nbsp;&nbsp;为确保我司与贵公司的战略合作关系，保证我司提供敏感信息的安全，诚挚邀请贵公司就以下问卷做如实回答，本问卷调查结果会作为供应商入选的必要条件，请确保所填信息真实有效，预祝合作愉快！
+                </p>
+                <div class="survey_client_info">
+                    <div class="client_info client_info_left"><div
+                            class="client_info_label">供应商全称：</div><input class="client_input" name="supplierName" v-model.trim="supplierName"></input></div>
+                    <div class="client_info"><div
+                            class="client_info_label">合作项目名称：</div><input class="client_input" name="projectName" v-model.trim="projectName"></input></div>
+                    <div class="client_info client_info_left"><div
+                            class="client_info_label">联系人姓名：</div><input class="client_input" name="relationerName" v-model.trim="relationerName"></input></div>
+                    <div class="client_info"><div
+                            class="client_info_label">联系人邮箱：</div><input class="client_input" name="relationerEmail" v-model.trim="relationerEmail"></input></div>
+                    <div class="client_info client_info_left"><div
+                            class="client_info_label">采购专员姓名：</div><input class="client_input" name="buyerName" v-model.trim="buyerName"></input></div>
+                    <div class="client_info"><div
+                            class="client_info_label">采购专员邮箱：</div><input class="client_input" name="buyerEmail" v-model.trim="buyerEmail"></input></div>
+                </div>
+            </div>
+            <div class="survey_content">
+                <div class="survey_content_item"
+                     :class="li.hiddenClass"
+                     v-for="li in detailList"
+                     ref="answerItem" data-id=""
+                     v-bind:data-serialnumber="li.serialNumber">
+                    <div class="survey_content_bar" v-on:click="switchBar($event)">{{li.classes}}</div>
+                    <div class="survey_content_title">{{li.serialNumber}}、 {{li.questionName}}
+                        <div class="survey_content_title_file dis-none">
+                            <a class="s-btn">下载浏览证明文件</a>
+                        </div>
+                    </div>
+                    <div class="survey_content_chose">
+                        <ul>
+                            <li><div class="label"
+                                    ref="radioClick"><input
+                                    class="survey_chose_item" type="radio" data-checked="3"/><span>满足</span><input
+                                    class="survey_chose_feedback" placeholder="填写理由"/></div></li>
+                            <li><div class="label"
+                                    ref="radioClick"><input
+                                    class="survey_chose_item" type="radio" data-checked="2"/><span>大部分满足</span><input
+                                    class="survey_chose_feedback" placeholder="填写理由"/></div></li>
+                            <li><div class="label"
+                                    ref="radioClick"><input
+                                    class="survey_chose_item" type="radio" data-checked="1"/><span>小部分满足</span><input
+                                    class="survey_chose_feedback" placeholder="填写理由"/></div></li>
+                            <li><div class="label"
+                                    ref="radioClick"><input
+                                    class="survey_chose_item" type="radio" data-checked="0"/><span>不满足</span><input
+                                    class="survey_chose_feedback" placeholder="填写理由"/></div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="returnTop">
+                <button class="s-btn" v-on:click="returnTop()">返回顶部</button>
+            </div>
+            <div class="returnBottom">
+                <button class="s-btn" v-on:click="returnBottom()">到达底部</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery/jquery-1.10.1.js}"></script>
+<script th:src="@{/js/layer/layer.js}"></script>
+<script th:src="@{/js/vue/vue.js}"></script>
+<script th:src="@{/js/survey/view.js}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >  
+<generatorConfiguration>  
+    <!-- 数据库驱动包位置 -->  
+    <classPathEntry  
+        location="E:\mysql-connector-java-5.1.6-bin.jar" />  
+    <context id="context1">  
+        <commentGenerator>  
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+            <property name="suppressAllComments" value="true"/>  
+        </commentGenerator>  
+        <!-- 数据库链接URL、用户名、密码 
+			10.202.8.16:3306/isicuaam
+			isicdb       sfs@f123456
+        -->  
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"  
+            connectionURL="jdbc:mysql://10.202.8.16:3306/isic_survey" userId="isicdb" password="sfs@f123456" />  
+        <!-- 生成模型的包名和位置 -->  
+        <javaModelGenerator targetPackage="com.sf.iguess.survey.domain" targetProject="webapp-survey\src\main\java" />  
+        <!-- 生成的映射文件报名和位置 -->  
+        <sqlMapGenerator targetPackage="mapper" targetProject="webapp-survey\src\main\resources" />  
+        <!-- 生成DAO的包名和位置 -->  
+        <javaClientGenerator targetPackage="com.sf.iguess.survey.mapper" targetProject="webapp-survey\src\main\java" type="XMLMAPPER" />  
+        <!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->  
+        <table tableName="ts_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">  
+        </table>
+        <table tableName="tt_answer" domainObjectName="Answer" enableCountByExample="false" enableUpdateByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">  
+        </table>
+        <table tableName="tt_question" domainObjectName="Question" enableCountByExample="false" enableUpdateByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">  
+        </table>
+        <table tableName="tt_user_score" domainObjectName="UserScore" enableCountByExample="false" enableUpdateByExample="false"  
+            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">  
+        </table>
+        
+    </context>  
+</generatorConfiguration>  
