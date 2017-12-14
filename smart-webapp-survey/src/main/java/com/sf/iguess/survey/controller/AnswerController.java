@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.sf.iguess.email.service.IMsgSendService;
+import com.sf.iguess.email.template.SuveryEmailTemplate;
 import com.sf.iguess.response.JsonResult;
 import com.sf.iguess.response.ResponseCode;
 import com.sf.iguess.survey.constant.Constant;
@@ -40,6 +43,9 @@ public class AnswerController{
 	@Resource
 	private UserScoreService userScoreService;
 	
+	@Resource
+	private IMsgSendService msgSendService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(AnswerController.class);
 	
 	@PostMapping("/save")
@@ -63,6 +69,10 @@ public class AnswerController{
 		List<Answer> answerList = JSON.parseArray(answerJson,Answer.class);
 		answerService.saveAnswerList(userScore, answerList,files);
 		
+        JSONObject parms = SuveryEmailTemplate.getClickLinkUrl(userScore.getScoreId());
+		if(!userInfo.isCurrentManage()) {
+            msgSendService.sendEmail(userScore.getRelationerEmail(), parms);
+		}
 		return new JsonResult(ResponseCode.SUCCESS,"", null);
 	}
 
