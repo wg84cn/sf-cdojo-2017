@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.sf.iguess.email.service.IMsgSendService;
-import com.sf.iguess.email.template.SuveryEmailTemplate;
 import com.sf.iguess.response.JsonResult;
 import com.sf.iguess.response.ResponseCode;
 import com.sf.iguess.survey.constant.Constant;
