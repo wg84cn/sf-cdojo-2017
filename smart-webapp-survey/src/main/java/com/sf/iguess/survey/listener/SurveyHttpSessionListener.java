@@ -11,17 +11,17 @@ import org.slf4j.LoggerFactory;
 @WebListener
 public class SurveyHttpSessionListener implements HttpSessionListener {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SurveyHttpSessionListener.class);
+	private static final Logger loger = LoggerFactory.getLogger(SurveyHttpSessionListener.class);
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-    	LOG.info("Session 被创建");
+    	loger.info("Session 被创建");
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
     	HttpSession session = se.getSession();
     	session.invalidate();	
-    	LOG.info("ServletContex 被销毁");
+    	loger.info("ServletContex 被销毁");
     }
 }

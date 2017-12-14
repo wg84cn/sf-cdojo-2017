@@ -26,12 +26,11 @@ import com.smart.platform.toolkit.StringUtil;
 
 @WebFilter(filterName = "sessionFilter", urlPatterns = "/*")
 public class SessionFilter implements Filter {
-	private static Logger LOG = LoggerFactory.getLogger(SessionFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(SessionFilter.class);
 	
-	private static final String static_path = "^.*(\\.js|\\.css|\\.html|\\.jpg|\\.gif|\\.png|\\.ico|/login)$";
-	private static final String  no_need_filter_path = 
+	private static final String STATIC_PATH = "^.*(\\.js|\\.css|\\.html|\\.jpg|\\.gif|\\.png|\\.ico|/login)$";
+	private static final String  NO_NEED_FILTER_PATH = 
 	    "^.*(/druid|/view.*\\.html|/question/findBySurveyType|/userScore/findByScoreId|/answer/findAnswerInfo).*$";
-
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain)
@@ -46,7 +45,7 @@ public class SessionFilter implements Filter {
 		Boolean isLogin = (Boolean) request.getSession().getAttribute(HttpConstant.ISLOGIN);
 		sessionKeyPairSet(request.getSession());
 		if(isNeedLoginPath(uri, isLogin)) {
-			LOG.info("request refer {} url {}", url, uri);
+			logger.info("request refer {} url {}", url, uri);
 			// User do not login can access the following page
 			String requestPath = request.getContextPath().equals("/") ? "" : request.getContextPath();
 			response.sendRedirect(requestPath + "/login");
@@ -77,26 +76,23 @@ public class SessionFilter implements Filter {
 			session.setAttribute(HttpConstant.RSA_PUBLIC_KEY_EXPONENT_HEX, publicKey.getPublicExponent().toString(16));
 			session.setAttribute(HttpConstant.RSA_PRIVATE_KEY, privateKey);
 		} catch (Exception e) {
-			LOG.error(" session set key pair erorr, {}", e.toString());
+			logger.error(" session set key pair erorr, {}", e.toString());
 		}
 	}
 	
 	private boolean isNeedLoginPath(String uri, Boolean isLogin) {
-		boolean isStaticPath = RegularMatcher.isRegularMatch(uri, static_path);
-		boolean isNoFilterPath = RegularMatcher.isRegularMatch(uri, no_need_filter_path);
-		if(!(isStaticPath || isNoFilterPath) && (isLogin == null || !isLogin.booleanValue())) {
-			return true;
-		}
-		return false;
+		boolean isStaticPath = RegularMatcher.isRegularMatch(uri, STATIC_PATH);
+		boolean isNoFilterPath = RegularMatcher.isRegularMatch(uri, NO_NEED_FILTER_PATH);
+		return !(isStaticPath || isNoFilterPath) && (isLogin == null || !isLogin.booleanValue());
 	}
 
 	@Override
 	public void destroy() {
-		LOG.info("过滤器销毁");
+		logger.info("过滤器销毁");
 	}
 
 	@Override
 	public void init(FilterConfig config) throws ServletException {
-		LOG.info("过滤器初始化");
+		logger.info("过滤器初始化");
 	}
 }

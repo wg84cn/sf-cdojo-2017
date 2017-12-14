@@ -9,17 +9,17 @@ import org.slf4j.LoggerFactory;
 
 @WebListener
 public class SurveyServletContextListener implements ServletContextListener {
-	private static final Logger LOG = LoggerFactory.getLogger(SurveyServletContextListener.class);
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(SurveyServletContextListener.class);
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		LOG.info("ServletContex初始化:{}",sce.getServletContext().getServerInfo());
+		logger.info("ServletContex初始化:{}",sce.getServletContext().getServerInfo());
 	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		LOG.info("ServletContex销毁");
+		logger.info("ServletContex销毁");
 	}
 
 }
