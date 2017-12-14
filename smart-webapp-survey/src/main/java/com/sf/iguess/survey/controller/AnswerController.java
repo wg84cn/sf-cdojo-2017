@@ -43,9 +43,6 @@ public class AnswerController{
 	@Resource
 	private UserScoreService userScoreService;
 	
-	@Resource
-	private IMsgSendService msgSendService;
-	
 	private static final Logger logger = LoggerFactory.getLogger(AnswerController.class);
 	
 	@PostMapping("/save")
@@ -68,11 +65,6 @@ public class AnswerController{
 		
 		List<Answer> answerList = JSON.parseArray(answerJson,Answer.class);
 		answerService.saveAnswerList(userScore, answerList,files);
-		
-        JSONObject parms = SuveryEmailTemplate.getClickLinkUrl(userScore.getScoreId());
-		if(!userInfo.isCurrentManage()) {
-            msgSendService.sendEmail(userScore.getRelationerEmail(), parms);
-		}
 		return new JsonResult(ResponseCode.SUCCESS,"", null);
 	}
 
