@@ -1,5 +1,14 @@
 package com.sf.iguess.response;
 
+/**
+ * ClassName: Response <br/>
+ * Function: 返回消息定义. <br/>
+ * date: 2017年12月14日 下午9:04:20 <br/>
+ *
+ * @author 618721
+ * @version 
+ * @since JDK 1.8
+ */
 public class Response {
 
 	private static final String OK = "ok";
