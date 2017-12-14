@@ -19,4 +19,22 @@
 >#### 官方演示
 >#### 关于我们
 * 详见模块文件resume.md
+* 生产环境：mvn clean package -Pproduct -Dmaven.test.skip=true
+
+
+>#### 官方演示
+>#### 关于我们
+* 详见模块文件resume.md
+* 生产环境：mvn clean package -Pproduct -Dmaven.test.skip=true
+
+
+>#### 官方演示
+>#### 关于我们
+* 详见模块文件resume.md
+* 生产环境：mvn clean package -Pproduct -Dmaven.test.skip=true
+
+
+>#### 官方演示
+>#### 关于我们
+* 详见模块文件resume.md
 

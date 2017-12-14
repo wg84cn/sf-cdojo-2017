@@ -20,6 +20,8 @@ public class ApplicationConfigurer {
 
 	public static final String SPRING_CONFIG_LOCATION = "spring.config.location";
 
+	private ApplicationConfigurer(){}
+	
 	/**
 	 * 自定义配置加载，方法定义为static的，保证优先加载
 	 * @return
