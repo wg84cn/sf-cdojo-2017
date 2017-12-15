@@ -30,7 +30,7 @@ public class StoreGoodsScheduler {
 	}
 	
 	/**
-	 * 定时检查集货的完成状态
+	 * 定时检查集货表的新增状态
 	 */
 	@Scheduled(cron = "*/50 * * * * ?")
 	public void autoCreateStoreGoods() {
@@ -41,5 +41,4 @@ public class StoreGoodsScheduler {
 		}
 		logger.info("Execute nessus bugs file synchronized task end");
 	}
-
 }

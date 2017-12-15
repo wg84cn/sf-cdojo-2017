@@ -72,22 +72,26 @@ public class StoreServiceImpl implements StroreService {
 	public void checkStoreGoodsStatus() {
 		// 获取状态为活跃状态集货记录
 		List<MarketBasicInfo> maketBasicList = marketBasicInfoDao.selectMaketBasicList();
-		for(MarketBasicInfo marketBasic:maketBasicList){
-			List<StoreGoods>  storeGoodsList = storeGoodsDao.selectActiveStoreGoods(marketBasic.getMktId(), null);
-			if(storeGoodsList != null && !storeGoodsList.isEmpty()){
+		for (MarketBasicInfo marketBasic : maketBasicList) {
+			List<StoreGoods> storeGoodsList = storeGoodsDao.selectActiveStoreGoods(marketBasic.getMktId(), null);
+			if (storeGoodsList != null && !storeGoodsList.isEmpty()) {
 				continue;
 			}
 			byte duration = marketBasic.getGroupDuration();
-			//过期
-			for(StoreGoods storeGoods:storeGoodsList){
-				if(storeGoods.initMinuteDuration() >= duration){
-					storeGoods.setStatus(StoreGoods.OVERDUE_STATUS);
-					storeGoodsDao.updateByPrimaryKey(storeGoods);
+			// 过期
+			for (StoreGoods storeGoods : storeGoodsList) {
+				if (storeGoods.initMinuteDuration() < duration) {
+					continue;
 				}
+				storeGoods.setStatus(StoreGoods.OVERDUE_STATUS);
+				storeGoodsDao.updateByPrimaryKey(storeGoods);
 			}
 		}
 	}
 
+	/*  
+	 * 1. 自动生成集货信息
+	 */
 	@Override
 	public void autoCreateStoreGoods() {
 		List<MarketBasicInfo> maketBasicList = marketBasicInfoDao.selectMaketBasicList();
