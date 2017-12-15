@@ -29,8 +29,8 @@
         <div class="share-wrapper">
             <img src="../images/分享 (3)@2x.png" alt="">
         </div>
-        <div>
-            <a class="mui-btn mui-btn-warning dis-block join-now-wrapper" @tap="toMediaList">
+        <div @tap="toMediaList">
+            <a class="mui-btn mui-btn-warning dis-block join-now-wrapper" >
                 <span class="mui-tab-label text-white">立即参加</span>
             </a>
         </div>
@@ -90,8 +90,7 @@
                         使用要求
                     </span>
                 </div>
-                <div class="hint-content">
-                    {{userRequire}}
+                <div class="hint-content" v-html="userRequire">
                 </div>
             </div>
         </div>
@@ -122,8 +121,9 @@
 <script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     mui.init();
-//    var baseUrl = "http://192.168.0.4:9090";
-    var baseUrl = "http://www.mockhttp.cn/mock";
+//    var baseUrl = "";
+    var baseUrl = "http://192.168.0.4:9090";
+//    var baseUrl = "http://www.mockhttp.cn/mock";
     var app = new Vue({
         el: '#detail',
         data: {
@@ -149,7 +149,7 @@
         methods: {
             toMediaList: function () {
                 mui.openWindow({
-                    url: 'template/goodsAssents.html',
+                    url: 'sentInformation.html',
                     id: 'info'
                 });
             },
@@ -177,7 +177,7 @@
                 })
             },
             promise: function (op) {
-                return axios(op.url + op.append, {params: op.data});
+                return axios(op.url + (op.append || ""), {params: op.data});
             },
             addData: function (data) {
                 var dateReal;
@@ -185,25 +185,26 @@
                     dateReal = data.data.data;
                     dateReal.deadline = common.adjustTime( dateReal.createTime + dateReal.groupDuration * 60 * 1000, "MM月DD日");
                     dateReal.finishPercent = dateReal.storedNumber / dateReal.groupLimit || 0;
-                    dateReal.userRequire.replace(/\$\{\{\w+\}\}/ig, function (match) {
-                        return this[match];
-                    });
+                    dateReal.userRequire.replace(/\$\{\{(\w+)\}\}/ig, function (match, cat) {
+                        return this[cat];
+                    }.bind(this));
                     Object.keys( dateReal ).forEach(function (t) {
                         this[t] = dateReal[t];
                     }.bind(this));
                 }
             },
             updatePro: function () {
-                this.promise({
+                /*this.promise({
                     append: "",
                     data: "",
                     url: baseUrl +  "/storeGoods/loadActiveStoreList"
-                })
+                })*/
             },
             addIcon:function (data) {
                 var dateReal;
                 if( data.data.code === "200" && data.data.data ) {
                     dateReal = data.data.data;
+//                    this.$set("iconGroup", dateReal);
                     this.iconGroup = dateReal;
                 }
             },
@@ -223,12 +224,15 @@
                             data: "",
                             url: baseUrl +  "/storeGoods/getStore/"
                         }).then(that.addData.bind(that))
+                            .then(function () {
+                                that.promise({
+                                    append: dataReal[0].storeId,
+                                    data: "",
+                                    url: baseUrl +  "/storeGoods/loadStoreUserList/"
+                                }).then(that.addIcon.bind(that))
+                            })
 
-                        this.promise({
-                            append: dataReal[0].storeId,
-                            data: "",
-                            url: baseUrl +  "/storeGoods/loadStoreUserList/"
-                        }).then(that.addIcon.bind(that))
+
                     }
 
                 }.bind(this))
