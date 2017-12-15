@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sf.iguess.survey.mapper.StoreGoodsDao" >
+  <resultMap id="BaseResultMap" type="com.sf.iguess.survey.domain.StoreGoods" >
+    <id column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="store_market_pic" property="storeMarketPic" jdbcType="VARCHAR" />
+    <result column="stored_number" property="storedNumber" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+   
+  <sql id="Base_Column_List" >
+    store_id, store_name, store_market_pic, stored_number, create_time, modify_time
+  </sql>
+   
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tt_store_goods
+    where store_id = #{storeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tt_store_goods
+    where store_id = #{storeId,jdbcType=BIGINT}
+  </delete>
+   
+  <insert id="insert" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
+    insert into tt_store_goods (store_id, store_name, store_market_pic, 
+      stored_number, create_time, modify_time
+      )
+    values (#{storeId,jdbcType=BIGINT}, #{storeName,jdbcType=VARCHAR}, #{storeMarketPic,jdbcType=VARCHAR}, 
+      #{storedNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
+    insert into tt_store_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="storeName != null" >
+        store_name,
+      </if>
+      <if test="storeMarketPic != null" >
+        store_market_pic,
+      </if>
+      <if test="storedNumber != null" >
+        stored_number,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeName != null" >
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeMarketPic != null" >
+        #{storeMarketPic,jdbcType=VARCHAR},
+      </if>
+      <if test="storedNumber != null" >
+        #{storedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+   
+  <update id="updateByPrimaryKeySelective" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
+    update tt_store_goods
+    <set >
+      <if test="storeName != null" >
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeMarketPic != null" >
+        store_market_pic = #{storeMarketPic,jdbcType=VARCHAR},
+      </if>
+      <if test="storedNumber != null" >
+        stored_number = #{storedNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where store_id = #{storeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
+    update tt_store_goods
+    set store_name = #{storeName,jdbcType=VARCHAR},
+      store_market_pic = #{storeMarketPic,jdbcType=VARCHAR},
+      stored_number = #{storedNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where store_id = #{storeId,jdbcType=BIGINT}
+  </update>
+</mapper>
