@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>填写寄件信息</title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../css/detail.css" rel="stylesheet"/>
+		<style>
+			.mui-btn {
+				font-size: 16px;
+				padding: 8px;
+				margin: 3px;
+			}
+			
+			h5.mui-content-padded {
+				margin-left: 3px;
+				margin-top: 20px !important;
+			}
+			
+			h5.mui-content-padded:first-child {
+				margin-top: 12px !important;
+			}
+			
+			.ui-alert {
+				text-align: center;
+				padding: 20px 10px;
+				font-size: 16px;
+			}
+			
+			.mui-content {
+				background: #F8F8F8;
+			}
+			
+			.mui-content .mui-content-padded {
+				margin: 0;
+			}
+			
+			.sent_part {
+				 font-size: 34px;
+		    height: 34px;
+
+		    border-bottom: 1px solid #E4E3E6;
+		    padding: 0 17.5px;
+		    padding-bottom: 10px;
+		    
+			}
+			
+			.sent_part .sent_part_img {
+				height: 22px;
+				vertical-align: middle;
+			}
+			
+			.sent_part span {
+				vertical-align: middle;
+			}
+			.mui-content{
+				background: #fff;
+			}
+			.mui-content .mui-input-group {
+				 padding: 12.5px 0;
+				 padding-bottom: 0;
+    		/*margin: 0 17.5px;*/
+			}
+		
+			
+			.mui-content .mui-input-group .mui-input-row {
+				margin: 0;
+				height: 45px;
+    		line-height: 45px;
+    		padding: 0 17.5px;
+			}
+			
+			.mui-content .mui-input-group .mui-input-row:after {
+				left: 0;
+			}
+			
+			.fl {
+				float: left;
+			}
+			
+			.fr {
+				float: right;
+			}
+			
+			.city_select {
+				overflow: hidden;
+			}
+		
+			
+			.dark{
+				color: #C1C1C1;
+			}
+			
+			.city_select .city_picker {
+				float: right;
+				margin-right:25px;
+			}
+			
+			.city_select .ico_right {
+				 width: 7.5px;
+    		 margin-top: 16px;
+			}
+			.margin5{
+				margin-left:5px;
+			}
+			
+			#myModal{
+				position: fixed;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    left: 0;
+		    z-index: 1050;
+		    background: #7F7F7F;
+		    opacity: 0.8;
+			}
+			
+
+			#myModal .modal-dialog{
+				
+			}
+			#myModal .modal-content{
+				position: relative;
+		    width: auto;
+		    margin: 10px;
+		    top: 60px;
+			}
+			
+			#myModal .modal-content .modal-body{
+				width: 88%;
+		    margin: 0 auto;
+		    height: 420px;
+		    background: #fff;
+		    text-align: center;
+			}
+			
+			#myModal .modal-content .modal-body .suc_btn{
+				margin-top:32px;
+				margin-bottom: 30px;
+			}
+			
+			#myModal .modal-content .modal-body .mui-btn{
+				width: 80%;
+			}
+			
+			
+			.text-center{
+				text-align: center;
+			}
+			#myModal .modal-content .modal-footer img{
+				width: 50px;
+				
+			}
+			
+			#myModal .sub-title{
+				font-size: 14px;
+				margin: 0 auto;
+				margin-top:25px;
+				margin-bottom: 35px;
+				width: 225px;
+				text-align: left;
+			}
+			
+			
+		</style>
+
+	</head>
+
+	<body>
+		<div id="sentInfor">
+			<!--<header class="mui-bar mui-bar-nav">-->
+				<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="main.html"></a>-->
+				<!--<h1 class="mui-title">填写寄件信息</h1>-->
+			<!--</header>-->
+
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back back-btn mui-pull-left" href="../index.html">
+					<img src="../images/Rectangle  Copy 4@2x.png" alt=""/>
+				</a>
+				<a class="mui-pull-left close-btn" href="../index.html">
+					<img src="../images/返回 copy 2@2x.png" alt=""/>
+				</a>
+				<h1 class="mui-title f-h2">填写寄件信息</h1>
+				<a class="more-btn mui-pull-right" href="#">
+					<img src="../images/更多 copy 2@2x.png" alt=""/>
+				</a>
+			</header>
+
+			<nav class="mui-bar mui-bar-tab">
+				<div @tap="submitForm">
+					<a  class="mui-btn mui-btn-warning dis-block join-now-wrapper" @tap="toMediaList">
+						<span class="mui-tab-label text-white">报名集货</span>
+					</a>
+				</div>
+			</nav>
+
+			<div class="mui-content">
+
+				<div class="mui-content-padded">
+
+					<form class="mui-input-group">
+
+						<div class="sent_part">
+							<img src="../images/Addres@2x.png" class="sent_part_img" />
+							<span class="f-h4 text-warning">寄件地址</span>
+						</div>
+
+						<div class="mui-input-row city_select" >
+						
+							<span class="fl dark">所在地区</span>
+							<img class="fr ico_right" src="../images/Chevron@2x.png" alt="" />
+							<span class="city_picker f-h4 fr" @tap="cityPicker">{{currentAddress}}</span>
+							
+						</div>
+
+						<div class="" style="margin: 10px 5px;">
+							<textarea v-model="sentForm.detailAddress" maxlength="1000" id="textarea" rows="3" placeholder="请填写详细地址，不少于5字"></textarea>
+						</div>
+
+						<div class="sent_part">
+							<img src="../images/People@2x.png" class="sent_part_img" />
+							<span class="f-h4 text-warning">寄件人</span>
+						</div>
+
+						<div class="mui-input-row">
+							<!--<label>Input</label>-->
+							<input type="text" v-model="sentForm.userName" maxlength="100" placeholder="请填写寄件人姓名">
+						</div>
+						<div class="mui-input-row">
+							
+							<input type="tel" v-model="sentForm.phoneNumber" class="mui-input-clear" placeholder="请填写寄件人电话">
+						</div>
+
+						<div class="mui-input-row">
+							<span class="f-h4" >预估每日寄件量</span><span class="dark f-h8 margin5">(请如实填报，以便我们为您准备资源)</span>
+						</div>
+
+						<div class="mui-input-row">
+							<input type="text" v-model="sentForm.dayExpressNumber" placeholder="请填写寄件数量(至少20件)">
+						</div>
+			
+						<div class="mui-input-row">
+							<input type="text" v-model="sentForm.avgWeight"  class="mui-input-clear" placeholder="请选择单件平均重量">
+						</div>
+
+						<!--<div class="mui-button-row">
+							<input type="button" @tap="submitForm" value="确认" class=""/>
+							<button type="button" @tap="submitForm" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>
+						</div>-->
+
+					</form>
+
+				</div>
+			</div>
+
+			<div class="modal fade in" id="myModal" v-if="successModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						
+						<div class="modal-body">
+							<img class="suc_btn" style="width:100px;" src="../images/Group 10@2x.png" alt="" />
+							<h4>报名成功!</h4>
+							
+							<div class="dark sub-title" style="font-size: 14px;">
+								转发给更多朋友或生成图片风向到朋友圈，即可加快集货速度。
+							</div>
+							<button type="button" class="mui-btn mui-btn-green">
+								<span>发送微信好友</span> 
+								<img src="../images/微信 (1)@2x.png" style="width: 16px;margin-left: 5px;position: relative;top: 2px;" alt="" />
+						
+							</button>
+							<button type="button" @tap='toGoodsAssents' class="mui-btn">
+								<span>分享到朋友圈</span> 
+								<img src="../images/朋友圈@2x.png" style="width: 16px;margin-left: 5px;position: relative;top: 2px;" alt="" />
+							</button>
+						</div>
+						<div class="modal-footer text-center">
+							<img @tap="hideModal" src="../images/pop_icon_close_nor@2x.png" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		
+
+		<script src="../js/mui.min.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+		<script src="../js/mui.picker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="../js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			//mui初始化
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+				statusBarBackground: '#f00',
+			});
+			var cityPicker3 = new mui.PopPicker({
+				layer: 3
+			});
+			
+			
+			var app = new Vue({
+				el: '#sentInfor',
+				data: {
+					successModal:false,
+					storeId:'',
+					currentAddress:'广东省深圳市宝安区',
+					subAddress:'广东省-深圳市-宝安区',
+					sentForm:{
+						userArea:'',
+						detailAddress:'',
+						userName:'',
+						phoneNumber:'',
+						dayExpressNumber:'',  //平均每天寄件量
+						avgWeight:'',
+						detailAddress:'', //寄件地址
+					},
+					urlData:'',
+				},
+				methods: {
+					hideModal: function(){
+						this.successModal = false;
+					},
+					toGoodsAssents: function(){
+						localStorage.setItem('urlData',this.urlData);
+						mui.openWindow({
+					    url: 'goodsAssents.html', 
+					    id:'info'
+					  });
+					},
+					verifyTel: function(val){
+						val = parseInt(val)
+            return /^[1][\d]{10}$/.test(val)
+	       	},
+	       	verifyNumber: function(val){
+	       		val = parseInt(val)
+            return /^[0-9]*$/.test(val)
+	       	},
+	       	
+					submitForm: function(){
+						var that = this;
+						if(!this.verifyTel(this.sentForm.phoneNumber)){
+							mui.alert('电话号码输入有误，请检查输入');
+							return;
+						}
+						
+						if(!this.verifyNumber(this.sentForm.dayExpressNumber)){
+							mui.alert('寄件数量输入有误，请检查输入');
+							return;
+						}
+						
+						if(this.sentForm.userArea == ''){
+							this.sentForm.userArea = this.subAddress
+						}
+						
+						var sentUrl = '/expressDelivery/StoreGoods/'+this.storeId+'/saving';
+						mui.post(sentUrl,this.sentForm,function(res){
+								console.log('data',res);
+								if(res && res.code=='200'){
+									console.log('res',res.data.url);
+									this.urlData = res.data.url;
+									that.successModal = true;
+								}else{
+									mui.alert('输入有误，请检查输入');
+								}
+							},'json'
+						);
+						
+					},
+					getParam: function(obj, param) {
+						return obj[param] || '';
+					},
+					cityPicker: function() {
+						var that = this;
+						cityPicker3.show(function(items) {
+							that.currentAddress = that.getParam(items[0], 'text') + that.getParam(items[1], 'text') + that.getParam(items[2], 'text');
+							that.sentForm.userArea = that.getParam(items[0], 'text') + "-" + that.getParam(items[1], 'text') + "-" + that.getParam(items[2], 'text');
+						});
+					},
+					toMediaList: function() {
+						mui.openWindow({
+							url: 'template/media-list.html',
+							id: 'info'
+						});
+					},
+					butFuc: function(e) {
+						//						this.btnVal = '我被点击了'
+						e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
+						var btnArray = ['取消', '确定'];
+						mui.prompt('请输入你对MUI的评语：', '性能好', 'Hello MUI', btnArray, function(e) {
+							if(e.index == 1) {
+								info.innerText = '谢谢你的评语：' + e.value;
+							} else {
+								info.innerText = '你点了取消按钮';
+							}
+						})
+					},
+					init: function() {
+						var stateText = localStorage.getItem('storeId') || "{}";
+					  this.storeId = stateText;
+						console.log('store',this.storeId);
+						mui.get('/area/list', function(res) {
+							if(res && res.code==200){
+								var dataa=eval(res.data);
+								cityPicker3.setData(dataa);
+							}
+						});
+
+					}
+				},
+				mounted: function() {
+					this.init();
+				},
+			});
+
+		</script>
+	</body>
+
+</html>

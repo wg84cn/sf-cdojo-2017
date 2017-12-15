@@ -1,0 +1,51 @@
+@import './app.scss';
+
+html, body, .mui-content{
+  background: #fff;
+}
+
+.mui-card-header.no-border:after {
+  height: 0;
+}
+.mui-card {
+  box-shadow: none;
+}
+.mui-card-header {
+  margin-top: 3rem;
+}
+.share-func {
+  margin: 15%;
+  text-align: center;
+  .check-qr-code {
+    margin-top: 2rem;
+  }
+
+}
+.qr-img-wrapper {
+  text-align: center;
+  border: none;
+  margin-top: 5rem;
+  .qr-img {
+
+    width: 50%;
+  }
+}
+.check-qr-code {
+  color: $title
+}
+.qr-hint {
+  padding: 1rem;
+  color: $title
+}
+.sub-title {
+
+}
+#qrcode {
+  width: 10rem;
+  text-align: center;
+  margin: auto;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
