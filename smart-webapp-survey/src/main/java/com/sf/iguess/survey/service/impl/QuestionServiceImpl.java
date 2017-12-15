@@ -26,7 +26,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public String findPageQuestions() {
-		PageHelper.startPage(1, 0);
+		PageHelper.startPage(1, 10);
 		List<Question> questList = questionDao.findPageQuestions();
 		PageInfo<Question> appsPageInfo = new PageInfo<>(questList);
 		return JSON.toJSONString(appsPageInfo);
