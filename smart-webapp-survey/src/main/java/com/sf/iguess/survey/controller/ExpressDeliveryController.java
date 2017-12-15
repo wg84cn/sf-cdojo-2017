@@ -38,10 +38,20 @@ public class ExpressDeliveryController {
 	@Resource
 	private ExpressDeliveryService expressDeliveryService;
 
+	/**
+	 * saving:保存寄件信息. <br/>
+	 *
+	 * @author 618721
+	 * @param storeId
+	 * @param expressDelivery
+	 * @return
+	 * @since JDK 1.8
+	 */
 	@PostMapping("/StoreGoods/{storeId}/saving")
 	public JsonResult saving(
 			@PathVariable("storeId")String storeId,
 			ExpressDelivery expressDelivery){
+		//保存并寄件信息
 		StoreGoods storeGood = expressDeliveryService.save(storeId,expressDelivery);
 		if(storeGood != null){
 			return new JsonResult(ResponseCode.SUCCESS,"", storeGood);

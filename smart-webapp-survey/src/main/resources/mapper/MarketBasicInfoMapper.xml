@@ -27,21 +27,21 @@
    
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select   <include refid="Base_Column_List" /> , <include refid="Blob_Column_List" />
-    from tt_market_basic
+    from pro_market_base
     where mkt_id = #{mktId,jdbcType=VARCHAR}
   </select>
   
     <select id="selectMaketBasicList" resultMap="BaseResultMap">
-    select   <include refid="Base_Column_List" /> from tt_market_basic
+    select   <include refid="Base_Column_List" /> from pro_market_base
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from tt_market_basic
+    delete from pro_market_base
     where mkt_id = #{mktId,jdbcType=VARCHAR}
   </delete>
    
   <insert id="insert" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
-    insert into tt_market_basic (mkt_id, mkt_name_show, daily_min_packages, 
+    insert into pro_market_base (mkt_id, mkt_name_show, daily_min_packages, 
       weight_min, weight_max, base_price, 
       base_weight, group_limit, group_duration, 
       user_require)
@@ -51,7 +51,7 @@
       #{userRequire,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
-    insert into tt_market_basic
+    insert into pro_market_base
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="mktId != null" >
         mkt_id,
@@ -119,7 +119,7 @@
   </insert>
   
   <update id="updateByPrimaryKeySelective" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
-    update tt_market_basic
+    update pro_market_base
     <set >
       <if test="mktNameShow != null" >
         mkt_name_show = #{mktNameShow,jdbcType=VARCHAR},
@@ -152,7 +152,7 @@
     where mkt_id = #{mktId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
-    update tt_market_basic
+    update pro_market_base
     set mkt_name_show = #{mktNameShow,jdbcType=VARCHAR},
       daily_min_packages = #{dailyMinPackages,jdbcType=SMALLINT},
       weight_min = #{weightMin,jdbcType=DOUBLE},
@@ -165,7 +165,7 @@
     where mkt_id = #{mktId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
-    update tt_market_basic
+    update pro_market_base
     set mkt_name_show = #{mktNameShow,jdbcType=VARCHAR},
       daily_min_packages = #{dailyMinPackages,jdbcType=SMALLINT},
       weight_min = #{weightMin,jdbcType=DOUBLE},

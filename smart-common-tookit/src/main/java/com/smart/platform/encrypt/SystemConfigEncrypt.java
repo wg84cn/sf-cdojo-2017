@@ -17,8 +17,6 @@ import com.smart.platform.formative.SercurityHelper;
 
 /**
  * ClassName:ConfigProcess <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason:	 TODO ADD REASON. <br/>
  * Date:     2017年2月28日 上午11:13:25 <br/>
  * @author   01135912
  * @version  
@@ -27,8 +25,6 @@ import com.smart.platform.formative.SercurityHelper;
  */
 /**
  * ClassName: ConfigProcess <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason: TODO ADD REASON(可选). <br/>
  * date: 2017年2月28日 上午11:13:25 <br/>
  *
  * @author 01135912
@@ -37,6 +33,10 @@ import com.smart.platform.formative.SercurityHelper;
  */
 public final class SystemConfigEncrypt
 {
+	private SystemConfigEncrypt(){
+		
+	}
+	
     private final static String ENCODE_COMPONENT_APP =
         "556522e59f4545fbaa2a12ca72209e5e7a407d24094531d27f12c0cde7c14a7b63a23f1ff6aa0dc9f35686e47b2de125";
     
@@ -59,7 +59,7 @@ public final class SystemConfigEncrypt
         }
         catch (Exception e)
         {
-            LOG.error("decryt config value error {}", e.toString());
+            LOG.error("decryt config value error {}", e);
         }
         return decodeData;
     }

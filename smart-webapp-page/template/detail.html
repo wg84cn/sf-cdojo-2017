@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
     <link href="../css/app.css" rel="stylesheet"/>
     <link href="../css/detail.css" rel="stylesheet"/>
+    <script src="../../../../esg-clpp-webapp-20171009/esg-clpp-core-server_80002450/ngsoc-portal-webapp/src/main/webapp/assets/scripts/main.js"></script>
 </head>
 <body>
 <div id="detail">
@@ -33,10 +34,6 @@
                 <span class="mui-tab-label text-white">立即参加</span>
             </a>
         </div>
-       <!-- <a class="mui-tab-item" href="#tabbar-with-contact">
-            <span class="mui-icon mui-icon-contact"><span class="mui-badge">9</span></span>
-            <span class="mui-tab-label">公告</span>
-        </a>-->
 
     </nav>
 
@@ -45,23 +42,23 @@
             <!--页眉，放置标题-->
             <div class="mui-card-header">
                 <div class="title-wrapper">
-                    <div class="title text-warning f-h1">鞋服转送080901期</div>
+                    <div class="title text-warning f-h1">{{mktNameShow}}</div>
                 </div>
                 <div class="sub-title f-h7">
-                    <span>1.5-5.5kg</span>
-                    <span>每日最低需寄<span class="text-warning">20</span>件</span>
+                    <span>{{weightMin}}-{{weightMax}}kg</span>
+                    <span>每日最低需寄<span class="text-warning">{{dailyMinPackages}}</span>件</span>
                 </div>
             </div>
             <!--内容区-->
             <div class="mui-card-content">
-                <img class="content-img" src="../images/1.png" alt=""/>
+                <img class="content-img" :src="storeMarketPic" alt=""/>
                 <div class="badge">
                     <div class="badge-it">
                         <img class="content-img" src="../images/Group空 8.png" alt=""/>
                         <div class="badge-title">
-                            <span class="f-h7 text-white">低至¥</span> <span class="f-h1 text-white">6</span>
+                            <span class="f-h8 text-white">低至¥</span> <span class="f-h1 text-white">{{basePrice}}</span>
                             <br>
-                            <span class="f-h8 text-white">1.5kg</span>
+                            <span class="f-h8 text-white">{{weightMin}}kg</span>
                         </div>
                     </div>
                 </div>
@@ -76,11 +73,12 @@
 
                     </div>
                     <div class="progress-word f-h3">
-                        还差<span class="text-warning">8</span>人成团
+                        还差<span class="text-warning">{{groupLimit - storedNumber}}</span>人成团
                     </div>
                 </div>
                 <div class="deadline dis-block">
-                    截止日期: 8月14日
+                    <!--截止日期: 8月14日-->
+                    截止日期: {{deadline}}
                 </div>
             </div>
         </div>
@@ -94,8 +92,7 @@
                     </span>
                 </div>
                 <div class="hint-content">
-                    1.每日承诺寄件量不低于20件
-                    (周六日及法定假期不要求承诺量)\r\n日发件不足20件或运费不足120元将按照120元收取最低运作费用。\r\n2.承诺使用周期内未达到目标则自动取消集货。\r\n3.集货周期内未达到目标则自动取消集货。\r\n4.用户需自行完成打包并贴好面单。\r\n5.每日在约定时间进行1次收件，不支持随寄随收。\r\n6.按月结算运费，不支持现寄现结。\r\n
+                    {{userRequire}}
                 </div>
             </div>
         </div>
@@ -107,7 +104,7 @@
                     <span>最近参与</span>
                 </div>
                 <div class="hint-content">
-                    <div class="favi-wrapper">
+                    <div class="favi-wrapper clearfix">
                         <div class="favi-icon">
                             <img src="../images/People@2x.png" alt="">
                         </div>
@@ -124,7 +121,7 @@
                             <img src="../images/People@2x.png" alt="">
                         </div>
                         <div class="favi-number">
-                            已有<span class="text-warning f-h4">13</span>人参团
+                            已有<span class="text-warning f-h4">{{storedNumber}}</span>人参团
                         </div>
                     </div>
                     <div class="dis-block">
@@ -135,17 +132,33 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+<script src="../js/axios.min.js"></script>
 <script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     mui.init();
 
-    mui("#demo1").progressbar({progress: 20}).show();
-
     var app = new Vue({
         el: '#detail',
         data: {
-            btnVal: '输入对话框'
+            btnVal: '输入对话框',
+            "storeId":"ca35b776b07a4ecb8819d9e58910843e",
+            "storeMarketPic":"../images/Group 5@2x.png",
+            "storedNumber":0,
+            "marketId":"62003793-e154-11e7-9d33-00163e003ff9",
+            "mktNameShow":"鞋服专送",
+            "dailyMinPackages":100,
+            "weightMin":1.5,
+            "weightMax":5.5,
+            "basePrice":12,
+            "baseWeight":4.5,
+            "groupLimit":20,
+            "groupDuration":30,
+            "userRequire":"1.每日承诺寄件量不低于20件 (周六日及法定假期不要求承诺量)\r\n日发件不足20件或运费不足120元将按照120元收取最低运作费用。\r\n2.承诺使用周期内未达到目标则自动取消集货。\r\n3.集货周期内未达到目标则自动取消集货。\r\n4.用户需自行完成打包并贴好面单。\r\n5.每日在约定时间进行1次收件，不支持随寄随收。\r\n6.按月结算运费，不支持现寄现结。\r\n",
+            "createTime":1513323351000,
+            "modifyTime":1513314363000,
+            deadline: "",
         },
         methods: {
             toMediaList: function () {
@@ -177,17 +190,35 @@
                     }
                 })
             },
+            promise: function (op) {
+                var promise = axios("http://192.168.0.4:9090/storeGoods/getStore/" + op.append, {params: op.data});
+                //todo:临时always
+                promise.always(function (data) {
+                    var dateReal;
+                    if( data.code === "200" && data.data ) {
+                        dateReal = data.data;
+                        dateReal.deadline = common.adjustTime( data.createTime + dateReal.groupDuration * 60 * 1000, "MM月DD日");
+                        Object.keys( data.data ).forEach(function (t) {
+                            this.$set(t, data.data[t]);
+                        });
+                    }
+                }.bind( this ) );
+                return promise;
+            },
             init: function () {
-                plus.storage.setItem("idfa", "123456");
+                this.promise({
+                    append: "62b2876060204286b3beb439bdfb8f2d",
+                    data: ""
+                });
+                mui("#demo1").progressbar({
+                    progress: this.storedNumber / this.groupLimit
+                }).show();
+                window.localStorage.setItem("idfa", "123456");
             }
         },
         mounted: function () {
             console.log('mounted');
-            var that = this;
-            mui.plusReady(function () {
-                that.init.call(this, arguments);
-
-            });
+            this.init.call(this, arguments);
         },
     });
 </script>

@@ -19,10 +19,10 @@ public class StoreGoodsScheduler {
 	/**
 	 * 定时检查集货的完成状态
 	 */
-	@Scheduled(cron = "* */20 * * * ?")
+	@Scheduled(cron = "0 */1 * * * ?")
 	public void checkStoreGoodsStatus() {
 		try {
-			//stroreService.checkStoreGoodsStatus();
+			stroreService.checkStoreGoodsStatus();
 		} catch (Exception e) {
 			logger.error("Execute nessus bugs file synchronized task error:{}", e);
 		}
