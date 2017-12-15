@@ -5,12 +5,13 @@ import java.lang.annotation.*;
 import com.smart.platform.constant.SystemConstant;
 
 /**
- * <p>
- * 绑定当前登录的用户
- * </p>
- * <p>
- * 不同于@ModelAttribute
- * </p>
+ * ClassName: CurrentUser <br/>
+ * Function: 绑定当前登陆用户. <br/>
+ * date: 2017年12月15日 上午9:10:28 <br/>
+ *
+ * @author 618721
+ * @version 
+ * @since JDK 1.8
  */
 @Target({ ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
