@@ -1,5 +1,6 @@
 package com.sf.iguess.survey.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,10 +13,10 @@ import com.sf.iguess.survey.domain.StoreGoods;
 import com.sf.iguess.survey.domain.User;
 import com.sf.iguess.survey.mapper.ExpressDeliveryDao;
 import com.sf.iguess.survey.mapper.StoreGoodsDao;
-import com.sf.iguess.survey.mapper.UserDao;
 import com.sf.iguess.survey.service.AreaService;
 import com.sf.iguess.survey.service.ExpressDeliveryService;
 import com.sf.iguess.survey.service.StroreService;
+import com.sf.iguess.survey.service.UserService;
 import com.smart.platform.toolkit.PropertyPlaceholderConfigurer;
 import com.smart.platform.toolkit.RegularMatcher;
 
@@ -36,16 +37,20 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	@Resource
 	private StoreGoodsDao storeGoodsDao;
 	@Resource
-	private UserDao userDao;
+	private UserService userService;
 	@Resource
 	private AreaService areaService;
 	@Resource
 	private StroreService stroreService;
-	
-	private static final int MAX_DAY_EXPRESS_NUMBER = 20;
+	/** 最小的运件量 */
+	private static final int MIN_DAY_EXPRESS_NUMBER = 20;
+	/** 配置的详情的URL */
 	private static final String STORE_GOOD_DETAIL_URL = "store.good.detail.url";
 
-
+	/**
+	 * 根据集货团得到用户.
+	 * @see com.sf.iguess.survey.service.ExpressDeliveryService#getExpresssUserList(java.lang.String)
+	 */
 	@Override
 	public List<User> getExpresssUserList(String storeId) {
 		return expressDeliveryDao.getExpressUserList(storeId);
@@ -66,13 +71,7 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 			expressDelivery.setStoreId(newStoreId);
 			expressDeliveryDao.insert(expressDelivery);
 			//新增用户
-			String userId = expressDelivery.getPhoneNumber();
-			if(userDao.selectByPrimaryKey(userId) != null){
-				User user = new User();
-				user.setUserId(userId);
-				user.setUserName(expressDelivery.getUserName());
-				userDao.insert(user);
-			}
+			userService.saveUserByExpressDelivery(expressDelivery);
 			//加入返回链接
 			String url = PropertyPlaceholderConfigurer
 					.getConfigValue(STORE_GOOD_DETAIL_URL) + newStoreId;
@@ -145,7 +144,7 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	 */
 	private boolean checkDayExpressNumber(Integer dayExpressNumber) {
 		return (dayExpressNumber != null 
-			&& dayExpressNumber.intValue() >= MAX_DAY_EXPRESS_NUMBER);
+			&& dayExpressNumber.intValue() >= MIN_DAY_EXPRESS_NUMBER);
 	}
 
 	/**

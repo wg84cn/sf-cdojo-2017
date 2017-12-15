@@ -48,6 +48,7 @@ public class StoreServiceImpl implements StroreService {
 		MarketBasicInfo marketInfo = marketBasicInfoDao.selectByPrimaryKey(goods.getMarketId());
 		Integer updateNumber = storeGoodsDao.updateStoreGroupStatus(goods.getStoreId(), marketInfo.getGroupLimit());
 		if (updateNumber != null && updateNumber > 0) {
+			storeGoodsDao.updateStoreFullStatus(goods.getStoreId(), marketInfo.getGroupLimit(), StoreGoods.FULL_STATUS);
 			return goods.getStoreId();
 		}
 		logger.warn("update store group error as group is above limit, system will add new store goods record");

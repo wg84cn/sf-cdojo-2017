@@ -22,12 +22,6 @@ public class User {
 
 	private Date modifyTime;
 	
-	private static final int is_manage = 1;
-
-	public boolean isCurrentManage() {
-		return this.roleType == is_manage;
-	}
-
 	public String getUserId() {
 		return userId;
 	}

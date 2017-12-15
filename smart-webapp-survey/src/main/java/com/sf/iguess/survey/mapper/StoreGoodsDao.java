@@ -25,4 +25,6 @@ public interface StoreGoodsDao {
 	Integer updateStoreGroupStatus(@Param("storeId")String storeId, @Param("goupLimit")Short goupLimit);
 
 	List<StoreGoods> selectActiveStoreGoods(@Param("marketId")String marketId, @Param("groupLimit")Short groupLimit);
+
+	void updateStoreFullStatus(@Param("storeId")String storeId, @Param("goupLimit")Short groupLimit, @Param("fullStatus")Short fullStatus);
 }
