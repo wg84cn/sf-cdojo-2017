@@ -47,15 +47,14 @@ public class StoreServiceImpl implements StroreService {
 	public String updateStoreGroupStatus(StoreGoods goods) {
 		MarketBasicInfo marketInfo = marketBasicInfoDao.selectByPrimaryKey(goods.getMarketId());
 		Integer updateNumber = storeGoodsDao.updateStoreGroupStatus(goods.getStoreId(), marketInfo.getGroupLimit());
+		String storeId = goods.getStoreId();
 		if (updateNumber != null && updateNumber > 0) {
 			int stautusNubmer = storeGoodsDao.updateStoreFullStatus(goods.getStoreId(), marketInfo.getGroupLimit(), StoreGoods.FULL_STATUS);
 			if(stautusNubmer > 0){
-				String storeId = UuidUtil.get32UUID();
+				storeId = UuidUtil.get32UUID();
 				storeGoodsDao.insertSelective(new StoreGoods(storeId, goods.getMarketId(), 0));
-				return storeId;
-			}else{
-				return goods.getStoreId();
 			}
+			return storeId;
 		}
 		logger.warn("update store group error as group is above limit, system will add new store goods record");
 		// 判断新的集货物是否已经被新增
@@ -64,7 +63,6 @@ public class StoreServiceImpl implements StroreService {
 			return goods.getStoreId();
 		}
 		StoreGoods newGoods = newGoodsList.get(0);
-		String storeId = null;
 		if (newGoods == null) {
 			storeId = UuidUtil.get32UUID();
 			storeGoodsDao.insertSelective(new StoreGoods(storeId, goods.getMarketId(), 1));
