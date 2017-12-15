@@ -36,16 +36,16 @@ public class StoreGoodsController {
 		StoreGoods storeGoods = storeGoodsService.selectStoreGood(goodsId);
 		return new JsonResult(ResponseCode.SUCCESS, "", storeGoods);
 	}
-
-	@RequestMapping("loadActiveStoreList")
-	public JsonResult loadActiveStoreList() {
-		List<StoreGoods> storeGoodsList = storeGoodsService.selectActiveStoreList();
-		return new JsonResult(ResponseCode.SUCCESS, "", storeGoodsList);
-	}
 	
 	@RequestMapping("loadStoreUserList/{goodsId}")
 	public JsonResult loadStoreUserList(@PathVariable("goodsId") String goodsId) {
 		List<User> storeGoodsList = expressDeliveryService.getExpresssUserList(goodsId);
+		return new JsonResult(ResponseCode.SUCCESS, "", storeGoodsList);
+	}
+
+	@RequestMapping("loadActiveStoreList")
+	public JsonResult loadActiveStoreList() {
+		List<StoreGoods> storeGoodsList = storeGoodsService.selectActiveStoreList();
 		return new JsonResult(ResponseCode.SUCCESS, "", storeGoodsList);
 	}
 }
