@@ -15,7 +15,7 @@
 	</properties>
 	
     <modules>
-		<module>smart-basic-depengent</module>
+		<module>smart-basic-dependency</module>
 		<module>smart-common-model</module>
 		<module>smart-common-tookit</module>
 		<module>smart-webapp-survey</module>

@@ -7,6 +7,13 @@ label,input,li,ul{
 	font-size: 14px;
 	color: #333;
 }
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #eee inset !important;
+    background-color: rgb(0, 0, 0) !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+    -webkit-tap-highlight-color:rgba(0,0,0,0) !important;
+}
 
 ul,li{
 	list-style-type:none;
@@ -230,12 +237,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .login_module{
 	text-align: center;
-	margin: 10% auto;
+	margin: 18% auto;
 }
 .login_show_module{
 	background: rgba(255,255,255,0.3);
 	width: 500px;
-	height: 260px;
+	height: 280px;
 	display: inline-block;
 }
 .login_title{
@@ -243,7 +250,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	line-height: 35px;
 	text-align: center;
 	font-size: 18px;
-	padding-top:20px;
+	padding-top:30px;
 	font-weight: bold;
 }
 .survey_login{
@@ -257,12 +264,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 	text-align: right;
 }
 .survey_login_input{
-	width: calc(100% - 120px);
+	width: calc(100% - 150px);
 	padding: 0 15px;
 	border: none;
+	border-bottom:1px solid #eee;
 	height: 30px;
 	line-height: 30px;
 	margin-left: 10px;
+	background: none;
 }
 .survey_login_submit{
 	text-align: center;

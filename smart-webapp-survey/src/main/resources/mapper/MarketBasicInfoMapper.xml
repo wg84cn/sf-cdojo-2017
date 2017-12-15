@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sf.iguess.survey.mapper.MarketBasicInfoDao" >
+  <resultMap id="BaseResultMap" type="com.sf.iguess.survey.domain.MarketBasicInfo" >
+    <id column="mkt_id" property="mktId" jdbcType="VARCHAR" />
+    <result column="mkt_name_show" property="mktNameShow" jdbcType="VARCHAR" />
+    <result column="daily_min_packages" property="dailyMinPackages" jdbcType="SMALLINT" />
+    <result column="weight_min" property="weightMin" jdbcType="DOUBLE" />
+    <result column="weight_max" property="weightMax" jdbcType="DOUBLE" />
+    <result column="base_price" property="basePrice" jdbcType="DOUBLE" />
+    <result column="base_weight" property="baseWeight" jdbcType="DOUBLE" />
+    <result column="group_limit" property="groupLimit" jdbcType="SMALLINT" />
+    <result column="group_duration" property="groupDuration" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sf.iguess.survey.domain.MarketBasicInfo" extends="BaseResultMap" >
+    <result column="user_require" property="userRequire" jdbcType="LONGVARCHAR" />
+  </resultMap>
+   
+  <sql id="Base_Column_List" >
+    mkt_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, 
+    group_limit, group_duration
+  </sql>
+  <sql id="Blob_Column_List" >
+    user_require
+  </sql>
+  
+   
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" /> , <include refid="Blob_Column_List" />
+    from pro_market_base
+    where mkt_id = #{mktId,jdbcType=VARCHAR}
+  </select>
+  
+    <select id="selectMaketBasicList" resultMap="BaseResultMap">
+    select   <include refid="Base_Column_List" /> from pro_market_base
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pro_market_base
+    where mkt_id = #{mktId,jdbcType=VARCHAR}
+  </delete>
+   
+  <insert id="insert" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
+    insert into pro_market_base (mkt_id, mkt_name_show, daily_min_packages, 
+      weight_min, weight_max, base_price, 
+      base_weight, group_limit, group_duration, 
+      user_require)
+    values (#{mktId,jdbcType=VARCHAR}, #{mktNameShow,jdbcType=VARCHAR}, #{dailyMinPackages,jdbcType=SMALLINT}, 
+      #{weightMin,jdbcType=DOUBLE}, #{weightMax,jdbcType=DOUBLE}, #{basePrice,jdbcType=DOUBLE}, 
+      #{baseWeight,jdbcType=DOUBLE}, #{groupLimit,jdbcType=SMALLINT}, #{groupDuration,jdbcType=TINYINT}, 
+      #{userRequire,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
+    insert into pro_market_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mktId != null" >
+        mkt_id,
+      </if>
+      <if test="mktNameShow != null" >
+        mkt_name_show,
+      </if>
+      <if test="dailyMinPackages != null" >
+        daily_min_packages,
+      </if>
+      <if test="weightMin != null" >
+        weight_min,
+      </if>
+      <if test="weightMax != null" >
+        weight_max,
+      </if>
+      <if test="basePrice != null" >
+        base_price,
+      </if>
+      <if test="baseWeight != null" >
+        base_weight,
+      </if>
+      <if test="groupLimit != null" >
+        group_limit,
+      </if>
+      <if test="groupDuration != null" >
+        group_duration,
+      </if>
+      <if test="userRequire != null" >
+        user_require,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mktId != null" >
+        #{mktId,jdbcType=VARCHAR},
+      </if>
+      <if test="mktNameShow != null" >
+        #{mktNameShow,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyMinPackages != null" >
+        #{dailyMinPackages,jdbcType=SMALLINT},
+      </if>
+      <if test="weightMin != null" >
+        #{weightMin,jdbcType=DOUBLE},
+      </if>
+      <if test="weightMax != null" >
+        #{weightMax,jdbcType=DOUBLE},
+      </if>
+      <if test="basePrice != null" >
+        #{basePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="baseWeight != null" >
+        #{baseWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="groupLimit != null" >
+        #{groupLimit,jdbcType=SMALLINT},
+      </if>
+      <if test="groupDuration != null" >
+        #{groupDuration,jdbcType=TINYINT},
+      </if>
+      <if test="userRequire != null" >
+        #{userRequire,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
+    update pro_market_base
+    <set >
+      <if test="mktNameShow != null" >
+        mkt_name_show = #{mktNameShow,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyMinPackages != null" >
+        daily_min_packages = #{dailyMinPackages,jdbcType=SMALLINT},
+      </if>
+      <if test="weightMin != null" >
+        weight_min = #{weightMin,jdbcType=DOUBLE},
+      </if>
+      <if test="weightMax != null" >
+        weight_max = #{weightMax,jdbcType=DOUBLE},
+      </if>
+      <if test="basePrice != null" >
+        base_price = #{basePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="baseWeight != null" >
+        base_weight = #{baseWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="groupLimit != null" >
+        group_limit = #{groupLimit,jdbcType=SMALLINT},
+      </if>
+      <if test="groupDuration != null" >
+        group_duration = #{groupDuration,jdbcType=TINYINT},
+      </if>
+      <if test="userRequire != null" >
+        user_require = #{userRequire,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where mkt_id = #{mktId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
+    update pro_market_base
+    set mkt_name_show = #{mktNameShow,jdbcType=VARCHAR},
+      daily_min_packages = #{dailyMinPackages,jdbcType=SMALLINT},
+      weight_min = #{weightMin,jdbcType=DOUBLE},
+      weight_max = #{weightMax,jdbcType=DOUBLE},
+      base_price = #{basePrice,jdbcType=DOUBLE},
+      base_weight = #{baseWeight,jdbcType=DOUBLE},
+      group_limit = #{groupLimit,jdbcType=SMALLINT},
+      group_duration = #{groupDuration,jdbcType=TINYINT},
+      user_require = #{userRequire,jdbcType=LONGVARCHAR}
+    where mkt_id = #{mktId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
+    update pro_market_base
+    set mkt_name_show = #{mktNameShow,jdbcType=VARCHAR},
+      daily_min_packages = #{dailyMinPackages,jdbcType=SMALLINT},
+      weight_min = #{weightMin,jdbcType=DOUBLE},
+      weight_max = #{weightMax,jdbcType=DOUBLE},
+      base_price = #{basePrice,jdbcType=DOUBLE},
+      base_weight = #{baseWeight,jdbcType=DOUBLE},
+      group_limit = #{groupLimit,jdbcType=SMALLINT},
+      group_duration = #{groupDuration,jdbcType=TINYINT}
+    where mkt_id = #{mktId,jdbcType=VARCHAR}
+  </update>
+</mapper>

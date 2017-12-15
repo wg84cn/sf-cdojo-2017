@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sf.iguess.survey.mapper.ExpressDeliveryDao" >
+  <resultMap id="BaseResultMap" type="com.sf.iguess.survey.domain.ExpressDelivery" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_area" property="userArea" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="day_express_number" property="dayExpressNumber" jdbcType="INTEGER" />
+    <result column="avg_weight" property="avgWeight" jdbcType="REAL" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.sf.iguess.survey.domain.ExpressDelivery" extends="BaseResultMap" >
+    <result column="detail_address" property="detailAddress" jdbcType="VARBINARY" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, user_id, user_area, user_name, phone_number, day_express_number, avg_weight
+  </sql>
+  <sql id="Blob_Column_List" >
+    detail_address
+  </sql>
+   
+  <insert id="insert" parameterType="com.sf.iguess.survey.domain.ExpressDelivery" >
+    insert into pro_user_delivery (id, user_id, user_area, 
+      user_name, phone_number, day_express_number, 
+      avg_weight, detail_address)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userArea,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{dayExpressNumber,jdbcType=INTEGER}, 
+      #{avgWeight,jdbcType=REAL}, #{detailAddress,jdbcType=VARBINARY})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.ExpressDelivery" >
+    insert into pro_user_delivery
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userArea != null" >
+        user_area,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="dayExpressNumber != null" >
+        day_express_number,
+      </if>
+      <if test="avgWeight != null" >
+        avg_weight,
+      </if>
+      <if test="detailAddress != null" >
+        detail_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userArea != null" >
+        #{userArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dayExpressNumber != null" >
+        #{dayExpressNumber,jdbcType=INTEGER},
+      </if>
+      <if test="avgWeight != null" >
+        #{avgWeight,jdbcType=REAL},
+      </if>
+      <if test="detailAddress != null" >
+        #{detailAddress,jdbcType=VARBINARY},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,15 +1,34 @@
 package com.sf.iguess.response;
 
+/**
+ * ClassName: JsonResult <br/>
+ * Function: 统一返回消息类. <br/>
+ * date: 2017年12月14日 下午9:03:51 <br/>
+ *
+ * @author 618721
+ * @version 
+ * @since JDK 1.8
+ */
 public class JsonResult {  
+	
+    /**
+     * 返回码
+     */
+    private String code;
     
-    private String code;  
-    private String message;  
+    /**
+     * 返回消息说明
+     */
+    private String message;
+    
+    /**
+     * 返回对象
+     */
     private Object data;  
       
     public JsonResult() {  
         this.setCode(ResponseCode.SUCCESS);  
         this.setMessage("成功！");  
-          
     }  
       
     public JsonResult(ResponseCode code) {  

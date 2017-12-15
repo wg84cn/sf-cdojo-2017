@@ -10,6 +10,10 @@ import com.smart.platform.formative.SercurityHelper;
 
 public final class CollecterEncrypt
 {
+	private CollecterEncrypt(){
+		
+	}
+	
     public final static String ENCODE_COMPONENT_APP =
         "5e3af2b4ab8fe2b1dd8233bc9991e7568093208310468ea9df1606842262e3212d071ddd75a57a48a513092a997ec7c3";
     
@@ -32,6 +36,7 @@ public final class CollecterEncrypt
         }
         catch (UnsupportedEncodingException e)
         {
+        	LOG.error("UnsupportedEncodingException {}", e);
             throw new IllegalArgumentException("The work key can not init,please recheck it!");
         }
     }
@@ -50,7 +55,7 @@ public final class CollecterEncrypt
         }
         catch (Exception e)
         {
-            LOG.error("Data decode error:{}", e.toString());
+            LOG.error("Data decode error  {}", e);
         }
         return decodeData;
     }
@@ -70,7 +75,7 @@ public final class CollecterEncrypt
         }
         catch (Exception e)
         {
-            LOG.error("Data encode error:{}", e.toString());
+            LOG.error("Data encode error {}", e);
         }
         return encodeData;
     }
@@ -86,7 +91,7 @@ public final class CollecterEncrypt
         }
         catch (Exception e)
         {
-            LOG.error("Data decode error:{}", e.toString());
+            LOG.error("Data decode error:{}", e);
         }
         return decodeData;
     }
@@ -102,7 +107,7 @@ public final class CollecterEncrypt
         }
         catch (Exception e)
         {
-            LOG.error("Data encode error:{}", e.toString());
+            LOG.error("Data encode error:{}", e);
         }
         return encodeData;
     }
@@ -118,7 +123,7 @@ public final class CollecterEncrypt
         }
         catch (Exception e)
         {
-            LOG.error("Data decode error:{}", e.toString());
+            LOG.error("Data decode error:{}", e);
         }
         return decodeData;
     }
@@ -134,7 +139,7 @@ public final class CollecterEncrypt
         }
         catch (Exception e)
         {
-            LOG.error("Data encode error:{}", e.toString());
+            LOG.error("Data encode error:{}", e);
         }
         return encodeData;
     }
