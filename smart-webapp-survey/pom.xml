@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>com.sf.iguess</groupId>
-		<artifactId>basic-depengent</artifactId>
+		<artifactId>basic-depengency</artifactId>
 		<version>1.0.1</version>
 	</parent>
 

@@ -4,10 +4,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sf.iguess</groupId>
-	<artifactId>basic-depengent</artifactId>
+	<artifactId>basic-depengency</artifactId>
 	<version>${smart.release.version}</version>
 	<packaging>pom</packaging>
-	<name>smart-basic-depengent</name>
+	<name>smart-basic-depengency</name>
 
 	<!-- 集中定义依赖版本号 -->
 	<properties>
@@ -443,3 +443,4 @@
 		</pluginManagement>
 	</build>
 </project>
+
