@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>顺丰集货助手</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+    <link href="../css/app.css" rel="stylesheet"/>
+    <link href="../css/detail.css" rel="stylesheet"/>
+    <link href="../css/goodsAssents.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="goodsAssents">
+    <header class="mui-bar mui-bar-nav">
+        <h1 class="mui-title f-h2">顺丰集货助手</h1>
+    </header>
+
+    <div class="mui-content">
+        <div class="mui-card" >
+            <div id="data">
+            <!--页眉，放置标题-->
+                <div class="mui-card-header no-border">
+                    <div class="title-wrapper">
+                        <div class="title text-warning f-h1">{{mktNameShow}}</div>
+                    </div>
+                    <div class="sub-title mui-text-center f-h9">
+                        <span>全国流向</span>
+                        <span class="text-warning">{{weightMin}}-{{weightMax}}kg</span>
+                        <span>每日承诺寄件量最低<span class="text-warning">{{dailyMinPackages}}</span>件</span>
+                    </div>
+                </div>
+                <div class="qr-img-wrapper">
+                    <!--<img class="qr-img" :src="storeMarketPic"  id="qrcode" alt=""/>-->
+                    <div class="qr-img"  id="qrcode" alt=""/>
+
+                </div>
+            </div>
+            <div id="view">
+
+            </div>
+            <!--页脚，放置补充信息或支持的操作-->
+            <div class=" dis-block" >
+                <div class="share-func">
+                    <div>
+                        <div  class="qr-hint f-h mui-text-left">扫一扫或长按小程序识别码（二维码）即可直达集货页面</div>
+                        <div @tap="toMediaList">
+                            <a class="mui-btn mui-btn-warning dis-block" >
+                                <span class="mui-tab-label text-white">保存分享小程序码</span>
+                            </a>
+                        </div>
+                        <div class="check-qr-code f-h9">
+                            长按识别二维码，查看详情
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/qrcode.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/html2canvas.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    mui.init();
+
+    var app = new Vue({
+        el: '#goodsAssents',
+        data: {
+            btnVal: '输入对话框',
+            "storeId": "ca35b776b07a4ecb8819d9e58910843e",
+            "storeMarketPic": "../images/Group 5@2x.png",
+            "storedNumber": 0,
+            "marketId": "62003793-e154-11e7-9d33-00163e003ff9",
+            "mktNameShow": "鞋服专送",
+            "dailyMinPackages": 100,
+            "weightMin": 1.5,
+            "weightMax": 5.5,
+            "basePrice": 12,
+            "baseWeight": 4.5,
+            "groupLimit": 20,
+            "groupDuration": 30,
+            "userRequire": "1.每日承诺寄件量不低于20件 (周六日及法定假期不要求承诺量)\r\n日发件不足20件或运费不足120元将按照120元收取最低运作费用。\r\n2.承诺使用周期内未达到目标则自动取消集货。\r\n3.集货周期内未达到目标则自动取消集货。\r\n4.用户需自行完成打包并贴好面单。\r\n5.每日在约定时间进行1次收件，不支持随寄随收。\r\n6.按月结算运费，不支持现寄现结。\r\n",
+            "createTime": 1513323351000,
+            "modifyTime": 1513314363000,
+            deadline: "",
+            finishPercent: 0
+        },
+        methods: {
+            toMediaList: function () {
+
+                html2canvas(document.getElementById('data')).then(function(canvas) {
+                    document.getElementById('view').appendChild(canvas);
+                    document.getElementById('data').style.display = 'none';
+                    var qrIimage = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                    window.location.href=qrIimage;
+
+                });
+
+            },
+            promise:  function (op) {
+                return axios(op.url + (op.append || ""), {params: op.data});
+            },
+            init: function () {
+
+                new QRCode(document.getElementById("qrcode"), "http://localhost:8020/smart-webapp-pageReal/template/goodsAssents.html#");
+//                new QRCode(document.getElementById("qrcode"), window.localStorage.getItem("urlData"));
+
+
+            }
+        },
+        mounted: function () {
+            console.log('mounted');
+            this.init.call(this, arguments);
+        },
+    });
+</script>
+</body>
+</html>
