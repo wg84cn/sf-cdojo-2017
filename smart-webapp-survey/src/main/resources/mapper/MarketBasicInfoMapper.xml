@@ -165,6 +165,7 @@
       user_require = #{userRequire,jdbcType=LONGVARCHAR}
     where mkt_id = #{mktId,jdbcType=VARCHAR}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.MarketBasicInfo" >
     update pro_market_base
     set mkt_name_show = #{mktNameShow,jdbcType=VARCHAR},

@@ -40,7 +40,6 @@ public class ExpressDeliveryController {
 
 	/**
 	 * saving:保存寄件信息. <br/>
-	 *
 	 * @author 618721
 	 * @param storeId
 	 * @param expressDelivery
