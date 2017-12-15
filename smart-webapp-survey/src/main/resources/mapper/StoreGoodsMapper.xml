@@ -37,9 +37,15 @@
     group_limit, group_duration,user_require
   </sql>
   
-   <select id="selectActiveStoreGoods" resultMap="Base_Column_List">
+   <select id="selectActiveStoreGoods" resultMap="BaseResultMap">
     select   <include refid="Base_Column_List" />
-    from tt_store_goods where market_id = #{marketId} and status = 0 and stored_number &lt; #{groupLimit}
+    from tt_store_goods where  status = 0 
+     <if test="groupLimit != null" >
+    	and stored_number &lt; #{groupLimit} 
+    </if>
+     <if test="marketId != null" >
+    	 and market_id = #{marketId}
+     </if>
   </select>
   
   <select id="selectByPrimaryKey" resultMap="DetailResultMap" parameterType="java.lang.String" >

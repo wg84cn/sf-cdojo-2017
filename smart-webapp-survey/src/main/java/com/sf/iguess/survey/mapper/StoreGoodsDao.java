@@ -28,5 +28,5 @@ public interface StoreGoodsDao {
 
 	Integer updateStoreGroupStatus(@Param("storeId")String storeId, @Param("goupLimit")Short goupLimit);
 
-	StoreGoods selectActiveStoreGoods(@Param("marketId")String marketId, @Param("groupLimit")Short groupLimit);
+	List<StoreGoods> selectActiveStoreGoods(@Param("marketId")String marketId, @Param("groupLimit")Short groupLimit);
 }

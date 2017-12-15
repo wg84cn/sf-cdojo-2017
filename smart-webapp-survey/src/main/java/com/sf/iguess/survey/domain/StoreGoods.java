@@ -30,7 +30,13 @@ public class StoreGoods {
 
 	private String userRequire;
 	
-	private String url;
+	private Short status;
+	
+	public static final Short FULL_STATUS = 1;
+	
+	public static final Short OVERDUE_STATUS = 2;
+	
+	public static final int MUNITE_UNIT = 60000;
 
 	public StoreGoods() {
 	}
@@ -165,12 +171,16 @@ public class StoreGoods {
 		this.modifyTime = modifyTime;
 	}
 
-	public String getUrl() {
-		return url;
+	public Short getStatus() {
+		return status;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setStatus(Short status) {
+		this.status = status;
 	}
 	
+	public long initMinuteDuration(){
+		long duration = System.currentTimeMillis() - this.getCreateTime().getTime();
+		return (duration / MUNITE_UNIT);
+	}
 }
