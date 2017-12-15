@@ -14,37 +14,40 @@ $share: #09BB07;
 $bg-wt: #FFFFFF;
 $bt-hint: #F8EEE6;
 
+html {
+    font-size: 10px;
+}
 @mixin font($fontSize) {
-    font-size: $fontSize + 'px';
+    font-size: $fontSize / 2.2 + rem !important ;
     font-family: "微软雅黑" "arial black";
 }
 
 .f-h1 {
-    @include font(40);
+    @include font(4.0);
 };
 .f-h2 {
-    @include font(37);
+    @include font(3.7);
 };
 .f-h3 {
-    @include font(36);
+    @include font(3.6);
 };
 .f-h4{
-    @include font(34);
+    @include font(3.4);
 };
 .f-h5 {
-    @include font(32);
+    @include font(3.2);
 };
 .f-h6 {
-    @include font(30);
+    @include font(3.0);
 };
 .f-h7 {
-    @include font(28);
+    @include font(2.8);
 };
 .f-h8 {
-    @include font(26);
+    @include font(2.6);
 };
 .f-h9 {
-    @include font(24);
+    @include font(2.4);
 };
 
 /*普通按钮*/
@@ -79,4 +82,13 @@ $bt-hint: #F8EEE6;
             border-radius: none;
         }
     }
+}
+.text-warning {
+    color: $main-color;
+}
+.text-white {
+    color: $bg-wt;
+}
+.bold {
+    font-weight: bold;
 }

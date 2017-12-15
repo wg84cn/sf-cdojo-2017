@@ -1,7 +1,19 @@
 package com.sf.iguess.survey.domain;
 
+/**
+ * ClassName: ExpressDelivery <br/>
+ * Function: 寄件信息实体类. <br/>
+ * date: 2017年12月15日 上午11:05:35 <br/>
+ *
+ * @author 618721
+ * @version 
+ * @since JDK 1.8
+ */
 public class ExpressDelivery {
+	
     private Long id;
+    
+    private String storeId;
 
     private Long userId;
 
@@ -13,9 +25,9 @@ public class ExpressDelivery {
 
     private Integer dayExpressNumber;
 
-    private Float avgWeight;
+    private Double avgWeight;
 
-    private byte[] detailAddress;
+    private String detailAddress;
 
     public Long getId() {
         return id;
@@ -65,19 +77,29 @@ public class ExpressDelivery {
         this.dayExpressNumber = dayExpressNumber;
     }
 
-    public Float getAvgWeight() {
-        return avgWeight;
-    }
+    public Double getAvgWeight() {
+		return avgWeight;
+	}
 
-    public void setAvgWeight(Float avgWeight) {
-        this.avgWeight = avgWeight;
-    }
+	public void setAvgWeight(Double avgWeight) {
+		this.avgWeight = avgWeight;
+	}
 
-    public byte[] getDetailAddress() {
+	public String getDetailAddress() {
         return detailAddress;
     }
 
-    public void setDetailAddress(byte[] detailAddress) {
+    public void setDetailAddress(String detailAddress) {
         this.detailAddress = detailAddress;
     }
+
+	public String getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
+	}
+    
+    
 }

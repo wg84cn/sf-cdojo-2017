@@ -3,6 +3,7 @@ package com.sf.iguess.survey.domain;
 import java.util.Date;
 
 public class User {
+	
 	private String userId;
 
 	private String userName; // 用户名
@@ -20,7 +21,7 @@ public class User {
 	private Date createTime;
 
 	private Date modifyTime;
-
+	
 	private static final int is_manage = 1;
 
 	public boolean isCurrentManage() {
