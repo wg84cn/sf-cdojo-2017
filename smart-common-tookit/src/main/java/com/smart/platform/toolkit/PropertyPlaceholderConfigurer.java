@@ -26,8 +26,6 @@ import com.smart.platform.encrypt.SystemConfigEncrypt;
 
 /**
  * ClassName:PropertyPlaceholderConfigurer <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason:	 TODO ADD REASON. <br/>
  * Date:     2017年2月27日 下午8:21:32 <br/>
  * @author   01135912
  * @version  
