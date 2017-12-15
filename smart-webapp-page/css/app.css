@@ -69,4 +69,13 @@
   .mui-btn .mui-btn-success.mui-btn-success.no-radius.no-radius {
     border-radius: none; }
 
+.text-warning {
+  color: #FF6532; }
+
+.text-white {
+  color: #FFFFFF; }
+
+.bold {
+  font-weight: bold; }
+
 /*# sourceMappingURL=app.css.map */
