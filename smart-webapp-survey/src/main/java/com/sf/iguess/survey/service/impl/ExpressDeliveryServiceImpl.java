@@ -1,5 +1,6 @@
 package com.sf.iguess.survey.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -41,11 +42,15 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	private AreaService areaService;
 	@Resource
 	private StroreService stroreService;
-	
-	private static final int MAX_DAY_EXPRESS_NUMBER = 20;
+	/** 最小的运件量 */
+	private static final int MIN_DAY_EXPRESS_NUMBER = 20;
+	/** 配置的详情的URL */
 	private static final String STORE_GOOD_DETAIL_URL = "store.good.detail.url";
 
-
+	/**
+	 * 根据集货团得到用户.
+	 * @see com.sf.iguess.survey.service.ExpressDeliveryService#getExpresssUserList(java.lang.String)
+	 */
 	@Override
 	public List<User> getExpresssUserList(String storeId) {
 		return expressDeliveryDao.getExpressUserList(storeId);
@@ -67,10 +72,11 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 			expressDeliveryDao.insert(expressDelivery);
 			//新增用户
 			String userId = expressDelivery.getPhoneNumber();
-			if(userDao.selectByPrimaryKey(userId) != null){
+			if(userDao.selectByPrimaryKey(userId) == null){
 				User user = new User();
 				user.setUserId(userId);
 				user.setUserName(expressDelivery.getUserName());
+				user.setCreateTime(new Date());
 				userDao.insert(user);
 			}
 			//加入返回链接
@@ -145,7 +151,7 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	 */
 	private boolean checkDayExpressNumber(Integer dayExpressNumber) {
 		return (dayExpressNumber != null 
-			&& dayExpressNumber.intValue() >= MAX_DAY_EXPRESS_NUMBER);
+			&& dayExpressNumber.intValue() >= MIN_DAY_EXPRESS_NUMBER);
 	}
 
 	/**

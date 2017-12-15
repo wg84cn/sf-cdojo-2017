@@ -28,7 +28,7 @@
   </select>
   
   <insert id="insert" parameterType="com.sf.iguess.survey.domain.User">
-    insert into ts_user (user_id, user_name, create_time)
+    insert into ts_user (user_id, user_name,pic_url, create_time)
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
       #{picUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
