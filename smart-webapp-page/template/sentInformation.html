@@ -63,6 +63,7 @@
 			}
 			.mui-content .mui-input-group {
 				 padding: 12.5px 0;
+				 padding-bottom: 0;
     		/*margin: 0 17.5px;*/
 			}
 		
@@ -191,8 +192,8 @@
 			</header>
 
 			<nav class="mui-bar mui-bar-tab">
-				<div>
-					<a class="mui-btn mui-btn-warning dis-block join-now-wrapper" @tap="toMediaList">
+				<div @tap="submitForm">
+					<a  class="mui-btn mui-btn-warning dis-block join-now-wrapper" @tap="toMediaList">
 						<span class="mui-tab-label text-white">报名集货</span>
 					</a>
 				</div>
@@ -247,10 +248,10 @@
 							<input type="text" v-model="sentForm.avgWeight"  class="mui-input-clear" placeholder="请选择单件平均重量">
 						</div>
 
-						<div class="mui-button-row">
+						<!--<div class="mui-button-row">
 							<input type="button" @tap="submitForm" value="确认" class=""/>
-							<!--<button type="button" @tap="submitForm" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>-->
-						</div>
+							<button type="button" @tap="submitForm" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>
+						</div>-->
 
 					</form>
 
@@ -323,6 +324,7 @@
 						avgWeight:'',
 						detailAddress:'', //寄件地址
 					},
+					
 				},
 				methods: {
 					toGoodsAssents: function(){
@@ -331,7 +333,6 @@
 					    id:'info'
 					  });
 					},
-					
 					verifyTel: function(val){
 						val = parseInt(val)
             return /^[1][\d]{10}$/.test(val)
@@ -342,7 +343,7 @@
 	       	},
 	       	
 					submitForm: function(){
-						
+						var that = this;
 						if(!this.verifyTel(this.sentForm.phoneNumber)){
 							mui.alert('电话号码输入有误，请检查输入');
 							return;
@@ -357,12 +358,12 @@
 							this.sentForm.userArea = this.subAddress
 						}
 						
-						var sentUrl = 'http://192.168.0.8:9090/expressDelivery/StoreGoods/'+'62b2876060204286b3beb439bdfb8f2d'+'/saving';
+						var sentUrl = 'http://192.168.0.8:9090/expressDelivery/StoreGoods/'+this.storeId+'/saving';
 						mui.post(sentUrl,this.sentForm,function(res){
 								console.log('data',res);
-								if(res && res.code==200){
+								if(res && res.code=='200'){
 //									console.log('res',res.data);
-									this.successModal = true;
+									that.successModal = true;
 								}else{
 									mui.alert('输入有误，请检查输入');
 								}
@@ -399,9 +400,9 @@
 						})
 					},
 					init: function() {
-						var stateText = localStorage.getItem('$state') || "{}";
-					  this.storeId = JSON.parse(stateText);
-//						console.log('store',this.storeId);
+						var stateText = localStorage.getItem('storeId') || "{}";
+					  this.storeId = stateText;
+						console.log('store',this.storeId);
 							mui.get('http://192.168.0.8:9090/area/list', function(res) {
 								if(res && res.code==200){
 									var dataa=eval(res.data);
