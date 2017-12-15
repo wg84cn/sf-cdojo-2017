@@ -3,36 +3,44 @@ package com.sf.iguess.survey.domain;
 import java.util.Date;
 
 public class StoreGoods {
-	
-    private Long storeId;
 
-    private String storeName;
+	private String storeId;
 
-    private String storeMarketPic;
+	private String storeName;
 
-    private Integer storedNumber;
-    
-    private String marketId;
-    
-    private String mktNameShow;
+	private String storeMarketPic;
 
-    private Short dailyMinPackages;
+	private Integer storedNumber;
 
-    private Double weightMin;
+	private String marketId;
 
-    private Double weightMax;
+	private String mktNameShow;
 
-    private Double basePrice;
+	private Short dailyMinPackages;
 
-    private Double baseWeight;
+	private Double weightMin;
 
-    private Short groupLimit;
+	private Double weightMax;
 
-    private Byte groupDuration;
+	private Double basePrice;
 
-    private String userRequire;
+	private Double baseWeight;
 
-    public String getMarketId() {
+	private Short groupLimit;
+
+	private Byte groupDuration;
+
+	private String userRequire;
+
+	public StoreGoods() {
+	}
+
+	public StoreGoods(String storeId, String marketId) {
+		this.storeId = storeId;
+		this.marketId = marketId;
+	}
+
+	public String getMarketId() {
 		return marketId;
 	}
 
@@ -114,53 +122,53 @@ public class StoreGoods {
 
 	private Date createTime;
 
-    private Date modifyTime;
+	private Date modifyTime;
 
-    public Long getStoreId() {
-        return storeId;
-    }
+	public String getStoreId() {
+		return storeId;
+	}
 
-    public void setStoreId(Long storeId) {
-        this.storeId = storeId;
-    }
+	public void setStoreId(String storeId) {
+		this.storeId = storeId;
+	}
 
-    public String getStoreName() {
-        return storeName;
-    }
+	public String getStoreName() {
+		return storeName;
+	}
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName == null ? null : storeName.trim();
-    }
+	public void setStoreName(String storeName) {
+		this.storeName = storeName == null ? null : storeName.trim();
+	}
 
-    public String getStoreMarketPic() {
-        return storeMarketPic;
-    }
+	public String getStoreMarketPic() {
+		return storeMarketPic;
+	}
 
-    public void setStoreMarketPic(String storeMarketPic) {
-        this.storeMarketPic = storeMarketPic == null ? null : storeMarketPic.trim();
-    }
+	public void setStoreMarketPic(String storeMarketPic) {
+		this.storeMarketPic = storeMarketPic == null ? null : storeMarketPic.trim();
+	}
 
-    public Integer getStoredNumber() {
-        return storedNumber;
-    }
+	public Integer getStoredNumber() {
+		return storedNumber;
+	}
 
-    public void setStoredNumber(Integer storedNumber) {
-        this.storedNumber = storedNumber;
-    }
+	public void setStoredNumber(Integer storedNumber) {
+		this.storedNumber = storedNumber;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Date getModifyTime() {
-        return modifyTime;
-    }
+	public Date getModifyTime() {
+		return modifyTime;
+	}
 
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
-    }
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
 }

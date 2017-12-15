@@ -8,7 +8,7 @@ public interface StroreService {
 	
 	List<StoreGoods> selectStoreList();
 	
-	StoreGoods selectStoreGood(Long stroeId);
+	StoreGoods selectStoreGood(String stroeId);
 
 	void checkStoreGoodsStatus();
 
