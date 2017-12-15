@@ -10,9 +10,20 @@ package com.sf.iguess.response;
  * @since JDK 1.8
  */
 public class JsonResult {  
+	
+    /**
+     * 返回码
+     */
+    private String code;
     
-    private String code;  
-    private String message;  
+    /**
+     * 返回消息说明
+     */
+    private String message;
+    
+    /**
+     * 返回对象
+     */
     private Object data;  
       
     public JsonResult() {  
