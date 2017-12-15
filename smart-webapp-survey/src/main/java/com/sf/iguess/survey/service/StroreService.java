@@ -6,7 +6,7 @@ import com.sf.iguess.survey.domain.StoreGoods;
 
 public interface StroreService {
 	
-	List<StoreGoods> selectStoreList();
+	List<StoreGoods> selectActiveStoreList();
 	
 	StoreGoods selectStoreGood(String stroeId);
 

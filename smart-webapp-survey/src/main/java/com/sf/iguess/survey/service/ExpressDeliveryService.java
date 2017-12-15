@@ -1,7 +1,10 @@
 package com.sf.iguess.survey.service;
 
+import java.util.List;
+
 import com.sf.iguess.survey.domain.ExpressDelivery;
 import com.sf.iguess.survey.domain.StoreGoods;
+import com.sf.iguess.survey.domain.User;
 
 /**
  * ClassName: ExpressDeliveryService <br/>
@@ -18,4 +21,5 @@ public interface ExpressDeliveryService {
 	
 	public boolean checkSendMsg(ExpressDelivery expressDelivery,StoreGoods storeGood);
 	
+	public List<User> getExpresssUserList(String storeId);
 }

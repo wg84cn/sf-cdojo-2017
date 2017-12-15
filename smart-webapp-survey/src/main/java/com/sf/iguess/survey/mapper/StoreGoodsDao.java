@@ -22,8 +22,6 @@ public interface StoreGoodsDao {
 
     int updateByPrimaryKey(StoreGoods record);
 
-	List<StoreGoods> selectStoreList();
-
 	List<StoreGoods> selectStoreByMarketId(@Param("mktId")String mktId);
 
 	Integer updateStoreGroupStatus(@Param("storeId")String storeId, @Param("goupLimit")Short goupLimit);

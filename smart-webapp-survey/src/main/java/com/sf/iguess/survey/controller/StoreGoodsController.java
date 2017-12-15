@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sf.iguess.response.JsonResult;
 import com.sf.iguess.response.ResponseCode;
 import com.sf.iguess.survey.domain.StoreGoods;
+import com.sf.iguess.survey.domain.User;
+import com.sf.iguess.survey.service.ExpressDeliveryService;
 import com.sf.iguess.survey.service.StroreService;
 
 /**
@@ -25,6 +27,9 @@ public class StoreGoodsController {
 
 	@Resource
 	private StroreService storeGoodsService;
+	
+	@Resource
+	private ExpressDeliveryService expressDeliveryService;
 
 	@RequestMapping("/getStore/{goodsId}")
 	public JsonResult getStoreGood(@PathVariable("goodsId") String goodsId) {
@@ -32,9 +37,15 @@ public class StoreGoodsController {
 		return new JsonResult(ResponseCode.SUCCESS, "", storeGoods);
 	}
 
-	@RequestMapping("loadStoreList")
-	public JsonResult loadStoreList() {
-		List<StoreGoods> storeGoodsList = storeGoodsService.selectStoreList();
+	@RequestMapping("loadActiveStoreList")
+	public JsonResult loadActiveStoreList() {
+		List<StoreGoods> storeGoodsList = storeGoodsService.selectActiveStoreList();
+		return new JsonResult(ResponseCode.SUCCESS, "", storeGoodsList);
+	}
+	
+	@RequestMapping("loadStoreUserList/{goodsId}")
+	public JsonResult loadStoreUserList(@PathVariable("goodsId") String goodsId) {
+		List<User> storeGoodsList = expressDeliveryService.getExpresssUserList(goodsId);
 		return new JsonResult(ResponseCode.SUCCESS, "", storeGoodsList);
 	}
 }
