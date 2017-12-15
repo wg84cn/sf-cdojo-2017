@@ -49,7 +49,7 @@ public class StoreServiceImpl implements StroreService {
 		Integer updateNumber = storeGoodsDao.updateStoreGroupStatus(goods.getStoreId(), marketInfo.getGroupLimit());
 		if (updateNumber != null && updateNumber > 0) {
 			int stautusNubmer = storeGoodsDao.updateStoreFullStatus(goods.getStoreId(), marketInfo.getGroupLimit(), StoreGoods.FULL_STATUS);
-			if(stautusNubmer == 0){
+			if(stautusNubmer > 0){
 				String storeId = UuidUtil.get32UUID();
 				storeGoodsDao.insertSelective(new StoreGoods(storeId, goods.getMarketId(), 0));
 				return storeId;
