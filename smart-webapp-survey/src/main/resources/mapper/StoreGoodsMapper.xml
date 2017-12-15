@@ -2,42 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sf.iguess.survey.mapper.StoreGoodsDao" >
   <resultMap id="BaseResultMap" type="com.sf.iguess.survey.domain.StoreGoods" >
-    <id column="store_id" property="storeId" jdbcType="BIGINT" />
+    <id column="store_id" property="storeId" jdbcType="VARCHAR" />
     <result column="store_name" property="storeName" jdbcType="VARCHAR" />
     <result column="store_market_pic" property="storeMarketPic" jdbcType="VARCHAR" />
     <result column="stored_number" property="storedNumber" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
+  <resultMap id="DetailResultMap" type="com.sf.iguess.survey.domain.StoreGoods" >
+    <id column="store_id" property="storeId" jdbcType="VARCHAR" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="store_market_pic" property="storeMarketPic" jdbcType="VARCHAR" />
+    <result column="stored_number" property="storedNumber" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="mkt_id" property="mktId" jdbcType="VARCHAR" />
+    <result column="mkt_name_show" property="mktNameShow" jdbcType="VARCHAR" />
+    <result column="daily_min_packages" property="dailyMinPackages" jdbcType="SMALLINT" />
+    <result column="weight_min" property="weightMin" jdbcType="DOUBLE" />
+    <result column="weight_max" property="weightMax" jdbcType="DOUBLE" />
+    <result column="base_price" property="basePrice" jdbcType="DOUBLE" />
+    <result column="base_weight" property="baseWeight" jdbcType="DOUBLE" />
+    <result column="group_limit" property="groupLimit" jdbcType="SMALLINT" />
+    <result column="group_duration" property="groupDuration" jdbcType="TINYINT" />
+    <result column="user_require" property="userRequire" jdbcType="LONGVARCHAR" />
+  </resultMap>
    
   <sql id="Base_Column_List" >
     store_id, store_name, store_market_pic, stored_number, create_time, modify_time
   </sql>
    
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
+  <sql id="Detail_Column_List" >
+    store_id, store_name, store_market_pic, stored_number, create_time, modify_time,
+    mkt_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, 
+    group_limit, group_duration,user_require
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="DetailResultMap" parameterType="java.lang.String" >
+    select <include refid="Detail_Column_List" />
     from tt_store_goods
-    where store_id = #{storeId,jdbcType=BIGINT}
+    where store_id = #{storeId,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectStoreByMarketId" resultMap="DetailResultMap" parameterType="java.lang.String" >
+    select store_id  from tt_store_goods  where market_id = #{mktId}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from tt_store_goods
     where store_id = #{storeId,jdbcType=BIGINT}
   </delete>
    
-  <insert id="insert" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
-    insert into tt_store_goods (store_id, store_name, store_market_pic, 
-      stored_number, create_time, modify_time
-      )
-    values (#{storeId,jdbcType=BIGINT}, #{storeName,jdbcType=VARCHAR}, #{storeMarketPic,jdbcType=VARCHAR}, 
-      #{storedNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
     insert into tt_store_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="storeId != null" >
         store_id,
+      </if>
+      <if test="marketId != null" >
+        market_id,
       </if>
       <if test="storeName != null" >
         store_name,
@@ -57,7 +81,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="storeId != null" >
-        #{storeId,jdbcType=BIGINT},
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+       <if test="marketId != null" >
+        #{marketId,jdbcType=VARCHAR},
       </if>
       <if test="storeName != null" >
         #{storeName,jdbcType=VARCHAR},
@@ -98,6 +125,7 @@
     </set>
     where store_id = #{storeId,jdbcType=BIGINT}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
     update tt_store_goods
     set store_name = #{storeName,jdbcType=VARCHAR},

@@ -24,4 +24,6 @@ public interface StoreGoodsDao {
 
 	List<StoreGoods> selectStoreList();
 
+	List<StoreGoods> selectStoreByMarketId(@Param("mktId")String mktId);
+
 }
