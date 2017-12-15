@@ -11,26 +11,26 @@ public class Constant {
 	public static final String USER_INFO = "userInfo";
 	public static final String SUFFIXRULE = "\\.(?=\\w+?$)";
 	
-	public static final String PAGE_DATA = "pageData";
-	
-	public static final String MOBILE_NUMBER_SESSION_KEY = "sessionMobileNumber";  
-	
-	public static final String USER_CODE_SESSION_KEY = "userCode";  
-	public static final String SESSION_KEY = "sessionId";  
-	
-	public static final String USER_ROLE_TYPE = "current_user_role_type";
-	
-	public static final String USER_SUBMIT_TIMES = "last_submit_time";
-	
-	public static final long USER_SUBMIT_DURATION = 1000 * 15 * 60l;
-	
-	public static final long UPLOAD_FILE_LIMIT = 1024 * 1024 * 1l;
-   
-	private static Constant instance = new Constant();
-	
 	private String winPath = "E:/filesystem/upload/";
 	
 	private String linuxPath = "/app/upload/";
+	
+	public static final String PAGE_DATA = "pageData";
+	
+	public static String MOBILE_NUMBER_SESSION_KEY = "sessionMobileNumber";  
+	
+	public static String USER_CODE_SESSION_KEY = "userCode";  
+	public static String SESSION_KEY = "sessionId";  
+	
+	public static String USER_ROLE_TYPE = "current_user_role_type";
+	
+	public static String USER_SUBMIT_TIMES = "last_submit_time";
+	
+	public static long USER_SUBMIT_DURATION = 1000 * 15 * 60;
+	
+	public static long UPLOAD_FILE_LIMIT = 1024 * 1024 * 1;
+   
+	private static Constant instance = new Constant();
 	
 	public static String getOsName(){
     	return System.getProperty("os.name");

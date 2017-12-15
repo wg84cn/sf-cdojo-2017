@@ -19,10 +19,11 @@
 	<parameterMap type="com.sf.iguess.survey.domain.Question" id="question" />
 
 	<select id="findBySurveyType" parameterType="INTEGER" resultMap="BaseResultMap">
-		select * from
-			tt_question
-		where
-			survey_type = #{surveyType}
+		select * from tt_question where survey_type = #{surveyType}
+	</select>
+	
+	<select id="findPageQuestions" parameterType="INTEGER" resultMap="BaseResultMap">
+	   select * from tt_question
 	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">

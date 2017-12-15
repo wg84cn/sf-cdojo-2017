@@ -62,7 +62,6 @@ public class AnswerController{
 		
 		List<Answer> answerList = JSON.parseArray(answerJson,Answer.class);
 		answerService.saveAnswerList(userScore, answerList,files);
-		
 		return new JsonResult(ResponseCode.SUCCESS,"", null);
 	}
 

@@ -7,6 +7,7 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="role_type" jdbcType="INTEGER" property="roleType" />
     <result column="status" jdbcType="INTEGER" property="status" />
+     <result column="user_salt" jdbcType="VARCHAR" property="userSalt" />
     <result column="last_ip" jdbcType="VARCHAR" property="lastIp" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
@@ -15,24 +16,21 @@
   <parameterMap type="com.sf.iguess.survey.domain.User" id="user"/>
   
   <select id="findByUserName" parameterType="STRING" resultMap="BaseResultMap">
-    select * from 
-    	ts_user
-    where user_name = #{userName}
+    select * from  ts_user  where user_name = #{userName}
   </select>
   
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from ts_user
-    where user_id = #{userId,jdbcType=VARCHAR}
+    delete from ts_user where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="com.sf.iguess.survey.domain.User">
     insert into ts_user (user_id, user_name, password, 
-      role_type, status, last_ip, 
-      create_time, modify_time)
+      role_type, status, last_ip, user_salt,  create_time, modify_time)
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{roleType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{lastIp,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.User">
     insert into ts_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -44,6 +42,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="userSalt != null">
+        user_salt,
       </if>
       <if test="roleType != null">
         role_type,
@@ -71,6 +72,9 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
+       <if test="userSalt != null">
+        #{userSalt,jdbcType=VARCHAR},
+      </if>
       <if test="roleType != null">
         #{roleType,jdbcType=INTEGER},
       </if>
@@ -97,6 +101,9 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
+     <if test="userSalt != null">
+        user_salt = #{userSalt,jdbcType=VARCHAR},
+      </if>
       <if test="roleType != null">
         role_type = #{roleType,jdbcType=INTEGER},
       </if>
@@ -115,10 +122,12 @@
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.User">
     update ts_user
     set user_name = #{userName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      user_salt = #{userSalt,jdbcType=VARCHAR},
       role_type = #{roleType,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       last_ip = #{lastIp,jdbcType=VARCHAR},

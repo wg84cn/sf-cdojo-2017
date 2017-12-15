@@ -7,10 +7,14 @@
 	<script th:src="@{/js/jquery/jquery-1.10.1.js}"></script>
 	<script th:src="@{/js/layer/layer.js}"></script>
 	<script th:src="@{/js/survey/login.js}"></script>
+	<script th:src="@{/js/survey/security.js}"></script>
+	
 	<link rel="stylesheet" href="css/surveyview.css"></link>
 	<title>信息安全问卷调查-登录</title>
 </head>
 <body class="login_bg">
+	<p th:text="${session.rsa_public_key_exponent_hex}" class="dis-none" id="keyExponent"></p>
+	<p th:text="${session.rsa_key_module_hex}" class="dis-none" id="keyModulue"></p>
 	<div class="login_module">
 		<div class="login_show_module">
 			<div class="login_title">欢迎登录信息安全调查系统</div>

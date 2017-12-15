@@ -8,6 +8,8 @@ public class User {
 	private String userName; // 用户名
 
 	private String password; // 密码
+	
+	private String userSalt;
 
 	private Integer roleType; // 角色权限：1是管理员，0是普通用户
 
@@ -88,4 +90,14 @@ public class User {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
+
+    public String getUserSalt()
+    {
+        return userSalt;
+    }
+
+    public void setUserSalt(String userSalt)
+    {
+        this.userSalt = userSalt;
+    }
 }
