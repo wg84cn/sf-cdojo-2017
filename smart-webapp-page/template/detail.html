@@ -23,6 +23,23 @@
             <img src="../images/更多 copy 2@2x.png" alt=""/>
         </a>
     </header>
+
+    <nav class="mui-bar mui-bar-tab">
+        <div class="share-wrapper">
+            <img src="../images/分享 (3)@2x.png" alt="">
+        </div>
+        <div>
+            <a class="mui-btn mui-btn-warning dis-block join-now-wrapper" @tap="toMediaList">
+                <span class="mui-tab-label text-white">立即参加</span>
+            </a>
+        </div>
+       <!-- <a class="mui-tab-item" href="#tabbar-with-contact">
+            <span class="mui-icon mui-icon-contact"><span class="mui-badge">9</span></span>
+            <span class="mui-tab-label">公告</span>
+        </a>-->
+
+    </nav>
+
     <div class="mui-content">
         <div class="mui-card">
             <!--页眉，放置标题-->
@@ -70,27 +87,48 @@
 
         <div class="mui-card">
             <div class="hint-wrapper">
-                <div class="hint-title f-h3">
+                <div class="title f-h3">
                     <img src="../images/注意@2x.png" alt="">
                     <span>
                         使用要求
                     </span>
                 </div>
                 <div class="hint-content">
-                    1.每日承诺寄件量不低于20件 (周六日及法定假期不要求承诺量)\r\n日发件不足20件或运费不足120元将按照120元收取最低运作费用。\r\n2.承诺使用周期内未达到目标则自动取消集货。\r\n3.集货周期内未达到目标则自动取消集货。\r\n4.用户需自行完成打包并贴好面单。\r\n5.每日在约定时间进行1次收件，不支持随寄随收。\r\n6.按月结算运费，不支持现寄现结。\r\n
+                    1.每日承诺寄件量不低于20件
+                    (周六日及法定假期不要求承诺量)\r\n日发件不足20件或运费不足120元将按照120元收取最低运作费用。\r\n2.承诺使用周期内未达到目标则自动取消集货。\r\n3.集货周期内未达到目标则自动取消集货。\r\n4.用户需自行完成打包并贴好面单。\r\n5.每日在约定时间进行1次收件，不支持随寄随收。\r\n6.按月结算运费，不支持现寄现结。\r\n
                 </div>
             </div>
         </div>
 
         <div class="mui-card">
-            <div class="hint-wrapper">
-                <div class="hint-title f-h3">
+            <div class="join-wrapper clearfix">
+                <div class="title f-h3">
                     <img src="../images/参与@2x.png" alt="">
                     <span>最近参与</span>
                 </div>
                 <div class="hint-content">
-                    <div class="favi-icon">
-                        <img src="" alt="">
+                    <div class="favi-wrapper">
+                        <div class="favi-icon">
+                            <img src="../images/People@2x.png" alt="">
+                        </div>
+                        <div class="favi-icon">
+                            <img src="../images/People@2x.png" alt="">
+                        </div>
+                        <div class="favi-icon">
+                            <img src="../images/People@2x.png" alt="">
+                        </div>
+                        <div class="favi-icon">
+                            <img src="../images/People@2x.png" alt="">
+                        </div>
+                        <div class="favi-icon">
+                            <img src="../images/People@2x.png" alt="">
+                        </div>
+                        <div class="favi-number">
+                            已有<span class="text-warning f-h4">13</span>人参团
+                        </div>
+                    </div>
+                    <div class="dis-block">
+
                     </div>
                 </div>
             </div>
