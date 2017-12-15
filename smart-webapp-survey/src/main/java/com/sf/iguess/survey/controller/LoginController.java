@@ -78,6 +78,7 @@ public class LoginController
     {
         try
         {
+        	System.out.println(questionService.findPageQuestions());
             String userName = user.getUserName();
             User userInfo = userService.findByUserName(userName);
             if (null == userInfo)
