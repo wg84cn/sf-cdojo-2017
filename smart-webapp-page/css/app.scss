@@ -18,7 +18,7 @@ html {
     font-size: 10px;
 }
 @mixin font($fontSize) {
-    font-size: $fontSize / 2.2 + rem !important ;
+    font-size: $fontSize / 2 + rem !important ;
     font-family: "微软雅黑" "arial black";
 }
 
@@ -49,7 +49,12 @@ html {
 .f-h9 {
     @include font(2.4);
 };
-
+.dis-flex {
+  display: flex;
+}
+.dis-block {
+  display: block;
+}
 /*普通按钮*/
 @mixin btn($btn-width,$btn-height,$btn-bg-color,$btn-text-color,$btn-hover-bg-color,$btn-hover-text-color){
   display: inline-block;
@@ -92,3 +97,21 @@ html {
 .bold {
     font-weight: bold;
 }
+.clearfix:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  content: '';
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  background-color: #c8c7cc;
+  top: auto;
+  bottom: 0;
+}
+
+/*
+.clearfix:after {
+
+}*/
