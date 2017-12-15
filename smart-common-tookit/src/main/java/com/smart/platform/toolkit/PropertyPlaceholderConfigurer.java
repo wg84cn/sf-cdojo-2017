@@ -113,10 +113,7 @@ public class PropertyPlaceholderConfigurer extends PlaceholderConfigurerSupport
         }
         catch (Throwable ex)
         {
-            if (logger.isDebugEnabled())
-            {
-                logger.debug("Could not access system property '" + key + "': " + ex);
-            }
+        	logger.error("rsolve system error {} ", ex);
             return null;
         }
     }
