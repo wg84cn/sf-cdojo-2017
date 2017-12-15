@@ -84,12 +84,7 @@
     update ts_user
     set user_name = #{userName,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},
-      user_salt = #{userSalt,jdbcType=VARCHAR},
-      role_type = #{roleType,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      last_ip = #{lastIp,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>
