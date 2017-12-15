@@ -22,7 +22,7 @@
   </sql>
    
   <insert id="insert" parameterType="com.sf.iguess.survey.domain.ExpressDelivery" >
-    insert into tt_user_delivery (id, user_id, user_area, 
+    insert into pro_user_delivery (id, user_id, user_area, 
       user_name, phone_number, day_express_number, 
       avg_weight, detail_address)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userArea,jdbcType=VARCHAR}, 
@@ -31,7 +31,7 @@
   </insert>
   
   <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.ExpressDelivery" >
-    insert into tt_user_delivery
+    insert into pro_user_delivery
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,

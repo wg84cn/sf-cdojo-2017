@@ -23,7 +23,7 @@
 		<commons-validator.version>1.4.0</commons-validator.version>
 		<commons-http.version>3.0.1</commons-http.version>
 		<commons-codec.version>1.9</commons-codec.version>
-		<druid.version>1.1.0</druid.version>
+		<druid.version>1.1.6</druid.version>
 		<ehcache.version>2.6.11</ehcache.version>
 		<http.nio.version>4.4.5</http.nio.version>
 		<httpclient.version>4.3.5</httpclient.version>

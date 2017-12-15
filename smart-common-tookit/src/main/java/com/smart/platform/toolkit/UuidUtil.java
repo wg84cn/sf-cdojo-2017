@@ -4,9 +4,12 @@ import java.util.UUID;
 
 public class UuidUtil {
 
+	private UuidUtil() {
+
+	}
+
 	public static String get32UUID() {
-		String uuid = UUID.randomUUID().toString().trim().replaceAll("-", "");
-		return uuid;
+		String uuidStr = UUID.randomUUID().toString();
+		return uuidStr.replaceAll("-", "");
 	}
 }
-
