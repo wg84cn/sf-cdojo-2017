@@ -4,11 +4,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>测试APP1</title>
+		<title>填写寄件信息</title>
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link href="../css/mui.picker.css" rel="stylesheet" />
 		<link href="../css/mui.poppicker.css" rel="stylesheet" />
 		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../css/detail.css" rel="stylesheet"/>
 		<style>
 			.mui-btn {
 				font-size: 16px;
@@ -112,10 +113,31 @@
 
 	<body>
 		<div id="sentInfor">
+			<!--<header class="mui-bar mui-bar-nav">-->
+				<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="main.html"></a>-->
+				<!--<h1 class="mui-title">填写寄件信息</h1>-->
+			<!--</header>-->
+
 			<header class="mui-bar mui-bar-nav">
-				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="main.html"></a>
-				<h1 class="mui-title">填写寄件信息</h1>
+				<a class="mui-action-back back-btn mui-pull-left" href="../index.html">
+					<img src="../images/Rectangle  Copy 4@2x.png" alt=""/>
+				</a>
+				<a class="mui-pull-left close-btn" href="../index.html">
+					<img src="../images/返回 copy 2@2x.png" alt=""/>
+				</a>
+				<h1 class="mui-title f-h2">填写寄件信息</h1>
+				<a class="more-btn mui-pull-right" href="#">
+					<img src="../images/更多 copy 2@2x.png" alt=""/>
+				</a>
 			</header>
+
+			<nav class="mui-bar mui-bar-tab">
+				<div>
+					<a class="mui-btn mui-btn-warning dis-block join-now-wrapper" @tap="toMediaList">
+						<span class="mui-tab-label text-white">报名集货</span>
+					</a>
+				</div>
+			</nav>
 
 			<div class="mui-content">
 
