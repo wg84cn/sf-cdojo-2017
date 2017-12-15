@@ -39,7 +39,7 @@
   
    <select id="selectActiveStoreGoods" resultMap="BaseResultMap">
     select   <include refid="Base_Column_List" />
-    from tt_store_goods where  status = 0 
+    from pro_store_goods where  status = 0 
      <if test="groupLimit != null" >
     	and stored_number &lt; #{groupLimit} 
     </if>
@@ -50,21 +50,21 @@
   
   <select id="selectByPrimaryKey" resultMap="DetailResultMap" parameterType="java.lang.String" >
     select <include refid="Detail_Column_List" />
-    from tt_store_goods tg left join  tt_market_basic tb  on tg.market_id  = tb.mkt_id 
+    from pro_store_goods tg left join  pro_market_base tb  on tg.market_id  = tb.mkt_id 
     where store_id = #{storeId,jdbcType=VARCHAR}
   </select>
   
   <select id="selectStoreByMarketId" resultMap="DetailResultMap" parameterType="java.lang.String" >
-    select store_id  from tt_store_goods  where market_id = #{mktId}
+    select store_id  from pro_store_goods  where market_id = #{mktId}
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from tt_store_goods
+    delete from pro_store_goods
     where store_id = #{storeId,jdbcType=VARCHAR}
   </delete>
    
   <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
-    insert into tt_store_goods
+    insert into pro_store_goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="storeId != null" >
         store_id,
@@ -98,7 +98,7 @@
   </insert>
    
   <update id="updateByPrimaryKeySelective" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
-    update tt_store_goods
+    update pro_store_goods
     <set >
       <if test="storeMarketPic != null" >
         store_market_pic = #{storeMarketPic,jdbcType=VARCHAR},
@@ -117,7 +117,7 @@
   </update>
   
   <update id="updateStoreGroupStatus">
-    update tt_store_goods  stored_number = stored_number +1, modify_time = now()
+    update pro_store_goods  stored_number = stored_number +1, modify_time = now()
     where store_id = #{storeId} and stored_number &lt; #{goupLimit}
   </update>
 </mapper>
