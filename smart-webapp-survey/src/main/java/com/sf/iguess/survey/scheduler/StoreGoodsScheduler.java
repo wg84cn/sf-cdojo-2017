@@ -16,10 +16,10 @@ public class StoreGoodsScheduler {
 	/**
 	 * 定时检查集货的完成状态
 	 */
-	@Scheduled(cron = "* */1 * * * ?")
+	@Scheduled(cron = "* */20 * * * ?")
 	public void checkStoreGoodsStatus() {
 		try {
-			stroreService.checkStoreGoodsStatus();
+			//stroreService.checkStoreGoodsStatus();
 		} catch (Exception e) {
 			logger.error("Execute nessus bugs file synchronized task error:{}", e);
 		}
@@ -32,7 +32,7 @@ public class StoreGoodsScheduler {
 	@Scheduled(cron = "*/50 * * * * ?")
 	public void autoCreateStoreGoods() {
 		try {
-			stroreService.autoCreateStoreGoods();
+			//stroreService.autoCreateStoreGoods();
 		} catch (Exception e) {
 			logger.error("Execute nessus bugs file synchronized task error:{}", e);
 		}

@@ -2,8 +2,11 @@ package com.sf.iguess.survey.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.sf.iguess.survey.domain.MarketBasicInfo;
 
+@Mapper
 public interface MarketBasicInfoDao {
 
     int deleteByPrimaryKey(String mktId);
