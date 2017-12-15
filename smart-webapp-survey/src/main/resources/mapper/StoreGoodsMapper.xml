@@ -37,6 +37,11 @@
     group_limit, group_duration,user_require
   </sql>
   
+   <select id="selectActiveStoreGoods" resultMap="Base_Column_List">
+    select   <include refid="Base_Column_List" />
+    from tt_store_goods where market_id = #{marketId} and status = 0 and stored_number &lt; #{groupLimit}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="DetailResultMap" parameterType="java.lang.String" >
     select <include refid="Detail_Column_List" />
     from tt_store_goods tg left join  tt_market_basic tb  on tg.market_id  = tb.mkt_id 
@@ -67,12 +72,7 @@
       <if test="storedNumber != null" >
         stored_number,
       </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="modifyTime != null" >
-        modify_time,
-      </if>
+        create_time, modify_time
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="storeId != null" >
@@ -87,12 +87,7 @@
       <if test="storedNumber != null" >
         #{storedNumber,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null" >
-        #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),now()
     </trim>
   </insert>
    
@@ -115,7 +110,7 @@
     where store_id = #{storeId,jdbcType=VARCHAR}
   </update>
   
-  <update id="updateStoreGroupStatus" parameterType="java.lang.Short" >
+  <update id="updateStoreGroupStatus">
     update tt_store_goods  stored_number = stored_number +1, modify_time = now()
     where store_id = #{storeId} and stored_number &lt; #{goupLimit}
   </update>

@@ -31,7 +31,6 @@
     where mkt_id = #{mktId,jdbcType=VARCHAR}
   </select>
   
-  
     <select id="selectMaketBasicList" resultMap="BaseResultMap">
     select   <include refid="Base_Column_List" /> from tt_market_basic
   </select>

@@ -39,12 +39,20 @@ public class StoreServiceImpl implements StroreService {
 	@Override
 	public String updateStoreGroupStatus(StoreGoods goods) {
 		MarketBasicInfo marketInfo = marketBasicInfoDao.selectByPrimaryKey(goods.getMarketId());
-		Integer updateNumber = storeGoodsDao.updateStoreGroupStatus(marketInfo.getGroupLimit());
-		String storeId = goods.getStoreId();
-		if(updateNumber == null || updateNumber == 0){
-			logger.warn("update store group error as group is above limit.");
+		Integer updateNumber = storeGoodsDao.updateStoreGroupStatus(goods.getStoreId(), marketInfo.getGroupLimit());
+		if (updateNumber != null && updateNumber > 0) {
+			return goods.getStoreId();
+		}
+		logger.warn("update store group error as group is above limit, system will add new store goods record");
+		// 判断新的集货物是否已经被新增
+		StoreGoods newGoods = storeGoodsDao.selectActiveStoreGoods(goods.getMarketId(), marketInfo.getGroupLimit());
+		String storeId = null;
+		if (newGoods == null) {
 			storeId = UuidUtil.get32UUID();
 			storeGoodsDao.insertSelective(new StoreGoods(storeId, goods.getMarketId(), 1));
+		} else {
+			storeId = newGoods.getStoreId();
+			storeGoodsDao.updateStoreGroupStatus(storeId, marketInfo.getGroupLimit());
 		}
 		return storeId;
 	}
