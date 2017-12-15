@@ -17,30 +17,38 @@
     </header>
 
     <div class="mui-content">
-        <div class="mui-card">
+        <div class="mui-card" >
+            <div id="data">
             <!--页眉，放置标题-->
-            <div class="mui-card-header no-border">
-                <div class="title-wrapper">
-                    <div class="title text-warning f-h1">{{mktNameShow}}</div>
+                <div class="mui-card-header no-border">
+                    <div class="title-wrapper">
+                        <div class="title text-warning f-h1">{{mktNameShow}}</div>
+                    </div>
+                    <div class="sub-title mui-text-center f-h9">
+                        <span>全国流向</span>
+                        <span class="text-warning">{{weightMin}}-{{weightMax}}kg</span>
+                        <span>每日承诺寄件量最低<span class="text-warning">{{dailyMinPackages}}</span>件</span>
+                    </div>
                 </div>
-                <div class="sub-title mui-text-center f-h9">
-                    <span>全国流向</span>
-                    <span class="text-warning">{{weightMin}}-{{weightMax}}kg</span>
-                    <span>每日承诺寄件量最低<span class="text-warning">{{dailyMinPackages}}</span>件</span>
+                <div class="qr-img-wrapper">
+                    <!--<img class="qr-img" :src="storeMarketPic"  id="qrcode" alt=""/>-->
+                    <div class="qr-img"  id="qrcode" alt=""/>
+
                 </div>
             </div>
-            <div class="qr-img-wrapper">
-                <img class="qr-img" :src="storeMarketPic" alt=""/>
+            <div id="view">
 
             </div>
             <!--页脚，放置补充信息或支持的操作-->
-            <div class=" dis-block">
+            <div class=" dis-block" >
                 <div class="share-func">
                     <div>
                         <div  class="qr-hint f-h mui-text-left">扫一扫或长按小程序识别码（二维码）即可直达集货页面</div>
-                        <a class="mui-btn mui-btn-warning dis-block" @tap="toMediaList">
-                            <span class="mui-tab-label text-white">保存分享小程序码</span>
-                        </a>
+                        <div @tap="toMediaList">
+                            <a class="mui-btn mui-btn-warning dis-block" >
+                                <span class="mui-tab-label text-white">保存分享小程序码</span>
+                            </a>
+                        </div>
                         <div class="check-qr-code f-h9">
                             长按识别二维码，查看详情
                         </div>
@@ -54,6 +62,8 @@
 <script src="../js/axios.min.js"></script>
 <script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/qrcode.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/html2canvas.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     mui.init();
 
@@ -82,21 +92,24 @@
         methods: {
             toMediaList: function () {
 
+                html2canvas(document.getElementById('data')).then(function(canvas) {
+                    document.getElementById('view').appendChild(canvas);
+                    document.getElementById('data').style.display = 'none';
+                    var qrIimage = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                    window.location.href=qrIimage;
+
+                });
+
             },
             promise:  function (op) {
                 return axios(op.url + (op.append || ""), {params: op.data});
             },
             init: function () {
 
-                this.promise({
-                    append: "62b2876060204286b3beb439bdfb8f2d",
-                    data: "",
-                    url:""
-                }).then(function () {
-                    new QRCode(document.getElementById("qrcode"), window.localStorage.getItem("urlData"));
-                });
+                new QRCode(document.getElementById("qrcode"), "http://localhost:8020/smart-webapp-pageReal/template/goodsAssents.html#");
+//                new QRCode(document.getElementById("qrcode"), window.localStorage.getItem("urlData"));
 
-                window.localStorage.setItem("idfa", "123456");
+
             }
         },
         mounted: function () {

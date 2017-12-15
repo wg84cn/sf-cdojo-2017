@@ -132,4 +132,12 @@ html, body, .mui-content {
   padding: 1rem;
   color: #B2B2B2; }
 
+#qrcode {
+  width: 10rem;
+  text-align: center;
+  margin: auto; }
+  #qrcode img {
+    width: 100%;
+    height: 100%; }
+
 /*# sourceMappingURL=goodsAssents.css.map */
