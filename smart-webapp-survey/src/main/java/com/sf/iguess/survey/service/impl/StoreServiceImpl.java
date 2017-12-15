@@ -85,7 +85,6 @@ public class StoreServiceImpl implements StroreService {
 					continue;
 				}
 				storeGoods.setStatus(StoreGoods.OVERDUE_STATUS);
-				storeGoodsDao.updateByPrimaryKey(storeGoods);
 				if(storeGoodsNums == 1){
 					storeGoodsDao.insertSelective(new StoreGoods(UuidUtil.get32UUID(), marketBasic.getMktId() ,0));
 				}
