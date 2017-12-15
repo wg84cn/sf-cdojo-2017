@@ -43,7 +43,7 @@ public class UserDataEncrypt
     
     private static final Logger LOG = LoggerFactory.getLogger(UserDataEncrypt.class);
     
-    private static final String keyStart = "#c";
+    private static final String KEY_START = "#c";
     
     private static UserDataEncrypt instance;
     
@@ -75,17 +75,17 @@ public class UserDataEncrypt
         String decodeData = null;
         try
         {
-            if (encodeData == null || !encodeData.startsWith(keyStart))
+            if (encodeData == null || !encodeData.startsWith(KEY_START))
             {
                 return null;
             }
-            encodeData = encodeData.substring(keyStart.length());
+            encodeData = encodeData.substring(KEY_START.length());
             byte[] workKey = SercurityHelper.getWorkSecretKey(USER_COMPONENT_VALUE, ENCODE_COMPONENT_APP, userSalt);
             decodeData = AesCbcEncryptor.decryptBase64(encodeData, workKey);
         }
         catch (Exception e)
         {
-            LOG.error("decryt config value error {}", e.toString());
+            LOG.error("decryt config value error {}", e);
         }
         return decodeData;
     }
@@ -105,11 +105,11 @@ public class UserDataEncrypt
         try
         {
             byte[] workKey = SercurityHelper.getWorkSecretKey(USER_COMPONENT_VALUE, ENCODE_COMPONENT_APP, userSalt);
-            decodeData = keyStart + AesCbcEncryptor.encryptBase64(inputData, workKey);
+            decodeData = KEY_START + AesCbcEncryptor.encryptBase64(inputData, workKey);
         }
         catch (Exception e)
         {
-            LOG.error("decryt config value error {}", e.toString());
+            LOG.error("decryt config value error {}", e);
         }
         return decodeData;
     }
@@ -123,7 +123,7 @@ public class UserDataEncrypt
         }
         catch (Exception e)
         {
-            LOG.error("decryt config value error {}", e.toString());
+            LOG.error("decryt config value error {}", e);
             return null;
         }
     }

@@ -146,3 +146,179 @@
 		}
 	}
 }(mui, window.app = {}));
+
+
+var common = {};
+
+//用于调整时间输出
+common.adjustTime = function (time, type) {
+    type = type || "YYYY-MM-DD";
+    var ckTime = this.checkTime(time);//转为毫秒
+    if (!ckTime) {
+        return "";
+    }
+    ckTime = this._output(ckTime, type);
+    return (ckTime);
+};
+//转为毫秒
+common.checkTime = function (time) {
+	/* var ret = "";
+	 var temp;
+	 if (typeof time === "string" || typeof time === "number") {
+	 temp = parseInt(time);
+	 if (isNaN(temp)) {
+	 ret = false;
+	 } else {
+	 ret = (+new Date(time));
+	 }
+	 } else if (typeof time === "object" && time.constructor === Date) {
+	 temp = (+new Date(time));
+	 if (String(temp) === "Invalid Date") {
+	 ret = false;
+	 } else {
+	 ret = temp;
+	 }
+	 } else {
+	 ret = false;
+	 }
+
+	 if (!ret) {
+	 console.warn("时间格式出问题", time);
+	 }
+	 return ret;*/
+    if(String( new Date(time) ) !== "Invalid Date") {
+        return +new Date(time);
+    } else if(String( new Date(+time) ) !== "Invalid Date"){
+        return +new Date(+time);
+    } else {
+        console.warn("时间格式出问题", time);
+        return false;
+    }
+};
+//用于调整时间输出
+common.shiftTime = function (time, shifted, type) {
+    if(typeof shifted === "String") {
+        console.error("时间位移功能，不能支持位移参数：", shifted);
+    }
+    var ckTime = this.checkTime(time);//转为毫秒
+    if (!ckTime) {
+        return "";
+    }
+    var handleTime = this.adjustTime(time, "YYYY-MM-DD");
+    shifted = shifted || "";
+    type = type || "YYYY-MM-DD";
+    var dayMap = [{
+        str: "([-+])(\\d+)[Mm]",
+        func: function (time, month, isPlus) {
+            //调整时间量
+            month = +month;
+            var connect = isPlus ?  "+" : "-";
+            var m = +common.adjustTime( time, "MM");
+            var y = +common.adjustTime( time, "YYYY");
+            var d = +common.adjustTime( time, "DD");
+            var maxMonth = 12;
+            y += Math.ceil( ( eval(m + connect +month) ) / maxMonth - 1 );//todo: wrong
+            if(eval(m + connect +month) > maxMonth) {
+                m = eval(m + connect + month) % maxMonth || maxMonth;
+            } else {
+                var remain = eval(m + connect + month);
+                while(remain < 0 ) {
+                    remain += maxMonth;
+                }
+                m = remain || maxMonth;
+            }
+            return common.adjustTime( (y + "-" + m + "-" + d), type);
+        }
+    }, {
+        str: "([-+])(\\d+)[Dd]",
+        func: function (time, day, isPlus) {
+            //调整时间量
+            day = +day;
+            var connect = isPlus ?  "+" : "-";
+            var m = +common.adjustTime( time, "MM");
+            var y = +common.adjustTime( time, "YYYY");
+            var d = +common.adjustTime( time, "DD");
+            var maxMonth = 12;
+            var getDayNumByMon = function (year, month) {
+                var allDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                function isLeapYear(year) {  return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);  }
+                if(isLeapYear(year) && month === 2) {
+                    return 29;
+                } else {
+                    return allDays[month - 1]
+                }
+            };
+            if(isPlus) {
+                d += day;
+                if(d <= getDayNumByMon(y, m)) {
+                    return common.adjustTime( (y + "-" + m + "-" + d), type);
+                }
+                while(d > getDayNumByMon(y, m)) {
+                    if(getDayNumByMon(y, m) - d <= 0) {
+                        d -= getDayNumByMon(y, m);
+                        m++;
+                        if(m > maxMonth) {
+                            m = 1;
+                            y++;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                return common.adjustTime( (y + "-" + m + "-" + d), type);
+            } else {
+                d -= day;
+                if(d > 0) {
+                    return common.adjustTime( (y + "-" + m + "-" + d), type);
+                }
+                while(d <= 0) {
+                    m--;
+                    if(m <= 0) {
+                        m = maxMonth;
+                        y--;
+                    }
+                    d += getDayNumByMon(y, m);
+                }
+                return common.adjustTime( (y + "-" + m + "-" + d), type);
+            }
+        }
+    }];
+    var realTime = null;
+    dayMap.some(function (t) {
+        var reg = new RegExp(t.str);
+        var ret = shifted.match(reg);
+        if(ret) {
+            realTime = t.func(handleTime, ret[2], ret[1] === "+" ? true : false);
+            return true;
+        }
+    });
+
+    return (realTime);
+};
+//将毫秒输出为指定格式 YYYY-MM-DD hh:mm:ss
+common._output = function (time, type) {
+    time = new Date(time);
+    var o = {
+        "M+": time.getMonth() + 1,                 //月份
+        "D+": time.getDate(),                    //日
+        "h+": time.getHours(),                   //小时
+        "m+": time.getMinutes(),                 //分
+        "s+": time.getSeconds(),                 //秒
+        "q+": Math.floor((time.getMonth() + 3) / 3), //季度
+        "S": time.getMilliseconds()             //毫秒
+    };
+    var day = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
+
+    if (/(day)/.test(type)) {
+        type = type.replace(RegExp.$1, (day[time.getDay() - 1]));
+    }
+    if (/(Y+)/.test(type)) {
+        type = type.replace(RegExp.$1, (time.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o) {
+        if (new RegExp("(" + k + ")").test(type)) {
+            type = type.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        }
+    }
+    return type;
+};

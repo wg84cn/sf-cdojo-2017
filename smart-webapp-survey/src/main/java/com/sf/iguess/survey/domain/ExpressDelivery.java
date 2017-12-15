@@ -10,23 +10,21 @@ package com.sf.iguess.survey.domain;
  * @since JDK 1.8
  */
 public class ExpressDelivery {
-	
+	/** id */
     private Long id;
-    
+    /** storeId 外键 */
     private String storeId;
-
-    private Long userId;
-
+    /** 用户地区 */
     private String userArea;
-
+    /** 用户名称 */
     private String userName;
-
+    /** 电话号码 */
     private String phoneNumber;
-
+    /** 每日件量 */
     private Integer dayExpressNumber;
-
+    /** 每件平均重量 */
     private Double avgWeight;
-
+    /** 详细地址 */
     private String detailAddress;
 
     public Long getId() {
@@ -35,14 +33,6 @@ public class ExpressDelivery {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getUserArea() {
@@ -100,6 +90,5 @@ public class ExpressDelivery {
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
 	}
-    
     
 }

@@ -145,7 +145,7 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	 */
 	private boolean checkDayExpressNumber(Integer dayExpressNumber) {
 		return (dayExpressNumber != null 
-			&& dayExpressNumber.intValue() < MAX_DAY_EXPRESS_NUMBER);
+			&& dayExpressNumber.intValue() >= MAX_DAY_EXPRESS_NUMBER);
 	}
 
 	/**
