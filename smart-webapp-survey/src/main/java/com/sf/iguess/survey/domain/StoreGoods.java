@@ -29,6 +29,8 @@ public class StoreGoods {
 	private Byte groupDuration;
 
 	private String userRequire;
+	
+	private String url;
 
 	public StoreGoods() {
 	}
@@ -162,4 +164,13 @@ public class StoreGoods {
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 }

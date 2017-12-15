@@ -14,6 +14,7 @@ import com.sf.iguess.survey.mapper.UserDao;
 import com.sf.iguess.survey.service.AreaService;
 import com.sf.iguess.survey.service.ExpressDeliveryService;
 import com.sf.iguess.survey.service.StroreService;
+import com.smart.platform.toolkit.PropertyPlaceholderConfigurer;
 import com.smart.platform.toolkit.RegularMatcher;
 
 
@@ -32,16 +33,20 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	private StroreService stroreService;
 	
 	private static final int MAX_DAY_EXPRESS_NUMBER = 20;
+	private static final String STORE_GOOD_DETAIL_URL = "store.good.detail.url";
 
 	/**
 	 * 保存寄件人信息，同时加入团.
 	 * @see com.sf.iguess.survey.service.ExpressDeliveryService#save(com.sf.iguess.survey.domain.ExpressDelivery)
 	 */
 	@Override
-	public boolean save(String storeId,ExpressDelivery expressDelivery) {
+	public StoreGoods save(String storeId,ExpressDelivery expressDelivery) {
 		StoreGoods storeGood = storeGoodsDao.selectByPrimaryKey(storeId);
 		//判断参数是否合法
-		if(checkSendMsg(expressDelivery,storeGood)){
+		if(storeGood!=null && checkSendMsg(expressDelivery,storeGood)){
+			//更新集货信息
+			storeId = stroreService.updateStoreGroupStatus(storeGood);
+			//保存storeId
 			expressDelivery.setStoreId(storeId);
 			expressDeliveryDao.insert(expressDelivery);
 			//新增用户
@@ -52,10 +57,14 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 				user.setUserName(expressDelivery.getUserName());
 				userDao.insert(user);
 			}
-			//更新集货信息
-			
+			//加入返回链接
+			String url = PropertyPlaceholderConfigurer
+					.getConfigValue(STORE_GOOD_DETAIL_URL) + storeId;
+			StoreGoods newStore = storeGoodsDao.selectByPrimaryKey(storeId);
+			newStore.setUrl(url);
+			return newStore;
 		}
-		return false;
+		return null;
 	}
 
 	@Override
@@ -79,19 +88,14 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 		return areaService.isExist(userArea);
 	}
 	
-	public static void main(String[] args) {
-		AreaService areaService = new AreaServiceImpl();
-		System.out.println(areaService.isExist("北京市-北京市"));
-	}
-
 	private boolean checkPhoneNumber(String phoneNumber) {
 		return RegularMatcher.checkMobileNumber(phoneNumber);
 	}
 
 	private boolean checkAvgWeight(Double avgWeight, Double min, Double max) {
 		return avgWeight!=null 
-				&& avgWeight.doubleValue() > min.doubleValue()
-				&& avgWeight.hashCode() < max.doubleValue();
+				&& avgWeight.doubleValue() >= min.doubleValue()
+				&& avgWeight.doubleValue() <= max.doubleValue();
 	}
 
 	private boolean checkUserName(String userName) {

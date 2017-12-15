@@ -11,6 +11,7 @@ package com.sf.iguess.survey.controller;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sf.iguess.response.JsonResult;
 import com.sf.iguess.response.ResponseCode;
 import com.sf.iguess.survey.domain.ExpressDelivery;
+import com.sf.iguess.survey.domain.StoreGoods;
 import com.sf.iguess.survey.service.ExpressDeliveryService;
 
 /**
@@ -39,13 +41,13 @@ public class ExpressDeliveryController {
 
 	@PostMapping("/StoreGoods/{storeId}/saving")
 	public JsonResult saving(
-			@PathVariable("questionId")String storeId,
+			@PathVariable("storeId")String storeId,
 			ExpressDelivery expressDelivery){
-		expressDeliveryService.save(storeId,expressDelivery);
-		return new JsonResult(ResponseCode.SUCCESS, "");
+		StoreGoods storeGood = expressDeliveryService.save(storeId,expressDelivery);
+		if(storeGood != null){
+			return new JsonResult(ResponseCode.SUCCESS,"", storeGood);
+		}
+		return new JsonResult(ResponseCode.PARAMS_ERROR, "参数错误");
 	}
-	
-	
-	
 }
 

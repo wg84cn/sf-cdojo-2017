@@ -52,6 +52,7 @@ public class AreaServiceImpl implements AreaService {
 		return false;
 	}
 	
+	
 	private boolean isExist(JSONArray jsonArr,int flagLevel,String[] areas){
 		if(flagLevel < areas.length){
 			for (Object obj : jsonArr) {
@@ -64,6 +65,11 @@ public class AreaServiceImpl implements AreaService {
 			return false;
 		}
 		return true;
+	}
+	
+	public static void main(String[] args) {
+		AreaService areaService = new AreaServiceImpl();
+		System.out.println(areaService.isExist("北京市-北京市"));
 	}
 
 }
