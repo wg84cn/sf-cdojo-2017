@@ -3,40 +3,46 @@ html {
   font-size: 10px; }
 
 .f-h1 {
-  font-size: 1.81818rem !important;
+  font-size: 2rem !important;
   font-family: "微软雅黑" "arial black"; }
 
 .f-h2 {
-  font-size: 1.68182rem !important;
+  font-size: 1.85rem !important;
   font-family: "微软雅黑" "arial black"; }
 
 .f-h3 {
-  font-size: 1.63636rem !important;
+  font-size: 1.8rem !important;
   font-family: "微软雅黑" "arial black"; }
 
 .f-h4 {
-  font-size: 1.54545rem !important;
+  font-size: 1.7rem !important;
   font-family: "微软雅黑" "arial black"; }
 
 .f-h5 {
-  font-size: 1.45455rem !important;
+  font-size: 1.6rem !important;
   font-family: "微软雅黑" "arial black"; }
 
 .f-h6 {
-  font-size: 1.36364rem !important;
+  font-size: 1.5rem !important;
   font-family: "微软雅黑" "arial black"; }
 
 .f-h7 {
-  font-size: 1.27273rem !important;
+  font-size: 1.4rem !important;
   font-family: "微软雅黑" "arial black"; }
 
 .f-h8 {
-  font-size: 1.18182rem !important;
+  font-size: 1.3rem !important;
   font-family: "微软雅黑" "arial black"; }
 
 .f-h9 {
-  font-size: 1.09091rem !important;
+  font-size: 1.2rem !important;
   font-family: "微软雅黑" "arial black"; }
+
+.dis-flex {
+  display: flex; }
+
+.dis-block {
+  display: block; }
 
 /*普通按钮*/
 .mui-btn .mui-btn-warning.mui-btn-warning {
@@ -80,5 +86,23 @@ html {
 
 .bold {
   font-weight: bold; }
+
+.clearfix:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  content: '';
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  background-color: #c8c7cc;
+  top: auto;
+  bottom: 0; }
+
+/*
+.clearfix:after {
+
+}*/
 
 /*# sourceMappingURL=app.css.map */
