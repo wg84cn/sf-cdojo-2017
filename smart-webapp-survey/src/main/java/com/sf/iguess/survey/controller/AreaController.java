@@ -36,9 +36,17 @@ public class AreaController {
 	@Resource
 	private AreaService areaService;
 
+	/**
+	 * saving:查询地区字典. <br/>
+	 *
+	 * @author 618721
+	 * @param expressDelivery
+	 * @return
+	 * @since JDK 1.8
+	 */
 	@GetMapping("/list")
 	public JsonResult saving(ExpressDelivery expressDelivery){
-		return new JsonResult(ResponseCode.SUCCESS, "",areaService.listArea());
+		return new JsonResult(ResponseCode.SUCCESS, "",areaService.readAreaJson());
 	}
 	
 }
