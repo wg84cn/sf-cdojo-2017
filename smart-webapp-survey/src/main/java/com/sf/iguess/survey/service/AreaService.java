@@ -10,9 +10,23 @@ package com.sf.iguess.survey.service;
  * @since JDK 1.8
  */
 public interface AreaService {
-
+	/**
+	 * readAreaJson:读取地区字典文件. <br/>
+	 *
+	 * @author 618721
+	 * @return
+	 * @since JDK 1.8
+	 */
 	public String readAreaJson();
 	
+	/**
+	 * isExist:是否存在该地区. <br/>
+	 *
+	 * @author 618721
+	 * @param area
+	 * @return
+	 * @since JDK 1.8
+	 */
 	public boolean isExist(String area); 
 	
 }
