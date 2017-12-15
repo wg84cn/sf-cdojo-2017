@@ -29,6 +29,14 @@ public class StoreGoods {
 	private Byte groupDuration;
 
 	private String userRequire;
+	
+	private Short status;
+	
+	public static final Short FULL_STATUS = 1;
+	
+	public static final Short OVERDUE_STATUS = 2;
+	
+	public static final int MUNITE_UNIT = 60000;
 
 	public StoreGoods() {
 	}
@@ -161,5 +169,18 @@ public class StoreGoods {
 
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	public Short getStatus() {
+		return status;
+	}
+
+	public void setStatus(Short status) {
+		this.status = status;
+	}
+	
+	public long initMinuteDuration(){
+		long duration = System.currentTimeMillis() - this.getCreateTime().getTime();
+		return (duration / MUNITE_UNIT);
 	}
 }

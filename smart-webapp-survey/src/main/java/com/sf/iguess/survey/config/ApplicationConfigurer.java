@@ -15,6 +15,10 @@ import com.smart.platform.toolkit.PropertyPlaceholderConfigurer;
 
 @Configuration
 public class ApplicationConfigurer {
+	
+	protected ApplicationConfigurer()
+	{
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationConfigurer.class);
 
