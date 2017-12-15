@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Document</title>
+    <title>集货详情</title>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
     <link href="../css/app.css" rel="stylesheet"/>
     <link href="../css/detail.css" rel="stylesheet"/>
-    <script src="../../../../esg-clpp-webapp-20171009/esg-clpp-core-server_80002450/ngsoc-portal-webapp/src/main/webapp/assets/scripts/main.js"></script>
+    <!--<script src="../../../../esg-clpp-webapp-20171009/esg-clpp-core-server_80002450/ngsoc-portal-webapp/src/main/webapp/assets/scripts/main.js"></script>-->
 </head>
 <body>
 <div id="detail">
@@ -34,7 +34,6 @@
                 <span class="mui-tab-label text-white">立即参加</span>
             </a>
         </div>
-
     </nav>
 
     <div class="mui-content">
@@ -159,6 +158,7 @@
             "createTime":1513323351000,
             "modifyTime":1513314363000,
             deadline: "",
+            finishPercent: 0
         },
         methods: {
             toMediaList: function () {
@@ -198,6 +198,7 @@
                     if( data.code === "200" && data.data ) {
                         dateReal = data.data;
                         dateReal.deadline = common.adjustTime( data.createTime + dateReal.groupDuration * 60 * 1000, "MM月DD日");
+                        dateReal.finishPercent = this.storedNumber / this.groupLimit
                         Object.keys( data.data ).forEach(function (t) {
                             this.$set(t, data.data[t]);
                         });
@@ -210,9 +211,7 @@
                     append: "62b2876060204286b3beb439bdfb8f2d",
                     data: ""
                 });
-                mui("#demo1").progressbar({
-                    progress: this.storedNumber / this.groupLimit
-                }).show();
+
                 window.localStorage.setItem("idfa", "123456");
             }
         },
