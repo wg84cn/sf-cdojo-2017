@@ -9,4 +9,8 @@ public interface StroreService {
 	List<StoreGoods> selectStoreList();
 	
 	StoreGoods selectStoreGood(Long stroeId);
+
+	void checkStoreGoodsStatus();
+
+	void autoCreateStoreGoods();
 }
