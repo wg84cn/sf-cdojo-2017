@@ -103,24 +103,9 @@
                     <span>最近参与</span>
                 </div>
                 <div class="hint-content">
-                    <div class="favi-wrapper clearfix" v-for="icon in">
+                    <div class="favi-wrapper clearfix" v-for="icon in iconGroup">
                         <div class="favi-icon">
-                            <img src="../images/People@2x.png" alt="">
-                        </div>
-                        <div class="favi-icon">
-                            <img src="../images/People@2x.png" alt="">
-                        </div>
-                        <div class="favi-icon">
-                            <img src="../images/People@2x.png" alt="">
-                        </div>
-                        <div class="favi-icon">
-                            <img src="../images/People@2x.png" alt="">
-                        </div>
-                        <div class="favi-icon">
-                            <img src="../images/People@2x.png" alt="">
-                        </div>
-                        <div class="favi-number">
-                            已有<span class="text-warning f-h4">{{storedNumber}}</span>人参团
+                            <img :src="icon.picUrl" alt="">
                         </div>
                     </div>
                     <div class="dis-block">
@@ -158,12 +143,13 @@
             "createTime":0,
             "modifyTime":0,
             deadline: "",
-            finishPercent: 0
+            finishPercent: 0,
+            iconGroup: [],
         },
         methods: {
             toMediaList: function () {
                 mui.openWindow({
-                    url: 'template/media-list.html',
+                    url: 'template/goodsAssents.html',
                     id: 'info'
                 });
             },
@@ -203,10 +189,8 @@
                         return this[match];
                     });
                     Object.keys( dateReal ).forEach(function (t) {
-//                        this.$set(t, dateReal[t]);
                         this[t] = dateReal[t];
                     }.bind(this));
-                    console.log(this["userRequire"])
                 }
             },
             updatePro: function () {
@@ -215,6 +199,13 @@
                     data: "",
                     url: baseUrl +  "/storeGoods/loadActiveStoreList"
                 })
+            },
+            addIcon:function (data) {
+                var dateReal;
+                if( data.data.code === "200" && data.data.data ) {
+                    dateReal = data.data.data;
+                    this.iconGroup = dateReal;
+                }
             },
             init: function () {
                 var that = this;
@@ -225,12 +216,19 @@
                 }).then(function (data){
                     var dataReal;
                     if( data.data.code === "200" && data.data.data  && data.data.data.length ) {
-                        dateReal = data.data.data;
+                        dataReal = data.data.data;
+                        window.localStorage.setItem("storeId", dataReal[0].storeId);
                         this.promise({
-                            append: dateReal[0].storeId,
+                            append: dataReal[0].storeId,
                             data: "",
                             url: baseUrl +  "/storeGoods/getStore/"
                         }).then(that.addData.bind(that))
+
+                        this.promise({
+                            append: dataReal[0].storeId,
+                            data: "",
+                            url: baseUrl +  "/storeGoods/loadStoreUserList/"
+                        }).then(that.addIcon.bind(that))
                     }
 
                 }.bind(this))
@@ -238,7 +236,7 @@
                 setInterval(function () {
                     this.updatePro();
                 }.bind(this), 1000 * 3)
-                window.localStorage.setItem("idfa", "123456");
+
             }
         },
         mounted: function () {
