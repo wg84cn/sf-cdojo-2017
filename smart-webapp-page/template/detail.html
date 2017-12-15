@@ -186,11 +186,14 @@
                     dateReal.deadline = common.adjustTime( dateReal.createTime + dateReal.groupDuration * 60 * 1000, "MM月DD日");
                     dateReal.finishPercent = dateReal.storedNumber / dateReal.groupLimit || 0;
                     dateReal.userRequire.replace(/\$\{\{(\w+)\}\}/ig, function (match, cat) {
-                        return this[cat];
+                        return dateReal[cat];
                     }.bind(this));
+
                     Object.keys( dateReal ).forEach(function (t) {
                         this[t] = dateReal[t];
                     }.bind(this));
+
+
                 }
             },
             updatePro: function () {
