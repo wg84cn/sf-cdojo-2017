@@ -327,7 +327,7 @@ public class IPSourceUtil
      */
     public static int getNetMask(String netmarks)
     {
-        StringBuffer sbf;
+        StringBuilder sbf;
         String str;
         int inetmask = 0, count = 0;
         String[] ipList = netmarks.split("\\.");
@@ -378,9 +378,9 @@ public class IPSourceUtil
         return StringUtil.appendArrayToString(ipArrayStrs, SOUCE_SEGMENT_SIGN);
     }
     
-    private static StringBuffer toBin(int x)
+    private static StringBuilder toBin(int x)
     {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         result.append(x % 2);
         x /= 2;
         while (x > 0)
