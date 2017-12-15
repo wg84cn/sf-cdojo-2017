@@ -168,7 +168,7 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	 * @since JDK 1.8
 	 */
 	private boolean checkPhoneNumber(String phoneNumber) {
-		return RegularMatcher.checkMobileNumber(phoneNumber);
+		return RegularMatcher.checkCellPhone(phoneNumber);
 	}
 
 	/**

@@ -15,14 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.smart.platform.formative.AesCbcEncryptor;
 import com.smart.platform.formative.SercurityHelper;
 
-/**
- * ClassName:ConfigProcess <br/>
- * Date:     2017年2月28日 上午11:13:25 <br/>
- * @author   01135912
- * @version  
- * @since    JDK 1.6
- * @see 	 
- */
+
 /**
  * ClassName: ConfigProcess <br/>
  * date: 2017年2月28日 上午11:13:25 <br/>
