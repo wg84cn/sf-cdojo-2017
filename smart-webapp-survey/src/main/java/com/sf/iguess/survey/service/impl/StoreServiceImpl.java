@@ -78,18 +78,13 @@ public class StoreServiceImpl implements StroreService {
 			if (storeGoodsList == null || storeGoodsList.isEmpty()) {
 				continue;
 			}
-			int storeGoodsNums = storeGoodsList.size();
 			byte duration = marketBasic.getGroupDuration();
+			StoreGoods storeGoods = storeGoodsList.get(0);
 			// 过期
-			for (StoreGoods storeGoods : storeGoodsList) {
-				if (storeGoods.initMinuteDuration() < duration) {
-					continue;
-				}
+			if (storeGoods.initMinuteDuration() >= duration) {
 				storeGoods.setStatus(StoreGoods.OVERDUE_STATUS);
 				storeGoodsDao.updateByPrimaryKeySelective(storeGoods);
-				if(storeGoodsNums == 1){
-					storeGoodsDao.insertSelective(new StoreGoods(UuidUtil.get32UUID(), marketBasic.getMktId() ,0));
-				}
+				storeGoodsDao.insertSelective(new StoreGoods(UuidUtil.get32UUID(), marketBasic.getMktId(), 0));
 			}
 		}
 	}
