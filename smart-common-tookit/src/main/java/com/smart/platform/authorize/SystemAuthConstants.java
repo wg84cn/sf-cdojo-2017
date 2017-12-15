@@ -8,32 +8,20 @@
 */
 
 package com.smart.platform.authorize;
-/**
- * ClassName:SystemAuthConstants <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason:	 TODO ADD REASON. <br/>
- * Date:     2017年2月27日 下午2:02:53 <br/>
- * @author   01135912
- * @version  
- * @since    JDK 1.6
- * @see 	 
- */
+
 /**
  * ClassName: SystemAuthConstants <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Reason: TODO ADD REASON(可选). <br/>
+ * Function: 系统权限类. <br/>
  * date: 2017年2月27日 下午2:02:52 <br/>
  *
  * @author 01135912
- * @version 
+ * @version
  * @since JDK 1.7
  */
-public class SystemAuthConstants
-{
-    public final static String AUTH_TYPE_NAME = "authType";
-    
-    public final static String AUTH_TYPE_APP = "app";
-    
-    public final static String AUTH_TYPE_USER = "user";
-}
+public class SystemAuthConstants {
+	public static final String AUTH_TYPE_NAME = "authType";
 
+	public static final String AUTH_TYPE_APP = "app";
+
+	public static final String AUTH_TYPE_USER = "user";
+}

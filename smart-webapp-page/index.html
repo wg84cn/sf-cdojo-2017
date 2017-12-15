@@ -147,6 +147,7 @@
 
 		<script src="js/mui.min.js"></script>
 		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+		<script src="js/axios.min.js"></script>
 		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript" charset="utf-8">
 			//mui初始化
@@ -186,12 +187,20 @@
 							}
 						})
 					},
+					init: function () {
+						plus.storage.setItem("idfa", "123456");
+					}
 				},
 				mounted: function() {
 					console.log('mounted');
-					plus.storage.setItem("idfa", "123456");
+					var that = this;
+					mui.plusReady(function() {
+						that.init.call(this, arguments);
+						
+					});
 				},
 			});
+			
 			console.log(app);
 		</script>
 	</body>
