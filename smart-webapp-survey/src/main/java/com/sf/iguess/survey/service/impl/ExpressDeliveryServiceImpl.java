@@ -13,10 +13,10 @@ import com.sf.iguess.survey.domain.StoreGoods;
 import com.sf.iguess.survey.domain.User;
 import com.sf.iguess.survey.mapper.ExpressDeliveryDao;
 import com.sf.iguess.survey.mapper.StoreGoodsDao;
-import com.sf.iguess.survey.mapper.UserDao;
 import com.sf.iguess.survey.service.AreaService;
 import com.sf.iguess.survey.service.ExpressDeliveryService;
 import com.sf.iguess.survey.service.StroreService;
+import com.sf.iguess.survey.service.UserService;
 import com.smart.platform.toolkit.PropertyPlaceholderConfigurer;
 import com.smart.platform.toolkit.RegularMatcher;
 
@@ -37,7 +37,7 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	@Resource
 	private StoreGoodsDao storeGoodsDao;
 	@Resource
-	private UserDao userDao;
+	private UserService userService;
 	@Resource
 	private AreaService areaService;
 	@Resource
@@ -71,14 +71,7 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 			expressDelivery.setStoreId(newStoreId);
 			expressDeliveryDao.insert(expressDelivery);
 			//新增用户
-			String userId = expressDelivery.getPhoneNumber();
-			if(userDao.selectByPrimaryKey(userId) == null){
-				User user = new User();
-				user.setUserId(userId);
-				user.setUserName(expressDelivery.getUserName());
-				user.setCreateTime(new Date());
-				userDao.insert(user);
-			}
+			userService.saveUserByExpressDelivery(expressDelivery);
 			//加入返回链接
 			String url = PropertyPlaceholderConfigurer
 					.getConfigValue(STORE_GOOD_DETAIL_URL) + newStoreId;
