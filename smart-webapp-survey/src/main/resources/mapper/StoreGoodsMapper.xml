@@ -17,7 +17,7 @@
     <result column="stored_number" property="storedNumber" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
-    <result column="mkt_id" property="mktId" jdbcType="VARCHAR" />
+    <result column="market_id" property="marketId" jdbcType="VARCHAR" />
     <result column="mkt_name_show" property="mktNameShow" jdbcType="VARCHAR" />
     <result column="daily_min_packages" property="dailyMinPackages" jdbcType="SMALLINT" />
     <result column="weight_min" property="weightMin" jdbcType="DOUBLE" />
@@ -35,13 +35,13 @@
    
   <sql id="Detail_Column_List" >
     store_id, store_name, store_market_pic, stored_number, create_time, modify_time,
-    mkt_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, 
+    mkt_id as market_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, 
     group_limit, group_duration,user_require
   </sql>
   
   <select id="selectByPrimaryKey" resultMap="DetailResultMap" parameterType="java.lang.String" >
     select <include refid="Detail_Column_List" />
-    from tt_store_goods
+    from tt_store_goods tg left join  tt_market_basic tb  on tg.market_id  = tb.mkt_id 
     where store_id = #{storeId,jdbcType=VARCHAR}
   </select>
   
@@ -49,9 +49,9 @@
     select store_id  from tt_store_goods  where market_id = #{mktId}
   </select>
   
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from tt_store_goods
-    where store_id = #{storeId,jdbcType=BIGINT}
+    where store_id = #{storeId,jdbcType=VARCHAR}
   </delete>
    
   <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
@@ -123,7 +123,7 @@
         modify_time = #{modifyTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where store_id = #{storeId,jdbcType=BIGINT}
+    where store_id = #{storeId,jdbcType=VARCHAR}
   </update>
   
   <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
@@ -133,6 +133,6 @@
       stored_number = #{storedNumber,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
-    where store_id = #{storeId,jdbcType=BIGINT}
+    where store_id = #{storeId,jdbcType=VARCHAR}
   </update>
 </mapper>

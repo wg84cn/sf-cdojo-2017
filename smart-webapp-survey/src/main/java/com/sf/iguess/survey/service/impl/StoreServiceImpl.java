@@ -27,7 +27,7 @@ public class StoreServiceImpl implements StroreService {
 	}
 
 	@Override
-	public StoreGoods selectStoreGood(Long stroeId) {
+	public StoreGoods selectStoreGood(String stroeId) {
 		return storeGoodsDao.selectByPrimaryKey(stroeId);
 	}
 

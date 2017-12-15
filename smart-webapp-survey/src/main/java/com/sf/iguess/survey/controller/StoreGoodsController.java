@@ -27,7 +27,7 @@ public class StoreGoodsController {
 	private StroreService storeGoodsService;
 
 	@RequestMapping("/getStore/{goodsId}")
-	public JsonResult getStoreGood(@PathVariable("goodsId") Long goodsId) {
+	public JsonResult getStoreGood(@PathVariable("goodsId") String goodsId) {
 		StoreGoods storeGoods = storeGoodsService.selectStoreGood(goodsId);
 		return new JsonResult(ResponseCode.SUCCESS, "", storeGoods);
 	}

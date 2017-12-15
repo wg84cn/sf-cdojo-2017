@@ -16,7 +16,7 @@ public interface StoreGoodsDao {
 
     int insertSelective(StoreGoods record);
 
-    StoreGoods selectByPrimaryKey(@Param("storeId")Long storeId);
+    StoreGoods selectByPrimaryKey(@Param("storeId")String storeId);
 
     int updateByPrimaryKeySelective(StoreGoods record);
 
