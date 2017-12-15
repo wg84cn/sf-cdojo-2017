@@ -121,8 +121,8 @@
 <script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     mui.init();
-    var baseUrl = "";
-//    var baseUrl = "http://192.168.0.1:9090";
+//    var baseUrl = "";
+    var baseUrl = "http://192.168.0.4:9090";
 //    var baseUrl = "http://www.mockhttp.cn/mock";
     var app = new Vue({
         el: '#detail',
@@ -145,6 +145,8 @@
             deadline: "",
             finishPercent: 0,
             iconGroup: [],
+            isStorId: false,
+            isSotred: false
         },
         methods: {
             toMediaList: function () {
@@ -184,8 +186,8 @@
                 if( data.data.code === "200" && data.data.data ) {
                     dateReal = data.data.data;
                     dateReal.deadline = common.adjustTime( dateReal.createTime + dateReal.groupDuration * 60 * 1000, "MM月DD日");
-                    dateReal.finishPercent = dateReal.storedNumber / dateReal.groupLimit || 0;
-
+                    dateReal.finishPercent = Math.floor( dateReal.storedNumber / dateReal.groupLimit * 100 ) || 0;
+                    mui("#demo1").progressbar({progress:dateReal.finishPercent}).show();
                     Object.keys( dateReal ).forEach(function (t) {
                         this[t] = dateReal[t];
                     }.bind(this));
@@ -209,27 +211,35 @@
                     this.iconGroup = dateReal;
                 }
             },
+            storId: function (dataReal){
+                if(!this.isStorId) {
+                    window.localStorage.setItem("storeId", dataReal[0].storeId);
+                }
+            },
             sub: function (data){
                 var that = this;
                 var dataReal;
                 if( data.data.code === "200" && data.data.data  && data.data.data.length ) {
                     dataReal = data.data.data;
-                    window.localStorage.setItem("storeId", dataReal[0].storeId);
+                    if(!that.isSotred) {
+                        that.storId(dataReal);
+                        that.isSotred = dataReal[0].storeId;
+                    }
                     this.promise({
-                        append: dataReal[0].storeId,
+                        append: that.isSotred,
                         data: "",
                         url: baseUrl +  "/storeGoods/getStore/"
                     }).then(that.addData.bind(that))
                         .then(function () {
                             that.promise({
-                                append: dataReal[0].storeId,
+                                append: that.isSotred,
                                 data: "",
                                 url: baseUrl +  "/storeGoods/loadStoreUserList/"
                             }).then(that.addIcon.bind(that))
                         })
 
-
                 }
+
             },
             init: function () {
 
@@ -238,6 +248,7 @@
                     data: "",
                     url: baseUrl +  "/storeGoods/loadActiveStoreList"
                 }).then(this.sub.bind(this))
+
 
 
             }
