@@ -35,7 +35,7 @@ public class SessionFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain)
 			throws IOException, ServletException {
-		HttpServletRequest request = (HttpServletRequest) req;
+		/*HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		
 		String uri = request.getRequestURI(); 
@@ -50,7 +50,7 @@ public class SessionFilter implements Filter {
 			String requestPath = request.getContextPath().equals("/") ? "" : request.getContextPath();
 			response.sendRedirect(requestPath + "/login");
 			return;
-		} 
+		} */
 		filterChain.doFilter(req, resp);
 	}
 

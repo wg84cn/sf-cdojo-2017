@@ -13,106 +13,14 @@
   <resultMap id="ResultMapWithBLOBs" type="com.sf.iguess.survey.domain.ExpressDelivery" extends="BaseResultMap" >
     <result column="detail_address" property="detailAddress" jdbcType="VARBINARY" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
+  
   <sql id="Base_Column_List" >
     id, user_id, user_area, user_name, phone_number, day_express_number, avg_weight
   </sql>
   <sql id="Blob_Column_List" >
     detail_address
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.sf.iguess.survey.domain.ExpressDeliveryExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from tt_user_delivery
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sf.iguess.survey.domain.ExpressDeliveryExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tt_user_delivery
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.sf.iguess.survey.domain.ExpressDeliveryExample" >
-    delete from tt_user_delivery
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
+   
   <insert id="insert" parameterType="com.sf.iguess.survey.domain.ExpressDelivery" >
     insert into tt_user_delivery (id, user_id, user_area, 
       user_name, phone_number, day_express_number, 
@@ -121,6 +29,7 @@
       #{userName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{dayExpressNumber,jdbcType=INTEGER}, 
       #{avgWeight,jdbcType=REAL}, #{detailAddress,jdbcType=VARBINARY})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.sf.iguess.survey.domain.ExpressDelivery" >
     insert into tt_user_delivery
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -176,69 +85,4 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sf.iguess.survey.domain.ExpressDeliveryExample" resultType="java.lang.Integer" >
-    select count(*) from tt_user_delivery
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update tt_user_delivery
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
-      </if>
-      <if test="record.userArea != null" >
-        user_area = #{record.userArea,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userName != null" >
-        user_name = #{record.userName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phoneNumber != null" >
-        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dayExpressNumber != null" >
-        day_express_number = #{record.dayExpressNumber,jdbcType=INTEGER},
-      </if>
-      <if test="record.avgWeight != null" >
-        avg_weight = #{record.avgWeight,jdbcType=REAL},
-      </if>
-      <if test="record.detailAddress != null" >
-        detail_address = #{record.detailAddress,jdbcType=VARBINARY},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update tt_user_delivery
-    set id = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      user_area = #{record.userArea,jdbcType=VARCHAR},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      day_express_number = #{record.dayExpressNumber,jdbcType=INTEGER},
-      avg_weight = #{record.avgWeight,jdbcType=REAL},
-      detail_address = #{record.detailAddress,jdbcType=VARBINARY}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update tt_user_delivery
-    set id = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      user_area = #{record.userArea,jdbcType=VARCHAR},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      day_express_number = #{record.dayExpressNumber,jdbcType=INTEGER},
-      avg_weight = #{record.avgWeight,jdbcType=REAL}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
 </mapper>
