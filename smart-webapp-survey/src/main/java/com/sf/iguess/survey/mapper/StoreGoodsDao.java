@@ -26,4 +26,5 @@ public interface StoreGoodsDao {
 
 	List<StoreGoods> selectStoreByMarketId(@Param("mktId")String mktId);
 
+	Integer updateStoreGroupStatus(@Param("goupLimit")Short goupLimit);
 }

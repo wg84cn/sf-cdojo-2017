@@ -3,7 +3,6 @@
 <mapper namespace="com.sf.iguess.survey.mapper.StoreGoodsDao" >
   <resultMap id="BaseResultMap" type="com.sf.iguess.survey.domain.StoreGoods" >
     <id column="store_id" property="storeId" jdbcType="VARCHAR" />
-    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
     <result column="store_market_pic" property="storeMarketPic" jdbcType="VARCHAR" />
     <result column="stored_number" property="storedNumber" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -12,7 +11,6 @@
   
   <resultMap id="DetailResultMap" type="com.sf.iguess.survey.domain.StoreGoods" >
     <id column="store_id" property="storeId" jdbcType="VARCHAR" />
-    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
     <result column="store_market_pic" property="storeMarketPic" jdbcType="VARCHAR" />
     <result column="stored_number" property="storedNumber" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -30,11 +28,11 @@
   </resultMap>
    
   <sql id="Base_Column_List" >
-    store_id, store_name, store_market_pic, stored_number, create_time, modify_time
+    store_id, store_market_pic, stored_number, create_time, modify_time
   </sql>
    
   <sql id="Detail_Column_List" >
-    store_id, store_name, store_market_pic, stored_number, create_time, modify_time,
+    store_id, store_market_pic, stored_number, create_time, modify_time,
     mkt_id as market_id, mkt_name_show, daily_min_packages, weight_min, weight_max, base_price, base_weight, 
     group_limit, group_duration,user_require
   </sql>
@@ -63,9 +61,6 @@
       <if test="marketId != null" >
         market_id,
       </if>
-      <if test="storeName != null" >
-        store_name,
-      </if>
       <if test="storeMarketPic != null" >
         store_market_pic,
       </if>
@@ -86,9 +81,6 @@
        <if test="marketId != null" >
         #{marketId,jdbcType=VARCHAR},
       </if>
-      <if test="storeName != null" >
-        #{storeName,jdbcType=VARCHAR},
-      </if>
       <if test="storeMarketPic != null" >
         #{storeMarketPic,jdbcType=VARCHAR},
       </if>
@@ -107,9 +99,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
     update tt_store_goods
     <set >
-      <if test="storeName != null" >
-        store_name = #{storeName,jdbcType=VARCHAR},
-      </if>
       <if test="storeMarketPic != null" >
         store_market_pic = #{storeMarketPic,jdbcType=VARCHAR},
       </if>
@@ -126,13 +115,8 @@
     where store_id = #{storeId,jdbcType=VARCHAR}
   </update>
   
-  <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.StoreGoods" >
-    update tt_store_goods
-    set store_name = #{storeName,jdbcType=VARCHAR},
-      store_market_pic = #{storeMarketPic,jdbcType=VARCHAR},
-      stored_number = #{storedNumber,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
-    where store_id = #{storeId,jdbcType=VARCHAR}
+  <update id="updateStoreGroupStatus" parameterType="java.lang.Short" >
+    update tt_store_goods  stored_number = stored_number +1, modify_time = now()
+    where store_id = #{storeId} and stored_number &lt; #{goupLimit}
   </update>
 </mapper>

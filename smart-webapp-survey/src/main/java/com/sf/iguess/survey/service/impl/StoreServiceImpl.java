@@ -1,8 +1,11 @@
 package com.sf.iguess.survey.service.impl;
 
 import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.sf.iguess.survey.domain.MarketBasicInfo;
@@ -20,6 +23,8 @@ public class StoreServiceImpl implements StroreService {
 	
 	@Resource
 	private MarketBasicInfoDao marketBasicInfoDao;
+	
+	private static final Logger logger = LoggerFactory.getLogger(StoreServiceImpl.class);
 
 	@Override
 	public List<StoreGoods> selectStoreList() {
@@ -30,9 +35,23 @@ public class StoreServiceImpl implements StroreService {
 	public StoreGoods selectStoreGood(String stroeId) {
 		return storeGoodsDao.selectByPrimaryKey(stroeId);
 	}
-
+	
+	@Override
+	public String updateStoreGroupStatus(StoreGoods goods) {
+		MarketBasicInfo marketInfo = marketBasicInfoDao.selectByPrimaryKey(goods.getMarketId());
+		Integer updateNumber = storeGoodsDao.updateStoreGroupStatus(marketInfo.getGroupLimit());
+		String storeId = goods.getStoreId();
+		if(updateNumber == null || updateNumber == 0){
+			logger.warn("update store group error as group is above limit.");
+			storeId = UuidUtil.get32UUID();
+			storeGoodsDao.insertSelective(new StoreGoods(storeId, goods.getMarketId(), 1));
+		}
+		return storeId;
+	}
+	
 	@Override
 	public void checkStoreGoodsStatus() {
+		
 	}
 
 	@Override
@@ -43,7 +62,7 @@ public class StoreServiceImpl implements StroreService {
 			if(storeGoods != null && !storeGoods.isEmpty()){
 				continue;
 			}
-			storeGoodsDao.insertSelective(new StoreGoods(UuidUtil.get32UUID(), marketBasic.getMktId()));
+			storeGoodsDao.insertSelective(new StoreGoods(UuidUtil.get32UUID(), marketBasic.getMktId() ,0));
 		}
 	}
 }

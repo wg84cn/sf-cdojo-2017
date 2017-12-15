@@ -13,4 +13,6 @@ public interface StroreService {
 	void checkStoreGoodsStatus();
 
 	void autoCreateStoreGoods();
+	
+	String updateStoreGroupStatus(StoreGoods goods);
 }

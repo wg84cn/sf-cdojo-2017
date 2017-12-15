@@ -6,8 +6,6 @@ public class StoreGoods {
 
 	private String storeId;
 
-	private String storeName;
-
 	private String storeMarketPic;
 
 	private Integer storedNumber;
@@ -35,9 +33,10 @@ public class StoreGoods {
 	public StoreGoods() {
 	}
 
-	public StoreGoods(String storeId, String marketId) {
+	public StoreGoods(String storeId, String marketId, Integer storedNumber) {
 		this.storeId = storeId;
 		this.marketId = marketId;
+		this.storedNumber = storedNumber;
 	}
 
 	public String getMarketId() {
@@ -130,14 +129,6 @@ public class StoreGoods {
 
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
-	}
-
-	public String getStoreName() {
-		return storeName;
-	}
-
-	public void setStoreName(String storeName) {
-		this.storeName = storeName == null ? null : storeName.trim();
 	}
 
 	public String getStoreMarketPic() {
