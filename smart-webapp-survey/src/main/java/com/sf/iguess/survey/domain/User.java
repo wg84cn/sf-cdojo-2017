@@ -8,7 +8,7 @@ public class User {
 
 	private String userName; // 用户名
 
-	private String password; // 密码
+	private String picUrl; // 头像
 	
 	private String userSalt;
 
@@ -42,14 +42,6 @@ public class User {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public Integer getRoleType() {
@@ -101,4 +93,12 @@ public class User {
     {
         this.userSalt = userSalt;
     }
+
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
 }

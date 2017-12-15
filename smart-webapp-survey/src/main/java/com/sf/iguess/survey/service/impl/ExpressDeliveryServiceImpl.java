@@ -1,5 +1,7 @@
 package com.sf.iguess.survey.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,6 +44,12 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 	
 	private static final int MAX_DAY_EXPRESS_NUMBER = 20;
 	private static final String STORE_GOOD_DETAIL_URL = "store.good.detail.url";
+
+
+	@Override
+	public List<User> getExpresssUserList(String storeId) {
+		return expressDeliveryDao.getExpressUserList(storeId);
+	}
 
 	/**
 	 * 保存寄件人信息，同时加入团.
@@ -205,5 +213,5 @@ public class ExpressDeliveryServiceImpl implements ExpressDeliveryService {
 		return StringUtils.isNotBlank(detailAddress)
 				&& detailAddress.length() < 2000;
 	}
-	
 }
+

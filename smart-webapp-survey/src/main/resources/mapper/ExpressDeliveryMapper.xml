@@ -12,9 +12,20 @@
     <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
   </resultMap>
   
+    <resultMap id="UserResultMap" type="com.sf.iguess.survey.domain.User">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     id, store_id, user_area, user_name, phone_number, day_express_number, avg_weight,detail_address
   </sql>
+  
+    <select id="getExpressUserList" resultMap="UserResultMap">
+    SELECT user_id,pic_url FROM `ts_user`  
+    WHERE user_id IN (SELECT phone_number FROM `pro_user_delivery` WHERE store_id = #{storeId});
+  </select>
    
   <insert id="insert" parameterType="com.sf.iguess.survey.domain.ExpressDelivery" >
     insert into pro_user_delivery (id, store_id, user_area, 

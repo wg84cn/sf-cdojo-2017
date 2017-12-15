@@ -27,8 +27,8 @@ public class StoreServiceImpl implements StroreService {
 	private static final Logger logger = LoggerFactory.getLogger(StoreServiceImpl.class);
 
 	@Override
-	public List<StoreGoods> selectStoreList() {
-		return storeGoodsDao.selectStoreList();
+	public List<StoreGoods> selectActiveStoreList() {
+		return storeGoodsDao.selectActiveStoreGoods(null, null);
 	}
 
 	@Override
@@ -74,9 +74,10 @@ public class StoreServiceImpl implements StroreService {
 		List<MarketBasicInfo> maketBasicList = marketBasicInfoDao.selectMaketBasicList();
 		for (MarketBasicInfo marketBasic : maketBasicList) {
 			List<StoreGoods> storeGoodsList = storeGoodsDao.selectActiveStoreGoods(marketBasic.getMktId(), null);
-			if (storeGoodsList != null && !storeGoodsList.isEmpty()) {
+			if (storeGoodsList == null || storeGoodsList.isEmpty()) {
 				continue;
 			}
+			int storeGoodsNums = storeGoodsList.size();
 			byte duration = marketBasic.getGroupDuration();
 			// 过期
 			for (StoreGoods storeGoods : storeGoodsList) {
@@ -84,7 +85,10 @@ public class StoreServiceImpl implements StroreService {
 					continue;
 				}
 				storeGoods.setStatus(StoreGoods.OVERDUE_STATUS);
-				storeGoodsDao.updateByPrimaryKey(storeGoods);
+				storeGoodsDao.updateByPrimaryKeySelective(storeGoods);
+				if(storeGoodsNums == 1){
+					storeGoodsDao.insertSelective(new StoreGoods(UuidUtil.get32UUID(), marketBasic.getMktId() ,0));
+				}
 			}
 		}
 	}

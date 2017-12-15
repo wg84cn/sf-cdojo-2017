@@ -117,7 +117,7 @@
   </update>
   
   <update id="updateStoreGroupStatus">
-    update pro_store_goods  stored_number = stored_number +1, modify_time = now()
+    update pro_store_goods set stored_number = stored_number +1, modify_time = now()
     where store_id = #{storeId} and stored_number &lt; #{goupLimit}
   </update>
 </mapper>
