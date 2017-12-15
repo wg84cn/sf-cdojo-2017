@@ -62,7 +62,7 @@ html {
   height: $btn-height;
   line-height: $btn-height;
   text-align: center;
-  background: $btn-bg-color;
+  background: $btn-bg-color !important;
   color: $btn-text-color;
   cursor: pointer;
   border: none;
@@ -75,13 +75,13 @@ html {
 
 //普通按钮
 .mui-btn {
-    .mui-btn-warning.mui-btn-warning {
+    &.mui-btn-warning.mui-btn-warning {
         @include btn(100%, auto,$main-color,$bg-wt,$btn-bg,$bg-wt);
         &.no-radius.no-radius{
             border-radius: none;
         }
     }
-    .mui-btn-success.mui-btn-success {
+    &.mui-btn-success.mui-btn-success {
          @include btn(100%, auto,$share,$bg-wt,$btn-bg,$bg-wt);
           &.no-radius.no-radius{
             border-radius: none;

@@ -45,37 +45,37 @@ html {
   display: block; }
 
 /*普通按钮*/
-.mui-btn .mui-btn-warning.mui-btn-warning {
+.mui-btn.mui-btn-warning.mui-btn-warning {
   display: inline-block;
   width: 100%;
   height: auto;
   line-height: auto;
   text-align: center;
-  background: #FF6532;
+  background: #FF6532 !important;
   color: #FFFFFF;
   cursor: pointer;
   border: none;
   vertical-align: middle; }
-  .mui-btn .mui-btn-warning.mui-btn-warning:hover {
+  .mui-btn.mui-btn-warning.mui-btn-warning:hover {
     background: #FF6532;
     color: #FFFFFF; }
-  .mui-btn .mui-btn-warning.mui-btn-warning.no-radius.no-radius {
+  .mui-btn.mui-btn-warning.mui-btn-warning.no-radius.no-radius {
     border-radius: none; }
-.mui-btn .mui-btn-success.mui-btn-success {
+.mui-btn.mui-btn-success.mui-btn-success {
   display: inline-block;
   width: 100%;
   height: auto;
   line-height: auto;
   text-align: center;
-  background: #09BB07;
+  background: #09BB07 !important;
   color: #FFFFFF;
   cursor: pointer;
   border: none;
   vertical-align: middle; }
-  .mui-btn .mui-btn-success.mui-btn-success:hover {
+  .mui-btn.mui-btn-success.mui-btn-success:hover {
     background: #FF6532;
     color: #FFFFFF; }
-  .mui-btn .mui-btn-success.mui-btn-success.no-radius.no-radius {
+  .mui-btn.mui-btn-success.mui-btn-success.no-radius.no-radius {
     border-radius: none; }
 
 .text-warning {
