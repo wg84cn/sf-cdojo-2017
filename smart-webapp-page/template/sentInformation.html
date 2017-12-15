@@ -280,7 +280,7 @@
 							</button>
 						</div>
 						<div class="modal-footer text-center">
-							<img src="../images/pop_icon_close_nor@2x.png" alt="" />
+							<img @tap="hideModal" src="../images/pop_icon_close_nor@2x.png" alt="" />
 						</div>
 					</div>
 				</div>
@@ -324,10 +324,14 @@
 						avgWeight:'',
 						detailAddress:'', //寄件地址
 					},
-					
+					urlData:'',
 				},
 				methods: {
+					hideModal: function(){
+						this.successModal = false;
+					},
 					toGoodsAssents: function(){
+						localStorage.setItem('urlData',this.urlData);
 						mui.openWindow({
 					    url: 'goodsAssents.html', 
 					    id:'info'
@@ -362,7 +366,8 @@
 						mui.post(sentUrl,this.sentForm,function(res){
 								console.log('data',res);
 								if(res && res.code=='200'){
-//									console.log('res',res.data);
+									console.log('res',res.data.url);
+									this.urlData = res.data.url;
 									that.successModal = true;
 								}else{
 									mui.alert('输入有误，请检查输入');
@@ -401,7 +406,7 @@
 					},
 					init: function() {
 						var stateText = localStorage.getItem('storeId') || "{}";
-//					  this.storeId = stateText;
+					  this.storeId = stateText;
 						console.log('store',this.storeId);
 						mui.get('/area/list', function(res) {
 							if(res && res.code==200){

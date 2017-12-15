@@ -40,3 +40,12 @@ html, body, .mui-content{
 .sub-title {
 
 }
+#qrcode {
+  width: 10rem;
+  text-align: center;
+  margin: auto;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
