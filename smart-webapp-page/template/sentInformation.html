@@ -362,7 +362,7 @@
 							this.sentForm.userArea = this.subAddress
 						}
 						
-						var sentUrl = 'http://192.168.0.8:9090/expressDelivery/StoreGoods/'+this.storeId+'/saving';
+						var sentUrl = '/expressDelivery/StoreGoods/'+this.storeId+'/saving';
 						mui.post(sentUrl,this.sentForm,function(res){
 								console.log('data',res);
 								if(res && res.code=='200'){
@@ -408,7 +408,7 @@
 						var stateText = localStorage.getItem('storeId') || "{}";
 					  this.storeId = stateText;
 						console.log('store',this.storeId);
-						mui.get('http://192.168.0.8:9090/area/list', function(res) {
+						mui.get('/area/list', function(res) {
 							if(res && res.code==200){
 								var dataa=eval(res.data);
 								cityPicker3.setData(dataa);
