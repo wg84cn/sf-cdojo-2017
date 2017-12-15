@@ -32,6 +32,8 @@ public class StoreGoods {
 	
 	private Short status;
 	
+	private String url;
+	
 	public static final Short FULL_STATUS = 1;
 	
 	public static final Short OVERDUE_STATUS = 2;
@@ -183,4 +185,13 @@ public class StoreGoods {
 		long duration = System.currentTimeMillis() - this.getCreateTime().getTime();
 		return (duration / MUNITE_UNIT);
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 }
