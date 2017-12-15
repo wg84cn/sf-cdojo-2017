@@ -23,10 +23,7 @@ import com.smart.platform.toolkit.Hex;
  * @date 2016年8月10日 上午12:24:24
  * @version V1.3.1
  */
-
-public final class SercurityHelper
-{
-    final static String CODE_COMPONENT = "";
+public final class SercurityHelper{
     
     public static final int PWD_KEY_TIMES = 10240;
     

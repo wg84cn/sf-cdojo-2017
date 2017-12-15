@@ -27,8 +27,8 @@ public class StoreServiceImpl implements StroreService {
 	private static final Logger logger = LoggerFactory.getLogger(StoreServiceImpl.class);
 
 	@Override
-	public List<StoreGoods> selectStoreList() {
-		return storeGoodsDao.selectStoreList();
+	public List<StoreGoods> selectActiveStoreList() {
+		return storeGoodsDao.selectActiveStoreGoods(null, null);
 	}
 
 	@Override
@@ -48,11 +48,21 @@ public class StoreServiceImpl implements StroreService {
 		MarketBasicInfo marketInfo = marketBasicInfoDao.selectByPrimaryKey(goods.getMarketId());
 		Integer updateNumber = storeGoodsDao.updateStoreGroupStatus(goods.getStoreId(), marketInfo.getGroupLimit());
 		if (updateNumber != null && updateNumber > 0) {
-			return goods.getStoreId();
+			int stautusNubmer = storeGoodsDao.updateStoreFullStatus(goods.getStoreId(), marketInfo.getGroupLimit(), StoreGoods.FULL_STATUS);
+			if(stautusNubmer > 0){
+				String storeId = UuidUtil.get32UUID();
+				storeGoodsDao.insertSelective(new StoreGoods(storeId, goods.getMarketId(), 0));
+				return storeId;
+			}else{
+				return goods.getStoreId();
+			}
 		}
 		logger.warn("update store group error as group is above limit, system will add new store goods record");
 		// 判断新的集货物是否已经被新增
 		List<StoreGoods> newGoodsList = storeGoodsDao.selectActiveStoreGoods(goods.getMarketId(), marketInfo.getGroupLimit());
+		if(newGoodsList == null){
+			return goods.getStoreId();
+		}
 		StoreGoods newGoods = newGoodsList.get(0);
 		String storeId = null;
 		if (newGoods == null) {
@@ -74,17 +84,16 @@ public class StoreServiceImpl implements StroreService {
 		List<MarketBasicInfo> maketBasicList = marketBasicInfoDao.selectMaketBasicList();
 		for (MarketBasicInfo marketBasic : maketBasicList) {
 			List<StoreGoods> storeGoodsList = storeGoodsDao.selectActiveStoreGoods(marketBasic.getMktId(), null);
-			if (storeGoodsList != null && !storeGoodsList.isEmpty()) {
+			if (storeGoodsList == null || storeGoodsList.isEmpty()) {
 				continue;
 			}
 			byte duration = marketBasic.getGroupDuration();
+			StoreGoods storeGoods = storeGoodsList.get(0);
 			// 过期
-			for (StoreGoods storeGoods : storeGoodsList) {
-				if (storeGoods.initMinuteDuration() < duration) {
-					continue;
-				}
+			if (storeGoods.initMinuteDuration() >= duration) {
 				storeGoods.setStatus(StoreGoods.OVERDUE_STATUS);
-				storeGoodsDao.updateByPrimaryKey(storeGoods);
+				storeGoodsDao.updateByPrimaryKeySelective(storeGoods);
+				storeGoodsDao.insertSelective(new StoreGoods(UuidUtil.get32UUID(), marketBasic.getMktId(), 0));
 			}
 		}
 	}

@@ -40,7 +40,7 @@ public class StoreGoods {
 	
 	public static final int MUNITE_UNIT = 60000;
 
-	private static final String picUrl = "http://pic.qiantucdn.com/58pic/18/95/91/5666a3058dc39.jpg!/fw/300/clip/0x400a0a0/format/webp";
+	private static final String PICURL = "http://pic.qiantucdn.com/58pic/18/95/91/5666a3058dc39.jpg!/fw/300/clip/0x400a0a0/format/webp";
 	
 	public StoreGoods() {
 	}
@@ -49,7 +49,7 @@ public class StoreGoods {
 		this.storeId = storeId;
 		this.marketId = marketId;
 		this.storedNumber = storedNumber;
-		this.storeMarketPic = picUrl;
+		this.storeMarketPic = PICURL;
 	}
 
 	public String getMarketId() {

@@ -4,11 +4,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>测试APP1</title>
+		<title>填写寄件信息</title>
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link href="../css/mui.picker.css" rel="stylesheet" />
 		<link href="../css/mui.poppicker.css" rel="stylesheet" />
 		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../css/detail.css" rel="stylesheet"/>
 		<style>
 			.mui-btn {
 				font-size: 16px;
@@ -62,6 +63,7 @@
 			}
 			.mui-content .mui-input-group {
 				 padding: 12.5px 0;
+				 padding-bottom: 0;
     		/*margin: 0 17.5px;*/
 			}
 		
@@ -106,16 +108,96 @@
 			.margin5{
 				margin-left:5px;
 			}
+			
+			#myModal{
+				position: fixed;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    left: 0;
+		    z-index: 1050;
+		    background: #7F7F7F;
+		    opacity: 0.8;
+			}
+			
+
+			#myModal .modal-dialog{
+				
+			}
+			#myModal .modal-content{
+				position: relative;
+		    width: auto;
+		    margin: 10px;
+		    top: 60px;
+			}
+			
+			#myModal .modal-content .modal-body{
+				width: 88%;
+		    margin: 0 auto;
+		    height: 420px;
+		    background: #fff;
+		    text-align: center;
+			}
+			
+			#myModal .modal-content .modal-body .suc_btn{
+				margin-top:32px;
+				margin-bottom: 30px;
+			}
+			
+			#myModal .modal-content .modal-body .mui-btn{
+				width: 80%;
+			}
+			
+			
+			.text-center{
+				text-align: center;
+			}
+			#myModal .modal-content .modal-footer img{
+				width: 50px;
+				
+			}
+			
+			#myModal .sub-title{
+				font-size: 14px;
+				margin: 0 auto;
+				margin-top:25px;
+				margin-bottom: 35px;
+				width: 225px;
+				text-align: left;
+			}
+			
+			
 		</style>
 
 	</head>
 
 	<body>
 		<div id="sentInfor">
+			<!--<header class="mui-bar mui-bar-nav">-->
+				<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="main.html"></a>-->
+				<!--<h1 class="mui-title">填写寄件信息</h1>-->
+			<!--</header>-->
+
 			<header class="mui-bar mui-bar-nav">
-				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="main.html"></a>
-				<h1 class="mui-title">填写寄件信息</h1>
+				<a class="mui-action-back back-btn mui-pull-left" href="../index.html">
+					<img src="../images/Rectangle  Copy 4@2x.png" alt=""/>
+				</a>
+				<a class="mui-pull-left close-btn" href="../index.html">
+					<img src="../images/返回 copy 2@2x.png" alt=""/>
+				</a>
+				<h1 class="mui-title f-h2">填写寄件信息</h1>
+				<a class="more-btn mui-pull-right" href="#">
+					<img src="../images/更多 copy 2@2x.png" alt=""/>
+				</a>
 			</header>
+
+			<nav class="mui-bar mui-bar-tab">
+				<div @tap="submitForm">
+					<a  class="mui-btn mui-btn-warning dis-block join-now-wrapper" @tap="toMediaList">
+						<span class="mui-tab-label text-white">报名集货</span>
+					</a>
+				</div>
+			</nav>
 
 			<div class="mui-content">
 
@@ -151,8 +233,7 @@
 						</div>
 						<div class="mui-input-row">
 							
-							<!--<label>Input</label>-->
-							<input type="text" v-model="sentForm.phoneNumber" class="mui-input-clear" placeholder="请填写寄件人电话">
+							<input type="tel" v-model="sentForm.phoneNumber" class="mui-input-clear" placeholder="请填写寄件人电话">
 						</div>
 
 						<div class="mui-input-row">
@@ -167,18 +248,47 @@
 							<input type="text" v-model="sentForm.avgWeight"  class="mui-input-clear" placeholder="请选择单件平均重量">
 						</div>
 
-						<div class="mui-button-row">
+						<!--<div class="mui-button-row">
 							<input type="button" @tap="submitForm" value="确认" class=""/>
-							<!--<button type="button" @tap="submitForm" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>-->
-						</div>
+							<button type="button" @tap="submitForm" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>
+						</div>-->
 
 					</form>
 
 				</div>
 			</div>
 
+			<div class="modal fade in" id="myModal" v-if="successModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						
+						<div class="modal-body">
+							<img class="suc_btn" style="width:100px;" src="../images/Group 10@2x.png" alt="" />
+							<h4>报名成功!</h4>
+							
+							<div class="dark sub-title" style="font-size: 14px;">
+								转发给更多朋友或生成图片风向到朋友圈，即可加快集货速度。
+							</div>
+							<button type="button" class="mui-btn mui-btn-green">
+								<span>发送微信好友</span> 
+								<img src="../images/微信 (1)@2x.png" style="width: 16px;margin-left: 5px;position: relative;top: 2px;" alt="" />
+						
+							</button>
+							<button type="button" @tap='toGoodsAssents' class="mui-btn">
+								<span>分享到朋友圈</span> 
+								<img src="../images/朋友圈@2x.png" style="width: 16px;margin-left: 5px;position: relative;top: 2px;" alt="" />
+							</button>
+						</div>
+						<div class="modal-footer text-center">
+							<img src="../images/pop_icon_close_nor@2x.png" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
 			
 		</div>
+		
+		
 
 		<script src="../js/mui.min.js"></script>
 		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
@@ -201,6 +311,7 @@
 			var app = new Vue({
 				el: '#sentInfor',
 				data: {
+					successModal:false,
 					storeId:'',
 					currentAddress:'广东省深圳市宝安区',
 					subAddress:'广东省-深圳市-宝安区',
@@ -213,40 +324,48 @@
 						avgWeight:'',
 						detailAddress:'', //寄件地址
 					},
+					
 				},
 				methods: {
+					toGoodsAssents: function(){
+						mui.openWindow({
+					    url: 'goodsAssents.html', 
+					    id:'info'
+					  });
+					},
 					verifyTel: function(val){
-            return /^[0-9]{11}$/.test(val)
-	       },
+						val = parseInt(val)
+            return /^[1][\d]{10}$/.test(val)
+	       	},
+	       	verifyNumber: function(val){
+	       		val = parseInt(val)
+            return /^[0-9]*$/.test(val)
+	       	},
+	       	
 					submitForm: function(){
-						
-						
+						var that = this;
 						if(!this.verifyTel(this.sentForm.phoneNumber)){
 							mui.alert('电话号码输入有误，请检查输入');
 							return;
 						}
 						
+						if(!this.verifyNumber(this.sentForm.dayExpressNumber)){
+							mui.alert('寄件数量输入有误，请检查输入');
+							return;
+						}
 						
-//						console.log('sentForm',this.sentForm);
 						if(this.sentForm.userArea == ''){
 							this.sentForm.userArea = this.subAddress
 						}
-						var sentUrl = 'http://192.168.0.8:9090/expressDelivery/StoreGoods/'+'62b2876060204286b3beb439bdfb8f2d'+'/saving';
+						
+						var sentUrl = '/expressDelivery/StoreGoods/'+this.storeId+'/saving';
 						mui.post(sentUrl,this.sentForm,function(res){
 								console.log('data',res);
-								if(res && res.code==200){
-									
-									mui.toast('新增成功');
-									
-//										mui.openWindow({
-//									    url: 'template/.html', 
-//									    id:'info'
-//									  });
-									
+								if(res && res.code=='200'){
+//									console.log('res',res.data);
+									that.successModal = true;
 								}else{
-									mui.alert('输入有误，请检查输入', '提示', function() {
-										
-									});
+									mui.alert('输入有误，请检查输入');
 								}
 							},'json'
 						);
@@ -280,39 +399,21 @@
 							}
 						})
 					},
-					confirmFun: function(e) {
-						var btnArray = ['否', '是'];
-						mui.confirm('MUI是个好框架，确认？', 'Hello MUI', btnArray, function(e) {
-							//							console.log(e);
-							if(e.index == 1) {
-								info.innerText = '你刚确认MUI是个好框架';
-							} else {
-								info.innerText = 'MUI没有得到你的认可，继续加油'
-							}
-						})
-					},
 					init: function() {
-						var stateText = localStorage.getItem('$state') || "{}";
-					  this.storeId = JSON.parse(stateText);
+						var stateText = localStorage.getItem('storeId') || "{}";
+//					  this.storeId = stateText;
 						console.log('store',this.storeId);
-							mui.get('http://192.168.0.8:9090/area/list', function(res) {
-								if(res && res.code==200){
-									var dataa=eval(res.data);
-									cityPicker3.setData(dataa);
-								}
-							});
+						mui.get('/area/list', function(res) {
+							if(res && res.code==200){
+								var dataa=eval(res.data);
+								cityPicker3.setData(dataa);
+							}
+						});
 
 					}
 				},
 				mounted: function() {
-
 					this.init();
-					
-					//					var that = this;
-					//					mui.plusReady(function() {
-					//						that.init.call(this, arguments);
-					//			
-					//					});
 				},
 			});
 

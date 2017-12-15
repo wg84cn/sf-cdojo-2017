@@ -20,13 +20,11 @@ public interface StoreGoodsDao {
 
     int updateByPrimaryKeySelective(StoreGoods record);
 
-    int updateByPrimaryKey(StoreGoods record);
-
-	List<StoreGoods> selectStoreList();
-
 	List<StoreGoods> selectStoreByMarketId(@Param("mktId")String mktId);
 
 	Integer updateStoreGroupStatus(@Param("storeId")String storeId, @Param("goupLimit")Short goupLimit);
 
 	List<StoreGoods> selectActiveStoreGoods(@Param("marketId")String marketId, @Param("groupLimit")Short groupLimit);
+
+	int updateStoreFullStatus(@Param("storeId")String storeId, @Param("goupLimit")Short groupLimit, @Param("fullStatus")Short fullStatus);
 }

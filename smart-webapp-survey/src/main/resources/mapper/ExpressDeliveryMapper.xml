@@ -12,15 +12,26 @@
     <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
   </resultMap>
   
+  <resultMap id="UserResultMap" type="com.sf.iguess.survey.domain.User">
+	<id column="user_id" jdbcType="VARCHAR" property="userId" />
+	<result column="user_name" jdbcType="VARCHAR" property="userName" />
+	<result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     id, store_id, user_area, user_name, phone_number, day_express_number, avg_weight,detail_address
   </sql>
+  
+    <select id="getExpressUserList" resultMap="UserResultMap">
+    SELECT user_id,pic_url FROM `ts_user`  
+    WHERE user_id IN (SELECT phone_number FROM `pro_user_delivery` WHERE store_id = #{storeId});
+  </select>
    
   <insert id="insert" parameterType="com.sf.iguess.survey.domain.ExpressDelivery" >
-    insert into pro_user_delivery (id, store_id, user_area, 
+    insert into pro_user_delivery (store_id, user_area, 
       user_name, phone_number, day_express_number, 
       avg_weight, detail_address)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userArea,jdbcType=VARCHAR}, 
+    values (#{storeId,jdbcType=BIGINT}, #{userArea,jdbcType=VARCHAR}, 
       #{userName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{dayExpressNumber,jdbcType=INTEGER}, 
       #{avgWeight,jdbcType=REAL}, #{detailAddress,jdbcType=VARCHAR})
   </insert>
@@ -32,7 +43,7 @@
         id,
       </if>
       <if test="storeId != null" >
-        user_id,
+        store_id,
       </if>
       <if test="userArea != null" >
         user_area,
@@ -58,7 +69,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="storeId != null" >
-        #{userId,jdbcType=BIGINT},
+        #{storeId,jdbcType=VARCHAR},
       </if>
       <if test="userArea != null" >
         #{userArea,jdbcType=VARCHAR},

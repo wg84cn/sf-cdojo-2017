@@ -1,0 +1,135 @@
+@charset "UTF-8";
+html {
+  font-size: 10px; }
+
+.f-h1 {
+  font-size: 2rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.f-h2 {
+  font-size: 1.85rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.f-h3 {
+  font-size: 1.8rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.f-h4 {
+  font-size: 1.7rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.f-h5 {
+  font-size: 1.6rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.f-h6 {
+  font-size: 1.5rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.f-h7 {
+  font-size: 1.4rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.f-h8 {
+  font-size: 1.3rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.f-h9 {
+  font-size: 1.2rem !important;
+  font-family: "微软雅黑" "arial black"; }
+
+.dis-flex {
+  display: flex; }
+
+.dis-block {
+  display: block; }
+
+/*普通按钮*/
+.mui-btn.mui-btn-warning.mui-btn-warning {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  line-height: auto;
+  text-align: center;
+  background: #FF6532 !important;
+  color: #FFFFFF;
+  cursor: pointer;
+  border: none;
+  vertical-align: middle; }
+  .mui-btn.mui-btn-warning.mui-btn-warning:hover {
+    background: #FF6532;
+    color: #FFFFFF; }
+  .mui-btn.mui-btn-warning.mui-btn-warning.no-radius.no-radius {
+    border-radius: none; }
+.mui-btn.mui-btn-success.mui-btn-success {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  line-height: auto;
+  text-align: center;
+  background: #09BB07 !important;
+  color: #FFFFFF;
+  cursor: pointer;
+  border: none;
+  vertical-align: middle; }
+  .mui-btn.mui-btn-success.mui-btn-success:hover {
+    background: #FF6532;
+    color: #FFFFFF; }
+  .mui-btn.mui-btn-success.mui-btn-success.no-radius.no-radius {
+    border-radius: none; }
+
+.text-warning {
+  color: #FF6532; }
+
+.text-white {
+  color: #FFFFFF; }
+
+.bold {
+  font-weight: bold; }
+
+.clearfix:before {
+  display: table;
+  content: " "; }
+
+.clearfix:after {
+  clear: both;
+  display: table;
+  content: " "; }
+
+/*
+.clearfix:after {
+
+}*/
+html, body, .mui-content {
+  background: #fff; }
+
+.mui-card-header.no-border:after {
+  height: 0; }
+
+.mui-card {
+  box-shadow: none; }
+
+.mui-card-header {
+  margin-top: 3rem; }
+
+.share-func {
+  margin: 15%;
+  text-align: center; }
+  .share-func .check-qr-code {
+    margin-top: 2rem; }
+
+.qr-img-wrapper {
+  text-align: center;
+  border: none;
+  margin-top: 5rem; }
+  .qr-img-wrapper .qr-img {
+    width: 50%; }
+
+.check-qr-code {
+  color: #B2B2B2; }
+
+.qr-hint {
+  padding: 1rem;
+  color: #B2B2B2; }
+
+/*# sourceMappingURL=goodsAssents.css.map */

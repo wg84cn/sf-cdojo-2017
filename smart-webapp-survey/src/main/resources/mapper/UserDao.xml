@@ -4,10 +4,9 @@
   <resultMap id="BaseResultMap" type="com.sf.iguess.survey.domain.User">
     <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="pic_url" jdbcType="VARCHAR" property="password" />
+    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
-  
   
   <parameterMap type="com.sf.iguess.survey.domain.User" id="user"/>
   
@@ -29,7 +28,7 @@
   </select>
   
   <insert id="insert" parameterType="com.sf.iguess.survey.domain.User">
-    insert into ts_user (user_id, user_name, create_time)
+    insert into ts_user (user_id, user_name,pic_url, create_time)
     values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
       #{picUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
@@ -43,26 +42,11 @@
       <if test="userName != null">
         user_name,
       </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="userSalt != null">
-        user_salt,
-      </if>
-      <if test="roleType != null">
-        role_type,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="lastIp != null">
-        last_ip,
+      <if test="picUrl != null">
+        pic_url,
       </if>
       <if test="createTime != null">
         create_time,
-      </if>
-      <if test="modifyTime != null">
-        modify_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -72,26 +56,11 @@
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-       <if test="userSalt != null">
-        #{userSalt,jdbcType=VARCHAR},
-      </if>
-      <if test="roleType != null">
-        #{roleType,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="lastIp != null">
-        #{lastIp,jdbcType=VARCHAR},
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null">
-        #{modifyTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -101,26 +70,11 @@
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-     <if test="userSalt != null">
-        user_salt = #{userSalt,jdbcType=VARCHAR},
-      </if>
-      <if test="roleType != null">
-        role_type = #{roleType,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="lastIp != null">
-        last_ip = #{lastIp,jdbcType=VARCHAR},
+        <if test="picUrl != null">
+        pic_url = #{picUrl,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifyTime != null">
-        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
@@ -129,13 +83,8 @@
   <update id="updateByPrimaryKey" parameterType="com.sf.iguess.survey.domain.User">
     update ts_user
     set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      user_salt = #{userSalt,jdbcType=VARCHAR},
-      role_type = #{roleType,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      last_ip = #{lastIp,jdbcType=VARCHAR},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>
