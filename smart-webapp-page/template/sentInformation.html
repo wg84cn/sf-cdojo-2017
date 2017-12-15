@@ -106,6 +106,65 @@
 			.margin5{
 				margin-left:5px;
 			}
+			
+			#myModal{
+				position: fixed;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    left: 0;
+		    z-index: 1050;
+		    background: #7F7F7F;
+		    opacity: 0.8;
+			}
+			
+
+			#myModal .modal-dialog{
+				
+			}
+			#myModal .modal-content{
+				position: relative;
+		    width: auto;
+		    margin: 10px;
+		    top: 60px;
+			}
+			
+			#myModal .modal-content .modal-body{
+				width: 88%;
+		    margin: 0 auto;
+		    height: 420px;
+		    background: #fff;
+		    text-align: center;
+			}
+			
+			#myModal .modal-content .modal-body .suc_btn{
+				margin-top:32px;
+				margin-bottom: 30px;
+			}
+			
+			#myModal .modal-content .modal-body .mui-btn{
+				width: 80%;
+			}
+			
+			
+			.text-center{
+				text-align: center;
+			}
+			#myModal .modal-content .modal-footer img{
+				width: 50px;
+				
+			}
+			
+			#myModal .sub-title{
+				font-size: 14px;
+				margin: 0 auto;
+				margin-top:25px;
+				margin-bottom: 35px;
+				width: 225px;
+				text-align: left;
+			}
+			
+			
 		</style>
 
 	</head>
@@ -151,8 +210,7 @@
 						</div>
 						<div class="mui-input-row">
 							
-							<!--<label>Input</label>-->
-							<input type="text" v-model="sentForm.phoneNumber" class="mui-input-clear" placeholder="请填写寄件人电话">
+							<input type="tel" v-model="sentForm.phoneNumber" class="mui-input-clear" placeholder="请填写寄件人电话">
 						</div>
 
 						<div class="mui-input-row">
@@ -177,8 +235,37 @@
 				</div>
 			</div>
 
+			<div class="modal fade in" id="myModal" v-if="successModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						
+						<div class="modal-body">
+							<img class="suc_btn" style="width:100px;" src="../images/Group 10@2x.png" alt="" />
+							<h4>报名成功!</h4>
+							
+							<div class="dark sub-title" style="font-size: 14px;">
+								转发给更多朋友或生成图片风向到朋友圈，即可加快集货速度。
+							</div>
+							<button type="button" class="mui-btn mui-btn-green">
+								<span>发送微信好友</span> 
+								<img src="../images/微信 (1)@2x.png" style="width: 16px;margin-left: 5px;position: relative;top: 2px;" alt="" />
+						
+							</button>
+							<button type="button" @tap='toGoodsAssents' class="mui-btn">
+								<span>分享到朋友圈</span> 
+								<img src="../images/朋友圈@2x.png" style="width: 16px;margin-left: 5px;position: relative;top: 2px;" alt="" />
+							</button>
+						</div>
+						<div class="modal-footer text-center">
+							<img src="../images/pop_icon_close_nor@2x.png" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
 			
 		</div>
+		
+		
 
 		<script src="../js/mui.min.js"></script>
 		<script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
@@ -201,6 +288,7 @@
 			var app = new Vue({
 				el: '#sentInfor',
 				data: {
+					successModal:false,
 					storeId:'',
 					currentAddress:'广东省深圳市宝安区',
 					subAddress:'广东省-深圳市-宝安区',
@@ -215,38 +303,46 @@
 					},
 				},
 				methods: {
+					toGoodsAssents: function(){
+						mui.openWindow({
+					    url: 'goodsAssents.html', 
+					    id:'info'
+					  });
+					},
+					
 					verifyTel: function(val){
-            return /^[0-9]{11}$/.test(val)
-	       },
+						val = parseInt(val)
+            return /^[1][\d]{10}$/.test(val)
+	       	},
+	       	verifyNumber: function(val){
+	       		val = parseInt(val)
+            return /^[0-9]*$/.test(val)
+	       	},
+	       	
 					submitForm: function(){
-						
 						
 						if(!this.verifyTel(this.sentForm.phoneNumber)){
 							mui.alert('电话号码输入有误，请检查输入');
 							return;
 						}
 						
+						if(!this.verifyNumber(this.sentForm.dayExpressNumber)){
+							mui.alert('寄件数量输入有误，请检查输入');
+							return;
+						}
 						
-//						console.log('sentForm',this.sentForm);
 						if(this.sentForm.userArea == ''){
 							this.sentForm.userArea = this.subAddress
 						}
+						
 						var sentUrl = 'http://192.168.0.8:9090/expressDelivery/StoreGoods/'+'62b2876060204286b3beb439bdfb8f2d'+'/saving';
 						mui.post(sentUrl,this.sentForm,function(res){
 								console.log('data',res);
 								if(res && res.code==200){
-									
-									mui.toast('新增成功');
-									
-//										mui.openWindow({
-//									    url: 'template/.html', 
-//									    id:'info'
-//									  });
-									
+//									console.log('res',res.data);
+									this.successModal = true;
 								}else{
-									mui.alert('输入有误，请检查输入', '提示', function() {
-										
-									});
+									mui.alert('输入有误，请检查输入');
 								}
 							},'json'
 						);
@@ -280,21 +376,10 @@
 							}
 						})
 					},
-					confirmFun: function(e) {
-						var btnArray = ['否', '是'];
-						mui.confirm('MUI是个好框架，确认？', 'Hello MUI', btnArray, function(e) {
-							//							console.log(e);
-							if(e.index == 1) {
-								info.innerText = '你刚确认MUI是个好框架';
-							} else {
-								info.innerText = 'MUI没有得到你的认可，继续加油'
-							}
-						})
-					},
 					init: function() {
 						var stateText = localStorage.getItem('$state') || "{}";
 					  this.storeId = JSON.parse(stateText);
-						console.log('store',this.storeId);
+//						console.log('store',this.storeId);
 							mui.get('http://192.168.0.8:9090/area/list', function(res) {
 								if(res && res.code==200){
 									var dataa=eval(res.data);
@@ -305,14 +390,7 @@
 					}
 				},
 				mounted: function() {
-
 					this.init();
-					
-					//					var that = this;
-					//					mui.plusReady(function() {
-					//						that.init.call(this, arguments);
-					//			
-					//					});
 				},
 			});
 
