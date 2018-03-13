@@ -1,4 +1,0 @@
-mvn mybatis-generator:generate
-
-
-请在D:\soft\Mybatis\mybatis-generator目录下执行
